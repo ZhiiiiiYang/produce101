@@ -17,8 +17,8 @@
 
     <style>
         :root {
-            --color-primary: #FFB7C5; /* Melody Pink */
-            --color-secondary: #89CFF0; /* Cinnamoroll Blue */
+            --color-primary: #FFB7C5;
+            --color-secondary: #89CFF0;
             --color-bg: #FFF9FA;
             --color-card: #FFFFFF;
             --color-text-main: #2C2C2E;
@@ -27,8 +27,8 @@
             --color-line: #E0E0E0;
             
             --radius-card: 20px;
-            --radius-btn: 12px;
-            --shadow: 0 4px 20px rgba(0,0,0,0.03);
+            --radius-btn: 10px;
+            --shadow: 0 4px 15px rgba(0,0,0,0.03);
             
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
@@ -60,65 +60,67 @@
         .card {
             background: var(--color-card);
             border-radius: var(--radius-card);
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 18px;
+            margin-bottom: 16px;
             box-shadow: var(--shadow);
             border: 1px solid rgba(0,0,0,0.02);
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            scroll-margin-top: 20px; /* For smooth scroll positioning */
         }
         
         /* Day Header */
         .day-header {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
             cursor: pointer;
         }
         .date-box {
             text-align: center;
             margin-right: 15px;
-            min-width: 50px;
+            min-width: 45px;
         }
-        .date-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; line-height: 1; color: var(--color-primary); }
+        .date-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; line-height: 1; color: var(--color-primary); }
         .date-day { font-size: 0.75rem; color: var(--color-text-sub); font-weight: 500; margin-top: 4px; }
         .day-info { flex: 1; }
-        .day-title { font-size: 1.15rem; font-weight: 700; color: #333; margin-bottom: 4px; }
-        .day-loc { font-size: 0.85rem; color: var(--color-text-sub); display: flex; align-items: center; gap: 4px; }
+        .day-title { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 2px; }
+        .day-loc { font-size: 0.8rem; color: var(--color-text-sub); display: flex; align-items: center; gap: 4px; }
         
         /* Timeline Structure */
         .timeline {
             display: none;
-            padding-left: 8px;
-            margin-top: 10px;
+            padding-left: 6px;
+            margin-top: 20px;
+            border-top: 1px solid #F5F5F5;
+            padding-top: 15px;
         }
-        .timeline.open { display: block; animation: fadeIn 0.3s ease; }
+        .timeline.open { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Event Item */
         .event-node {
             position: relative;
-            padding-left: 28px;
-            padding-bottom: 0; /* Changed for travel connector */
+            padding-left: 24px;
+            padding-bottom: 25px;
         }
         
-        /* Vertical Line Logic */
         .event-node::before {
             content: '';
             position: absolute;
-            left: 5px; /* (12px dot width / 2) - 1px border */
-            top: 12px;
-            bottom: -12px; /* Extend to connect to next */
+            left: 5px;
+            top: 10px;
+            bottom: -10px;
             width: 2px;
             background: var(--color-line);
             z-index: 0;
         }
-        .event-node:last-child::before { display: none; } /* No line after last item */
+        .event-node:last-child { padding-bottom: 0; }
+        .event-node:last-child::before { display: none; }
 
         /* Dot */
         .event-dot {
             position: absolute;
             left: 0;
-            top: 6px;
+            top: 7px;
             width: 12px;
             height: 12px;
             border-radius: 50%;
@@ -132,18 +134,39 @@
         .dot-food { border-color: #FFCC80; }
 
         /* Content */
-        .event-content {
-            padding-bottom: 20px;
-        }
         .event-time {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--color-secondary);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
+        
+        .event-title { 
+            font-size: 0.95rem; 
+            font-weight: 600; 
+            color: #333; 
+            margin-bottom: 6px; 
+            line-height: 1.4;
+        }
+
+        /* Travel Time Tag */
+        .travel-tag {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #666;
+            background: #F0F0F5;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            font-weight: 400;
+            vertical-align: middle;
+        }
+
+        /* Badges */
         .pass-badge {
             background: #FF3B30;
             color: white;
@@ -153,86 +176,61 @@
         }
         .pass-free { background: #34C759; }
 
-        .event-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; color: #333; }
-        .event-desc { font-size: 0.9rem; color: #666; line-height: 1.5; margin-bottom: 8px; }
-
         /* Ticket Block */
         .ticket-block {
             background: #F2F8FD;
             border: 1px solid #D1E9FF;
             border-radius: 12px;
-            padding: 12px;
-            margin: 8px 0;
-            font-size: 0.85rem;
+            padding: 10px;
+            margin: 6px 0 10px 0;
+            font-size: 0.8rem;
             color: #444;
             display: flex;
-            justify-content: space-between;
             align-items: center;
         }
-        .ticket-icon { font-size: 1.2rem; color: var(--color-secondary); margin-right: 10px; }
-        .ticket-details { flex: 1; }
-        .ticket-code { font-weight: 700; color: #007AFF; display: block; }
+        .ticket-icon { font-size: 1.1rem; color: var(--color-secondary); margin-right: 10px; }
+        .ticket-code { font-weight: 700; color: #007AFF; margin-right: 6px;}
 
-        /* Action Buttons (Nav) */
-        .action-row {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
+        /* Buttons */
+        .action-row { display: flex; gap: 8px; margin-top: 4px; }
         .btn-nav {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            padding: 8px 12px;
+            gap: 5px;
+            padding: 8px;
             border-radius: var(--radius-btn);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-decoration: none;
-            transition: opacity 0.2s;
             border: 1px solid transparent;
         }
-        .btn-nav:active { opacity: 0.7; }
-        
         .btn-naver { background: #03C75A; color: white; }
         .btn-uber { background: black; color: white; }
         .btn-google { background: #4285F4; color: white; }
-        .btn-copy { background: #F0F0F0; color: #333; border: 1px solid #DDD; }
+        .btn-copy { background: #F7F7F7; color: #333; border: 1px solid #DDD; }
 
-        /* Travel Connector (The time between events) */
-        .travel-connector {
-            position: relative;
-            padding-left: 28px;
-            height: 40px; /* Space for the pill */
-            display: flex;
-            align-items: center;
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 50px;
+            padding: 12px;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            bottom: 30px;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s, bottom 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-        .travel-connector::before {
-            content: '';
-            position: absolute;
-            left: 5px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--color-line);
-            z-index: 0;
-        }
-        .travel-pill {
-            position: relative;
-            z-index: 1;
-            background: white;
-            border: 1px solid var(--color-line);
-            color: var(--color-text-sub);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
+        #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
 
     </style>
 </head>
@@ -240,53 +238,48 @@
 
     <div id="app">
         <div class="subtitle">2026/01/26 - 02/05</div>
-        <h1>Our Travel Log</h1>
-        <p style="color:#888; margin-bottom: 30px; font-size: 0.9rem;">Busan <span style="color:#FFB7C5">❤</span> Kyushu</p>
+        <h1>Our Trip 2026</h1>
+        <p style="color:#888; margin-bottom: 25px; font-size: 0.9rem;">Busan <span style="color:#FFB7C5">❤</span> Kyushu</p>
         
         <div id="itinerary-list"></div>
     </div>
+
+    <div id="toast"><i class="fa-solid fa-check"></i> 地址已複製</div>
 
     <script>
         // Data Structure
         const itinerary = [
             {
-                date: "26", day: "Mon", month: "Jan",
+                date: "26", day: "Mon", fullDate: "2026-01-26",
                 location: "Busan", title: "Day 1: 飛往釜山",
                 events: [
                     {
                         time: "06:10", title: "抵達金海機場 (PUS)",
-                        desc: "入境後搭計程車前往海雲台",
+                        travel: "🚕 40-50min",
                         cat: "transport",
-                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS 06:10" },
-                        travelToNext: "🚕 40-50min (約₩35,000)"
+                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS 06:10" }
                     },
                     {
                         time: "08:00", title: "海雲台 Prugio City (S07)",
-                        desc: "寄放行李 (A棟)。地標：해운대 푸르지오 시티",
                         address: "부산시 해운대구 해운대해변로298번길 29",
                         addressEn: "29 Haeundaehaebyeon-ro 298beon-gil, Haeundae-gu, Busan",
                         country: "KR",
-                        cat: "stay",
-                        travelToNext: "🚶 5min"
+                        cat: "stay"
                     },
                     {
                         time: "08:30", title: "錦繡河豚湯",
-                        desc: "24小時營業，清淡解酒湯",
                         address: "부산 해운대구 중동1로43번길 23",
                         country: "KR",
-                        cat: "food",
-                        travelToNext: "🚶 15min"
+                        cat: "food"
                     },
                     {
                         time: "09:30", title: "Rendezja-vous 海雲台",
-                        desc: "海景咖啡廳休息",
                         address: "부산 해운대구 달맞이길62번길 23",
                         country: "KR",
                         cat: "food"
                     },
                     {
                         time: "13:00", title: "Spa Land 汗蒸幕",
-                        desc: "🔴 Pass 啟用點 (出示QR Code)",
                         address: "부산 해운대구 센텀남대로 35",
                         country: "KR",
                         cat: "sight",
@@ -294,7 +287,6 @@
                     },
                     {
                         time: "18:30", title: "Busan X the Sky",
-                        desc: "🟢 Pass 免費入場 (100樓夜景)",
                         address: "부산 해운대구 달맞이길 30",
                         country: "KR",
                         cat: "sight",
@@ -303,12 +295,11 @@
                 ]
             },
             {
-                date: "27", day: "Tue", month: "Jan",
+                date: "27", day: "Tue", fullDate: "2026-01-27",
                 location: "Busan", title: "Day 2: 膠囊列車",
                 events: [
                     {
                         time: "09:30", title: "天空膠囊列車 (Sky Capsule)",
-                        desc: "已預約：尾浦站出發 → 青沙浦",
                         address: "부산 해운대구 달맞이길62번길 13",
                         country: "KR",
                         cat: "sight",
@@ -316,15 +307,12 @@
                     },
                     {
                         time: "11:00", title: "青沙浦 (Cheongsapo)",
-                        desc: "平交道灌籃高手場景、烤貝午餐",
                         address: "부산 해운대구 청사포로 128",
                         country: "KR",
-                        cat: "food",
-                        travelToNext: "🚃 海濱列車"
+                        cat: "food"
                     },
                     {
                         time: "14:00", title: "松島龍宮雲橋 / 纜車",
-                        desc: "🟢 Pass 免費",
                         address: "부산 서구 송도해변로 171",
                         country: "KR",
                         cat: "sight",
@@ -333,98 +321,75 @@
                 ]
             },
             {
-                date: "29", day: "Thu", month: "Jan",
+                date: "29", day: "Thu", fullDate: "2026-01-29",
                 location: "Busan Port", title: "Day 4: 登船夜",
                 events: [
                     {
                         time: "17:00", title: "抵達釜山港碼頭",
-                        desc: "請務必準時抵達，進行出境手續",
                         address: "부산 동구 충장대로 206",
                         country: "KR",
                         cat: "transport"
                     },
                     {
                         time: "18:30", title: "報到截止 & 登船",
-                        desc: "新山茶花號 (New Camellia)",
                         cat: "transport",
                         ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航 (船上過夜)" }
                     }
                 ]
             },
             {
-                date: "30", day: "Fri", month: "Jan",
+                date: "30", day: "Fri", fullDate: "2026-01-30",
                 location: "Fukuoka", title: "Day 5: 抵達福岡",
                 events: [
                     {
                         time: "07:30", title: "抵達博多港",
-                        desc: "入境日本",
+                        travel: "🚌 20min",
                         address: "福岡市博多区沖浜町14-1",
-                        country: "JP",
-                        cat: "transport",
-                        travelToNext: "🚌 20min"
-                    },
-                    {
-                        time: "09:00", title: "博多站 (Hakata Sta.)",
-                        desc: "寄放行李",
-                        address: "福岡市博多区博多駅中央街1-1",
                         country: "JP",
                         cat: "transport"
                     },
                     {
-                        time: "晚餐", title: "博多牛腸鍋",
-                        desc: "推薦：前田屋 / やま中",
-                        address: "福岡市博多区博多駅前3-26-5",
+                        time: "09:00", title: "博多站 (Hakata Sta.)",
+                        address: "福岡市博多区博多駅中央街1-1",
                         country: "JP",
-                        cat: "food"
+                        cat: "transport"
                     }
                 ]
             },
             {
-                date: "01", day: "Sun", month: "Feb",
+                date: "01", day: "Sun", fullDate: "2026-02-01",
                 location: "Yufuin", title: "Day 7: 由布院之森",
                 events: [
                     {
                         time: "10:11", title: "博多站出發",
-                        desc: "搭乘觀光列車前往由布院",
+                        travel: "🚆 2hr 16m",
                         cat: "transport",
-                        ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" },
-                        travelToNext: "🚆 2hr 16m"
+                        ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }
                     },
                     {
                         time: "12:27", title: "抵達由布院",
-                        desc: "車站對面寄放行李",
                         address: "大分県由布市湯布院町川北8-2",
                         country: "JP",
                         cat: "sight"
                     },
                     {
-                        time: "15:00", title: "由布院花卉村",
-                        desc: "Yufuin Floral Village (吉卜力風)",
-                        address: "大分県由布市湯布院町川上1503-3",
-                        country: "JP",
-                        cat: "sight"
-                    },
-                    {
                         time: "住宿", title: "由布院溫泉旅館",
-                        desc: "享受一泊二食",
                         cat: "stay"
                     }
                 ]
             },
             {
-                date: "05", day: "Thu", month: "Feb",
+                date: "05", day: "Thu", fullDate: "2026-02-05",
                 location: "Saga/Home", title: "Day 11: 返程",
                 events: [
                     {
                         time: "09:30", title: "前往佐賀機場 (HSG)",
-                        desc: "搭乘機場巴士",
                         address: "佐賀県佐賀市川副町大字犬井道947",
                         country: "JP",
                         cat: "transport"
                     },
                     {
                         time: "12:15", title: "虎航 IT247 起飛",
-                        desc: "再見九州！",
                         cat: "transport",
                         ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE 13:45" }
                     }
@@ -440,7 +405,7 @@
 
             itinerary.forEach((day, index) => {
                 html += `
-                <div class="card">
+                <div class="card" id="card-${index}">
                     <div class="day-header" onclick="toggleDay(${index})">
                         <div class="date-box">
                             <div class="date-num">${day.date}</div>
@@ -450,10 +415,11 @@
                             <div class="day-title">${day.title}</div>
                             <div class="day-loc"><i class="fa-solid fa-location-dot" style="color:#FFB7C5"></i> ${day.location}</div>
                         </div>
-                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:#ddd; transition:0.2s"></i>
+                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:#ddd; transition:0.3s"></i>
                     </div>
 
-                    <div id="timeline-${index}" class="timeline ${index <= 1 ? 'open' : ''}"> ${day.events.map((event, i) => renderEvent(event, i, day.events.length)).join('')}
+                    <div id="timeline-${index}" class="timeline">
+                        ${day.events.map((event) => renderEvent(event)).join('')}
                     </div>
                 </div>
                 `;
@@ -462,7 +428,7 @@
             container.innerHTML = html;
         }
 
-        function renderEvent(event, index, total) {
+        function renderEvent(event) {
             // Pass badges
             let passBadge = '';
             if (event.pass === 'start') passBadge = '<span class="pass-badge">Pass 啟用</span>';
@@ -479,7 +445,7 @@
                 ticketHtml = `
                     <div class="ticket-block">
                         <i class="fa-solid ${icon} ticket-icon"></i>
-                        <div class="ticket-details">
+                        <div>
                             <span class="ticket-code">${event.ticket.code}</span>
                             <span>${event.ticket.info}</span>
                         </div>
@@ -487,46 +453,30 @@
                 `;
             }
 
-            // Navigation Buttons (Deep Linking)
+            // Navigation Buttons
             let navButtons = '';
             if (event.address) {
                 const encodedAddr = encodeURIComponent(event.address);
                 const encodedAddrEn = encodeURIComponent(event.addressEn || event.address);
                 
                 // Copy Button
-                navButtons += `<button class="btn-nav btn-copy" onclick="copyAddr('${event.address}')"><i class="fa-regular fa-copy"></i> 複製</button>`;
+                navButtons += `<button class="btn-nav btn-copy" onclick="copyAddr('${event.address}')"><i class="fa-regular fa-copy"></i></button>`;
 
                 if (event.country === 'KR') {
-                    // Naver Map (App Scheme with Web Fallback)
-                    // Note: Direct scheme 'nmap://' might fail if app not installed. 
-                    // Using https://map.naver.com is safer for web apps, but user asked for App link.
-                    // We use a universal intent approach.
                     const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
                     const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
-                    
                     navButtons += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
                     navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
                 } else if (event.country === 'JP') {
-                    // Google Maps
                     const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
                     const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
-
                     navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
                     navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
                 }
             }
 
-            // Travel Connector (Visual time between events)
-            let connectorHtml = '';
-            if (event.travelToNext) {
-                connectorHtml = `
-                    <div class="travel-connector">
-                        <div class="travel-pill">
-                            ${event.travelToNext}
-                        </div>
-                    </div>
-                `;
-            }
+            // Travel Info (Now inline)
+            let travelHtml = event.travel ? `<span class="travel-tag">${event.travel}</span>` : '';
 
             return `
                 <div class="event-node">
@@ -536,39 +486,77 @@
                             ${event.time}
                             ${passBadge}
                         </div>
-                        <div class="event-title">${event.title}</div>
-                        <div class="event-desc">${event.desc}</div>
+                        <div class="event-title">
+                            ${event.title}
+                            ${travelHtml}
+                        </div>
                         ${ticketHtml}
                         ${navButtons ? `<div class="action-row">${navButtons}</div>` : ''}
                     </div>
                 </div>
-                ${connectorHtml}
             `;
         }
 
-        // Interactivity
+        // Interaction Logic
         function toggleDay(index) {
-            const tl = document.getElementById(`timeline-${index}`);
-            const arrow = document.getElementById(`arrow-${index}`);
-            if (tl.classList.contains('open')) {
-                tl.classList.remove('open');
-                arrow.style.transform = 'rotate(0deg)';
+            // 1. Collapse all others
+            itinerary.forEach((_, i) => {
+                const tl = document.getElementById(`timeline-${i}`);
+                const ar = document.getElementById(`arrow-${i}`);
+                if (i !== index) {
+                    tl.classList.remove('open');
+                    ar.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            // 2. Toggle clicked one
+            const targetTl = document.getElementById(`timeline-${index}`);
+            const targetAr = document.getElementById(`arrow-${index}`);
+            const isOpening = !targetTl.classList.contains('open');
+
+            if (isOpening) {
+                targetTl.classList.add('open');
+                targetAr.style.transform = 'rotate(180deg)';
+                
+                // 3. Scroll to top
+                setTimeout(() => {
+                    const card = document.getElementById(`card-${index}`);
+                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
             } else {
-                tl.classList.add('open');
-                arrow.style.transform = 'rotate(180deg)';
+                targetTl.classList.remove('open');
+                targetAr.style.transform = 'rotate(0deg)';
             }
         }
 
         function copyAddr(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('地址已複製: ' + text);
-            }).catch(err => {
-                console.error('Copy failed', err);
+                showToast();
             });
         }
 
-        // Init
-        document.addEventListener('DOMContentLoaded', renderApp);
+        function showToast() {
+            const x = document.getElementById("toast");
+            x.className = "show";
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 2000);
+        }
+
+        // Initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            renderApp();
+
+            // Auto-open logic based on date
+            // Note: Since trip is in 2026, this will only trigger if user system date matches.
+            // Otherwise defaults to first day.
+            const today = new Date().toISOString().split('T')[0];
+            const todayIndex = itinerary.findIndex(day => day.fullDate === today);
+            
+            if (todayIndex !== -1) {
+                toggleDay(todayIndex);
+            } else {
+                toggleDay(0); // Default to Day 1
+            }
+        });
 
     </script>
 </body>
