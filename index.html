@@ -6,153 +6,126 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#FFF9FA">
-    <meta name="description" content="Produce 101: Busan & Fukuoka Travel App">
-    <title>Our Travel 101</title>
+    <meta name="description" content="2026 Busan & Kyushu Trip">
+    <title>2026 Our Trip ❤️</title>
     
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063822.png">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- CSS Reset & Variables --- */
         :root {
-            /* Sanrio Palette */
-            --color-primary: #FFB7C5; /* My Melody Pink */
-            --color-secondary: #A0D8EF; /* Cinnamoroll Blue */
+            /* Sanrio Palette 2.0 */
+            --color-primary: #FFB7C5; /* Melody Pink */
+            --color-secondary: #89CFF0; /* Cinnamoroll Blue */
             --color-accent: #FFD700; /* Pompompurin Yellow */
-            --color-bg: #FFF9FA; /* Creamy White */
+            --color-danger: #FF6B6B; /* Pass Start Red */
+            --color-success: #4CD964; /* Pass Free Green */
+            --color-bg: #FFF9FA;
             --color-card: #FFFFFF;
-            --color-text-main: #4A4A4A;
+            --color-text-main: #2C2C2E;
             --color-text-sub: #8E8E93;
-            --color-border: #F0F0F0;
+            --color-border: #F2F2F7;
             
-            /* Category Colors */
-            --tag-sight: #FFB7C5;
-            --tag-food: #FFD180;
-            --tag-stay: #A0D8EF;
-            --tag-transport: #B39DDB;
-
-            /* UI Metrics */
             --radius-lg: 24px;
             --radius-md: 16px;
-            --radius-sm: 8px;
-            --shadow-soft: 0 8px 24px rgba(149, 157, 165, 0.1);
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
-            --nav-height: 80px;
+            --nav-height: 85px;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0; padding: 0;
+            font-family: 'Noto Sans TC', sans-serif;
             background-color: var(--color-bg);
             color: var(--color-text-main);
-            height: 100vh;
             height: 100dvh;
-            overflow: hidden; /* Prevent body scroll, handle in app-container */
+            overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        /* --- Layout Structure --- */
         #app {
             flex: 1;
             overflow-y: auto;
             overflow-x: hidden;
-            padding: calc(var(--safe-top) + 20px) 20px calc(var(--nav-height) + var(--safe-bottom) + 20px);
+            padding: calc(var(--safe-top) + 20px) 20px calc(var(--nav-height) + 20px);
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
         }
-
-        /* Hide Scrollbar */
         #app::-webkit-scrollbar { display: none; }
 
-        /* --- Typography --- */
-        h1, h2, h3 { margin: 0; font-family: 'Playfair Display', serif; }
+        /* Typography */
+        h1, h2 { font-family: 'Playfair Display', serif; margin: 0; }
         .text-sm { font-size: 0.85rem; color: var(--color-text-sub); }
+        .text-xs { font-size: 0.75rem; color: var(--color-text-sub); }
         .text-bold { font-weight: 700; }
 
-        /* --- Components --- */
+        /* Components */
         .header {
             margin-bottom: 24px;
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
         }
-        .header h1 { font-size: 2rem; color: var(--color-text-main); }
-        .header span { font-size: 0.9rem; color: var(--color-primary); font-weight: bold; letter-spacing: 1px; }
+        .header h1 { font-size: 2.2rem; background: -webkit-linear-gradient(45deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header span { font-size: 0.9rem; color: var(--color-text-sub); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* Card Style */
         .card {
             background: var(--color-card);
             border-radius: var(--radius-lg);
             padding: 20px;
             margin-bottom: 16px;
-            box-shadow: var(--shadow-soft);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
             transition: transform 0.2s;
             position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.02);
         }
         .card:active { transform: scale(0.98); }
 
-        /* Sanrio Deco - Ribbon */
-        .card.ribbon::after {
-            content: '';
-            position: absolute;
-            top: -20px;
-            right: -20px;
-            width: 60px;
-            height: 60px;
-            background: var(--color-primary);
-            transform: rotate(45deg);
-            opacity: 0.2;
-        }
-
-        /* Timeline Styles */
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            cursor: pointer;
-        }
-        .day-badge {
-            background: var(--color-primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        /* Pass Badge */
+        .pass-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
             font-weight: bold;
+            color: white;
+            margin-left: 6px;
+            vertical-align: middle;
         }
-        .day-title { font-size: 1.1rem; font-weight: 600; flex: 1; margin-left: 10px; }
-        .toggle-icon { color: var(--color-text-sub); transition: transform 0.3s; }
+        .pass-start { background-color: var(--color-danger); }
+        .pass-free { background-color: var(--color-success); }
+        .pass-expire { background-color: var(--color-text-sub); }
+
+        /* Timeline */
+        .day-header { display: flex; align-items: center; margin-bottom: 5px; }
+        .day-date { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; width: 60px; line-height: 1; text-align: center; margin-right: 15px; color: var(--color-primary); }
+        .day-date small { display: block; font-size: 0.7rem; font-family: 'Noto Sans TC'; color: var(--color-text-sub); font-weight: 400; margin-top: 4px; }
+        .day-info { flex: 1; }
+        .day-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 2px; }
         
-        .timeline-container {
-            display: none; /* Hidden by default */
-            margin-top: 15px;
-            padding-left: 10px;
-            border-left: 2px solid var(--color-border);
-            margin-left: 10px;
-        }
-        .timeline-container.open { display: block; animation: fadeIn 0.3s ease; }
+        .timeline-container { display: none; margin-top: 20px; padding-left: 8px; }
+        .timeline-container.open { display: block; animation: slideDown 0.3s ease; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         .event-item {
             position: relative;
-            padding-left: 20px;
-            margin-bottom: 20px;
+            padding-left: 24px;
+            padding-bottom: 24px;
+            border-left: 2px solid var(--color-border);
         }
-        .event-item::before {
-            content: '';
+        .event-item:last-child { border-left: 2px solid transparent; }
+        
+        .event-dot {
             position: absolute;
-            left: -16px;
-            top: 6px;
+            left: -6px;
+            top: 0;
             width: 10px;
             height: 10px;
             border-radius: 50%;
@@ -160,126 +133,63 @@
             border: 2px solid white;
             box-shadow: 0 0 0 2px var(--color-border);
         }
-        /* Category dots */
-        .event-item[data-cat="sight"]::before { background: var(--tag-sight); }
-        .event-item[data-cat="food"]::before { background: var(--tag-food); }
-        .event-item[data-cat="stay"]::before { background: var(--tag-stay); }
-        .event-item[data-cat="transport"]::before { background: var(--tag-transport); }
+        .dot-transport { background: #B39DDB; }
+        .dot-food { background: #FFCC80; }
+        .dot-sight { background: var(--color-primary); }
+        .dot-stay { background: var(--color-secondary); }
 
-        .event-time { font-size: 0.8rem; color: var(--color-text-sub); font-weight: 500; margin-bottom: 2px; }
-        .event-name { font-size: 1rem; font-weight: 500; margin-bottom: 4px; display: flex; align-items: center;}
-        .event-desc { font-size: 0.9rem; color: #666; line-height: 1.4; }
-        
-        .map-btn {
-            margin-left: 8px;
-            color: var(--color-secondary);
-            font-size: 0.9rem;
-            text-decoration: none;
-        }
-
-        /* --- Budget Page --- */
-        .budget-header {
-            background: linear-gradient(135deg, var(--color-primary), #FFD1DC);
-            color: white;
-            padding: 30px 20px;
-            border-radius: var(--radius-lg);
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .total-amount { font-size: 2.5rem; font-weight: 700; font-family: 'Playfair Display', serif; }
-        
-        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        input {
-            flex: 1;
-            padding: 12px;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            font-size: 1rem;
-            outline: none;
-            font-family: 'Noto Sans TC';
-        }
-        .btn-add {
-            background: var(--color-primary);
-            color: white;
-            border: none;
-            padding: 0 20px;
-            border-radius: var(--radius-md);
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .expense-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--color-border);
-        }
-        .btn-delete { color: #ff6b6b; margin-left: 10px; cursor: pointer; }
-
-        /* --- Guide Page --- */
-        .weather-widget {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: linear-gradient(to right, #A0D8EF, #E0F7FA);
-            color: #333;
-        }
-        .guide-section h3 { margin-bottom: 15px; font-size: 1.2rem; border-left: 4px solid var(--color-primary); padding-left: 10px; }
-        .checklist-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            background: white;
-            padding: 12px;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--color-border);
-        }
-        .checklist-item i { margin-right: 12px; color: var(--color-primary); width: 20px; text-align: center;}
-
-        /* --- Bottom Navigation --- */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: calc(var(--nav-height) + var(--safe-bottom));
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-around;
-            padding-bottom: var(--safe-bottom);
-            z-index: 1000;
-        }
-
-        .nav-item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: #C7C7CC;
+        .event-time { font-size: 0.8rem; color: var(--color-primary); font-weight: 700; margin-bottom: 4px; }
+        .event-name { font-size: 1rem; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; flex-wrap: wrap;}
+        .event-desc { font-size: 0.9rem; color: #555; line-height: 1.5; }
+        .address-box {
+            background: #F8F9FA;
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 6px;
             font-size: 0.75rem;
-            cursor: pointer;
-            transition: color 0.3s;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border: 1px solid #EEE;
         }
+        .btn-copy { color: var(--color-secondary); cursor: pointer; padding: 4px; }
+
+        /* Guide & Tickets */
+        .ticket-card {
+            background: linear-gradient(135deg, #fff, #fefefe);
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-secondary);
+        }
+        .ticket-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
+        .ticket-label { color: var(--color-text-sub); }
+        .ticket-val { font-weight: 600; }
+
+        /* Budget */
+        .budget-total { text-align: center; padding: 20px; background: var(--color-primary); color: white; border-radius: var(--radius-lg); margin-bottom: 20px; box-shadow: 0 8px 16px rgba(255, 183, 197, 0.4); }
+
+        /* Nav */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; width: 100%;
+            height: calc(var(--nav-height) + var(--safe-bottom));
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(0,0,0,0.05);
+            display: flex; justify-content: space-around;
+            padding-bottom: var(--safe-bottom);
+            z-index: 999;
+        }
+        .nav-item { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #CCC; transition: 0.3s; }
+        .nav-item.active { color: var(--color-primary); transform: translateY(-2px); }
         .nav-item i { font-size: 1.4rem; margin-bottom: 4px; }
-        .nav-item.active { color: var(--color-primary); }
-        .nav-item.active i { transform: translateY(-2px); transition: transform 0.2s; }
+        .nav-item span { font-size: 0.7rem; font-weight: 500; }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .page { display: none; animation: fadeIn 0.4s ease; }
-        .page.active { display: block; }
-        
-        /* Utility */
-        .tag { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; margin-left: 5px; color: white; vertical-align: middle; }
-        .bg-busan { background-color: var(--color-primary) !important; }
-        .bg-fukuoka { background-color: var(--color-secondary) !important; }
-        .bg-saga { background-color: #95E1D3 !important; }
-
+        /* Toast */
+        #toast {
+            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px;
+            font-size: 0.85rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 2000;
+        }
     </style>
 </head>
 <body>
@@ -287,335 +197,372 @@
     <div id="app">
         </div>
 
+    <div id="toast">已複製地址</div>
+
     <nav class="bottom-nav">
         <div class="nav-item active" onclick="switchTab('itinerary')">
-            <i class="fa-solid fa-plane-departure"></i>
+            <i class="fa-solid fa-calendar-check"></i>
             <span>行程</span>
         </div>
         <div class="nav-item" onclick="switchTab('guide')">
-            <i class="fa-solid fa-book-open-reader"></i>
+            <i class="fa-solid fa-ticket"></i>
             <span>攻略</span>
         </div>
         <div class="nav-item" onclick="switchTab('budget')">
-            <i class="fa-solid fa-sack-dollar"></i>
+            <i class="fa-solid fa-wallet"></i>
             <span>記帳</span>
         </div>
     </nav>
 
     <script>
-        // --- Data Definitions ---
+        // --- Data ---
+        const tripDates = {
+            start: "2026-01-26",
+            end: "2026-02-05"
+        };
 
         const itineraryData = [
             {
-                day: 1, loc: "Busan", theme: "Produce 101: 釜山篇", title: "抵達與南浦洞風情", color: "bg-busan",
+                date: "01/26", day: "Mon", fullDate: "2026-01-26",
+                loc: "Busan", title: "飛往釜山 & Pass啟用", 
                 events: [
-                    { time: "下午", title: "抵達金海機場 (PUS)", desc: "前往飯店 (建議：南浦洞/西面)", cat: "transport", map: "Gimhae International Airport" },
-                    { time: "傍晚", title: "BIFF 廣場", desc: "必吃：堅果糖餅", cat: "food", map: "BIFF Square Busan" },
-                    { time: "晚上", title: "釜山塔 / 樂天百貨觀景", desc: "欣賞影島大橋與港口夜景", cat: "sight", map: "Busan Tower" },
-                    { time: "晚餐", title: "札嘎其市場 / 富平夜市", desc: "海鮮大餐或夜市小吃", cat: "food", map: "Jagalchi Market" }
+                    { time: "06:10", title: "抵達金海機場 (PUS)", desc: "Eastar Jet ZE984。出關後搭計程車(約50分, ₩3-4萬)", cat: "transport", dot: "transport" },
+                    { time: "08:00", title: "前往 S07 寄放行李", desc: "Haeundae Prugio City A棟", cat: "stay", dot: "stay", address: "부산시 해운대구 해운대해변로298번길 29, A동" },
+                    { time: "08:30", title: "早餐：錦繡河豚湯", desc: "走路5分鐘，清爽湯頭解飛機疲勞", cat: "food", dot: "food", address: "부산 해운대구 중동1로43번길 23" },
+                    { time: "09:30", title: "海景咖啡 / 海雲台散步", desc: "Rendezja-vous 或 冬柏島", cat: "sight", dot: "sight", address: "부산 해운대구 달맞이길62번길 23" },
+                    { time: "11:30", title: "午餐：嚴泳白豬肉湯飯", desc: "海雲台店，走路20分或叫車", cat: "food", dot: "food", address: "부산 해운대구 구남로24번길 39" },
+                    { time: "13:00", title: "Spa Land 汗蒸幕", desc: "五星級汗蒸幕", cat: "sight", dot: "sight", pass: "start" },
+                    { time: "17:30", title: "S07 Check-in", desc: "回住宿休息整理", cat: "stay", dot: "stay" },
+                    { time: "18:30", title: "Busan X the Sky", desc: "100樓夜景", cat: "sight", dot: "sight", pass: "free" }
                 ]
             },
             {
-                day: 2, loc: "Busan", theme: "Produce 101: 釜山篇", title: "海雲台浪漫列車", color: "bg-busan",
+                date: "01/27", day: "Tue", fullDate: "2026-01-27",
+                loc: "Busan", title: "膠囊列車與海濱", 
                 events: [
-                    { time: "上午", title: "海雲台沙灘", desc: "拍人生四格、散步", cat: "sight", map: "Haeundae Beach" },
-                    { time: "中午", title: "海理團道", desc: "文青餐廳午餐", cat: "food", map: "Haeridan-gil" },
-                    { time: "下午", title: "Blue Line Park", desc: "🌟 必去：天空膠囊列車 (需預約)", cat: "sight", map: "Blue Line Park Mipo Station" },
-                    { time: "傍晚", title: "青沙浦", desc: "紅白燈塔、海景咖啡 (H.us/Alice Donut)", cat: "food", map: "Cheongsapo" },
-                    { time: "晚上", title: "The Bay 101", desc: "摩天樓倒影夜景", cat: "sight", map: "The Bay 101" }
+                    { time: "09:30", title: "天空膠囊列車", desc: "尾浦站出發 (已預約)", cat: "sight", dot: "sight", pass: "free" },
+                    { time: "中午", title: "青沙浦午餐", desc: "海鮮烤貝或網美咖啡廳", cat: "food", dot: "food" },
+                    { time: "下午", title: "海濱列車 / 松島纜車", desc: "Pass 行程跑透透", cat: "sight", dot: "sight", pass: "free" },
+                    { time: "晚上", title: "The Bay 101", desc: "摩天樓倒影夜景", cat: "sight", dot: "sight" }
                 ]
             },
             {
-                day: 3, loc: "Busan", theme: "Produce 101: 釜山篇", title: "童話村與廣安里", color: "bg-busan",
+                date: "01/28", day: "Wed", fullDate: "2026-01-28",
+                loc: "Busan", title: "甘川洞 & Pass 最後衝刺", 
                 events: [
-                    { time: "10:00", title: "甘川洞文化村", desc: "小王子合照 (早點去避人潮)", cat: "sight", map: "Gamcheon Culture Village" },
-                    { time: "下午", title: "白淺灘文化村", desc: "絕美海岸步道、窗景咖啡", cat: "sight", map: "Huinnyeoul Culture Village" },
-                    { time: "晚上", title: "廣安里海水浴場", desc: "廣安大橋點燈 (週六有無人機秀)", cat: "sight", map: "Gwangalli Beach" },
-                    { time: "晚餐", title: "韓式烤肉", desc: "廣安里周邊美食", cat: "food", map: "Gwangalli BBQ" }
+                    { time: "上午", title: "甘川洞文化村", desc: "跟小王子拍照，換手翻書", cat: "sight", dot: "sight", pass: "free" },
+                    { time: "12:59", title: "⚠️ Pass 失效", desc: "48小時結束", cat: "transport", dot: "transport", pass: "expire" },
+                    { time: "下午", title: "南浦洞 / BIFF廣場", desc: "逛街、吃堅果糖餅", cat: "sight", dot: "sight" },
+                    { time: "晚餐", title: "富平罐頭夜市", desc: "各式韓國小吃", cat: "food", dot: "food" }
                 ]
             },
             {
-                day: 4, loc: "Busan", theme: "Produce 101: 釜山篇", title: "汗蒸幕 & 移動日", color: "bg-busan",
+                date: "01/29", day: "Thu", fullDate: "2026-01-29",
+                loc: "Busan", title: "告別釜山 & 登船", 
                 events: [
-                    { time: "上午", title: "Spa Land", desc: "五星級汗蒸幕 (Centum City)", cat: "sight", map: "Spa Land Centum City" },
-                    { time: "下午", title: "新世界百貨", desc: "最後補貨", cat: "sight", map: "Shinsegae Centum City" },
-                    { time: "17:30", title: "釜山港國際客運碼頭", desc: "新山茶花號報到 (19:00登船)", cat: "transport", map: "Busan Port International Passenger Terminal" },
-                    { time: "22:30", title: "船班出發", desc: "在船上享受大浴場與便利商店", cat: "transport", map: "" }
+                    { time: "上午", title: "最後採買 / 樂天超市", desc: "把伴手禮買齊", cat: "sight", dot: "sight" },
+                    { time: "17:00", title: "抵達釜山港碼頭", desc: "務必準時！", cat: "transport", dot: "transport", address: "부산 동구 충장대로 206" },
+                    { time: "18:30", title: "最後報到截止", desc: "Check-in 結束", cat: "transport", dot: "transport" },
+                    { time: "20:00", title: "新山茶花號 出發", desc: "前往福岡！享用特等艙", cat: "stay", dot: "stay" }
                 ]
             },
             {
-                day: 5, loc: "Fukuoka", theme: "Produce 101: 福岡篇", title: "早安福岡！市區漫遊", color: "bg-fukuoka",
+                date: "01/30", day: "Fri", fullDate: "2026-01-30",
+                loc: "Fukuoka", title: "早安福岡", 
                 events: [
-                    { time: "07:30", title: "抵達博多港", desc: "入境後前往博多站寄放行李", cat: "transport", map: "Hakata Port Tower" },
-                    { time: "上午", title: "大濠公園", desc: "星巴克早餐、美術館草間彌生南瓜", cat: "sight", map: "Ohori Park" },
-                    { time: "下午", title: "六本松 / LaLaport", desc: "蔦屋書店或巨型鋼彈", cat: "sight", map: "LaLaport Fukuoka" },
-                    { time: "晚上", title: "博多運河城", desc: "水舞秀", cat: "sight", map: "Canal City Hakata" },
-                    { time: "晚餐", title: "博多牛腸鍋", desc: "前田屋 或 やま中", cat: "food", map: "Motsunabe Maedaya" }
+                    { time: "07:30", title: "抵達博多港", desc: "入境日本", cat: "transport", dot: "transport" },
+                    { time: "上午", title: "大濠公園", desc: "星巴克、美術館", cat: "sight", dot: "sight" },
+                    { time: "下午", title: "天神/博多逛街", desc: "三麗鷗商店巡禮", cat: "sight", dot: "sight" },
+                    { time: "晚餐", title: "博多牛腸鍋", desc: "前田屋 或 やま中", cat: "food", dot: "food" }
                 ]
             },
             {
-                day: 6, loc: "Yufuin", theme: "Produce 101: 福岡篇", title: "童話小鎮由布院", color: "bg-fukuoka",
+                date: "01/31", day: "Sat", fullDate: "2026-01-31",
+                loc: "Fukuoka", title: "福岡市區 / 演唱會預備?", 
                 events: [
-                    { time: "交通", title: "由布院之森", desc: "特急列車 (需提前一個月預約)", cat: "transport", map: "Hakata Station" },
-                    { time: "下午", title: "湯之坪街道", desc: "史努比茶屋、Miffy麵包、可樂餅", cat: "food", map: "Yunotsubo Street" },
-                    { time: "景點", title: "由布院花卉村", desc: "吉卜力風格矮房，超好拍", cat: "sight", map: "Yufuin Floral Village" },
-                    { time: "住宿", title: "溫泉旅館", desc: "享受一泊二食與私人湯屋", cat: "stay", map: "Yufuin Onsen" }
+                    { time: "全日", title: "市區自由行 / 追星", desc: "根據 SMTOWN 行程調整", cat: "sight", dot: "sight" },
+                    { time: "晚上", title: "中洲屋台", desc: "體驗日本路邊攤文化", cat: "food", dot: "food" }
                 ]
             },
             {
-                day: 7, loc: "Fukuoka", theme: "Produce 101: 福岡篇", title: "晨霧與中洲屋台", color: "bg-fukuoka",
+                date: "02/01", day: "Sun", fullDate: "2026-02-01",
+                loc: "Yufuin", title: "由布院之森", 
                 events: [
-                    { time: "清晨", title: "金鱗湖", desc: "觀賞夢幻晨霧", cat: "sight", map: "Kinrin Lake" },
-                    { time: "中午", title: "返回博多", desc: "搭乘 JR", cat: "transport", map: "Hakata Station" },
-                    { time: "下午", title: "天神地下街", desc: "流行服飾、藥妝血拼", cat: "sight", map: "Tenjin Underground Shopping Center" },
-                    { time: "晚上", title: "中洲屋台街", desc: "河邊小攤吃拉麵、關東煮", cat: "food", map: "Nakasu Yatai" }
+                    { time: "10:11", title: "博多站出發", desc: "由布院之森 3號 (4號車 7番CD)", cat: "transport", dot: "transport" },
+                    { time: "12:27", title: "抵達由布院", desc: "寄放行李", cat: "transport", dot: "transport" },
+                    { time: "下午", title: "湯之坪街道", desc: "史努比茶屋、花卉村", cat: "sight", dot: "sight" },
+                    { time: "住宿", title: "由布院溫泉旅館", desc: "一泊二食", cat: "stay", dot: "stay" }
                 ]
             },
             {
-                day: 8, loc: "Itoshima", theme: "Produce 101: 福岡篇", title: "糸島戀人聖地", color: "bg-fukuoka",
+                date: "02/02", day: "Mon", fullDate: "2026-02-02",
+                loc: "Fukuoka", title: "金鱗湖晨霧", 
                 events: [
-                    { time: "交通", title: "租車自駕 / 公車", desc: "前往糸島", cat: "transport", map: "Itoshima" },
-                    { time: "上午", title: "櫻井二見浦", desc: "夫婦岩與白色鳥居", cat: "sight", map: "Sakurai Futamigaura" },
-                    { time: "午餐", title: "海邊咖啡廳", desc: "Sunset Café 或 Current", cat: "food", map: "Futamigaura" },
-                    { time: "下午", title: "棕櫚樹鞦韆", desc: "拍照打卡點", cat: "sight", map: "Palm Tree Swing" },
-                    { time: "晚餐", title: "豚骨拉麵", desc: "ShinShin 或 一蘭總店", cat: "food", map: "Hakata Ramen ShinShin" }
+                    { time: "07:00", title: "金鱗湖", desc: "夢幻晨霧", cat: "sight", dot: "sight" },
+                    { time: "中午", title: "返回博多", desc: "搭乘 JR", cat: "transport", dot: "transport" },
+                    { time: "下午", title: "LaLaport 福岡", desc: "看鋼彈", cat: "sight", dot: "sight" }
                 ]
             },
             {
-                day: 9, loc: "Saga", theme: "Produce 101: 佐賀篇", title: "太宰府與移動", color: "bg-saga",
+                date: "02/03", day: "Tue", fullDate: "2026-02-03",
+                loc: "Saga", title: "移動至佐賀", 
                 events: [
-                    { time: "上午", title: "太宰府天滿宮", desc: "隈研吾星巴克、梅枝餅", cat: "sight", map: "Dazaifu Tenmangu" },
-                    { time: "下午", title: "前往佐賀", desc: "搭 JR 特急 (約40分)", cat: "transport", map: "Saga Station" },
-                    { time: "住宿", title: "佐賀站周邊", desc: "Comfort Hotel 或 Route Inn", cat: "stay", map: "Saga Station Hotel" },
-                    { time: "晚餐", title: "當地居酒屋", desc: "體驗在地風情", cat: "food", map: "Saga Station Izakaya" }
+                    { time: "上午", title: "太宰府天滿宮", desc: "吃梅枝餅", cat: "sight", dot: "sight" },
+                    { time: "下午", title: "前往佐賀", desc: "JR 特急", cat: "transport", dot: "transport" },
+                    { time: "晚餐", title: "佐賀牛餐廳 季樂", desc: "入口即化", cat: "food", dot: "food" }
                 ]
             },
             {
-                day: 10, loc: "Saga", theme: "Produce 101: 佐賀篇", title: "佐賀美學一日遊", color: "bg-saga",
+                date: "02/04", day: "Wed", fullDate: "2026-02-04",
+                loc: "Saga", title: "武雄圖書館", 
                 events: [
-                    { time: "上午", title: "武雄市圖書館", desc: "日本最美圖書館，絕美書牆", cat: "sight", map: "Takeo City Library" },
-                    { time: "午餐", title: "Kairo堂", desc: "佐賀牛壽喜燒便當 (九州冠軍)", cat: "food", map: "Takeo-Onsen Station" },
-                    { time: "下午", title: "武雄神社 & 御船山樂園", desc: "3000年大楠樹、teamLab展覽", cat: "sight", map: "Mifuneyama Rakuen" },
-                    { time: "晚餐", title: "佐賀牛餐廳 季樂", desc: "壓軸大餐，入口即化的美味", cat: "food", map: "Kira Saga" }
+                    { time: "上午", title: "武雄市圖書館", desc: "最美圖書館", cat: "sight", dot: "sight" },
+                    { time: "午餐", title: "佐賀牛便當", desc: "武雄溫泉站 Kairo堂", cat: "food", dot: "food" },
+                    { time: "下午", title: "御船山樂園", desc: "teamLab", cat: "sight", dot: "sight" }
                 ]
             },
             {
-                day: 11, loc: "Home", theme: "Produce 101: 返家", title: "甜蜜返家", color: "bg-saga",
+                date: "02/05", day: "Thu", fullDate: "2026-02-05",
+                loc: "Home", title: "甜蜜返家", 
                 events: [
-                    { time: "上午", title: "整理行李", desc: "打包滿滿戰利品", cat: "stay", map: "" },
-                    { time: "交通", title: "機場巴士", desc: "佐賀巴士中心 -> 佐賀機場", cat: "transport", map: "Saga Bus Center" },
-                    { time: "機場", title: "最後採買", desc: "海苔、嬉野茶、九州餅乾", cat: "sight", map: "Saga Airport" },
-                    { time: "起飛", title: "飛往溫暖的家", desc: "Travel End", cat: "transport", map: "" }
+                    { time: "上午", title: "前往佐賀機場 (HSG)", desc: "搭乘機場巴士", cat: "transport", dot: "transport" },
+                    { time: "12:15", title: "虎航 IT247 起飛", desc: "再見九州", cat: "transport", dot: "transport" },
+                    { time: "13:45", title: "抵達桃園 (TPE)", desc: "旅程結束", cat: "stay", dot: "stay" }
                 ]
             }
         ];
 
-        // --- Render Functions ---
-
+        // --- Functions ---
         const app = document.getElementById('app');
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.opacity = '1';
+                setTimeout(() => toast.style.opacity = '0', 2000);
+            });
+        }
 
         function renderItinerary() {
             let html = `
                 <div class="header">
                     <div>
-                        <span>OUR TRAVEL LOG</span>
-                        <h1>Itinerary</h1>
+                        <span>Jan 26 - Feb 05</span>
+                        <h1>Our Trip 2026</h1>
                     </div>
-                    <i class="fa-solid fa-map-location-dot" style="font-size: 2rem; color: var(--color-primary)"></i>
+                    <div style="text-align:right">
+                        <span style="font-size:2rem;">🇰🇷 🛳️ 🇯🇵</span>
+                    </div>
                 </div>
             `;
 
             itineraryData.forEach((day, index) => {
+                const isToday = false; // Logic for real date can be added
                 html += `
-                <div class="card ${day.events.some(e => e.title.includes('必')) ? 'ribbon' : ''}" onclick="toggleTimeline(${index})">
+                <div class="card" onclick="toggleTimeline(${index})">
                     <div class="day-header">
-                        <span class="day-badge ${day.color}">Day ${day.day}</span>
-                        <span style="font-size: 0.8rem; color: #888; margin-left: 8px;">${day.loc}</span>
-                        <div class="day-title">${day.title}</div>
-                        <i id="icon-${index}" class="fa-solid fa-chevron-down toggle-icon"></i>
+                        <div class="day-date">
+                            ${day.date}
+                            <small>${day.day}</small>
+                        </div>
+                        <div class="day-info">
+                            <div class="day-title">${day.title}</div>
+                            <div class="text-sm"><i class="fa-solid fa-location-dot" style="color:var(--color-primary)"></i> ${day.loc}</div>
+                        </div>
+                        <i id="icon-${index}" class="fa-solid fa-chevron-down" style="color: #ccc; transition: 0.3s"></i>
                     </div>
-                    <div class="text-sm" style="margin-bottom: 5px; color: var(--color-primary);">${day.theme}</div>
                     
-                    <div id="timeline-${index}" class="timeline-container">
-                        ${day.events.map(event => `
-                            <div class="event-item" data-cat="${event.cat}">
-                                <div class="event-time">${event.time}</div>
-                                <div class="event-name">
-                                    ${event.title}
-                                    ${event.map ? `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.title + " " + event.map)}" target="_blank" class="map-btn"><i class="fa-solid fa-diamond-turn-right"></i></a>` : ''}
+                    <div id="timeline-${index}" class="timeline-container ${index === 0 ? 'open' : ''}">
+                        ${day.events.map(e => `
+                            <div class="event-item">
+                                <div class="event-dot dot-${e.dot}"></div>
+                                <div class="event-time">${e.time}
+                                    ${e.pass === 'start' ? '<span class="pass-badge pass-start">Pass 啟用</span>' : ''}
+                                    ${e.pass === 'free' ? '<span class="pass-badge pass-free">Pass 免費</span>' : ''}
+                                    ${e.pass === 'expire' ? '<span class="pass-badge pass-expire">Pass 失效</span>' : ''}
                                 </div>
-                                <div class="event-desc">${event.desc}</div>
+                                <div class="event-name">${e.title}</div>
+                                <div class="event-desc">${e.desc}</div>
+                                ${e.address ? `
+                                    <div class="address-box">
+                                        <span>${e.address}</span>
+                                        <i class="fa-regular fa-copy btn-copy" onclick="event.stopPropagation(); copyToClipboard('${e.address}')"></i>
+                                    </div>
+                                ` : ''}
                             </div>
                         `).join('')}
                     </div>
                 </div>
                 `;
             });
-
-            // Add Footer padding
-            html += '<div style="height: 50px;"></div>';
+            html += '<div style="height: 50px"></div>';
             return html;
         }
 
         function renderGuide() {
             return `
                 <div class="header">
-                     <div>
-                        <span>TRAVEL TIPS</span>
+                    <div>
+                        <span>INFO & TICKETS</span>
                         <h1>Guide</h1>
                     </div>
-                    <i class="fa-solid fa-sun" style="font-size: 2rem; color: var(--color-accent)"></i>
                 </div>
 
-                <div class="card weather-widget">
-                    <div>
-                        <div class="text-bold">Busan / Fukuoka</div>
-                        <div class="text-sm">10°C - 18°C (預測)</div>
+                <h3 style="margin-bottom:10px">✈️ 航班資訊</h3>
+                <div class="card ticket-card">
+                    <div class="ticket-row">
+                        <span class="ticket-label">去程 (1/26)</span>
+                        <span class="ticket-val">ZE984</span>
                     </div>
-                    <i class="fa-solid fa-cloud-sun" style="font-size: 2.5rem; color: white;"></i>
-                </div>
-
-                <div class="guide-section">
-                    <h3><i class="fa-solid fa-check-double"></i> 出發前 Check List</h3>
-                    <div class="checklist-item"><i class="fa-regular fa-square-check"></i> 預約 Sky Capsule (釜山)</div>
-                    <div class="checklist-item"><i class="fa-regular fa-square-check"></i> 預約 由布院之森 (30天前)</div>
-                    <div class="checklist-item"><i class="fa-regular fa-square-check"></i> 預約 佐賀牛季樂</div>
-                    <div class="checklist-item"><i class="fa-regular fa-square-check"></i> Visit Japan Web QR Code</div>
-                    
-                    <h3><i class="fa-solid fa-gift"></i> 必買伴手禮</h3>
-                    <div class="card" style="background: #fff;">
-                        <ul style="padding-left: 20px; margin: 0; line-height: 1.8;">
-                            <li><strong>釜山：</strong> 堅果糖餅調理包、HBAF 杏仁果、Olive Young 美妝。</li>
-                            <li><strong>福岡：</strong> 努努雞 (冷炸雞)、明太子仙貝、博多通饅頭。</li>
-                            <li><strong>佐賀：</strong> 佐賀海苔、嬉野茶、小城羊羹。</li>
-                        </ul>
+                    <div class="ticket-row">
+                        <span>TPE 02:50</span>
+                        <span><i class="fa-solid fa-arrow-right"></i></span>
+                        <span>PUS 06:10</span>
                     </div>
-
-                    <h3><i class="fa-solid fa-circle-info"></i> 實用資訊</h3>
-                    <div class="card">
-                        <p><strong>緊急電話 (日本)：</strong> 110 (警) / 119 (火醫)</p>
-                        <p><strong>電壓：</strong> 韓國 220V (圓頭), 日本 100V (扁頭)</p>
-                        <p><strong>小費：</strong> 兩國皆無小費文化。</p>
+                    <hr style="border:0; border-top:1px dashed #eee; margin:10px 0;">
+                    <div class="ticket-row">
+                        <span class="ticket-label">回程 (2/05)</span>
+                        <span class="ticket-val">IT247</span>
+                    </div>
+                    <div class="ticket-row">
+                        <span>HSG 12:15</span>
+                        <span><i class="fa-solid fa-arrow-right"></i></span>
+                        <span>TPE 13:45</span>
                     </div>
                 </div>
-                 <div style="height: 50px;"></div>
+
+                <h3 style="margin-bottom:10px">🛳️ 新山茶花號</h3>
+                <div class="card ticket-card" style="border-left-color: var(--color-primary)">
+                    <div class="ticket-row">
+                        <span class="ticket-label">日期</span>
+                        <span class="ticket-val">1/29 (四)</span>
+                    </div>
+                    <div class="ticket-row">
+                        <span class="ticket-label">房型</span>
+                        <span class="ticket-val">特等艙雙床</span>
+                    </div>
+                    <div class="ticket-row" style="color: var(--color-danger); font-weight:bold">
+                        <span class="ticket-label" style="color:inherit">最後報到</span>
+                        <span>18:30 (17:00抵達)</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom:10px">🚆 關鍵交通</h3>
+                <div class="card ticket-card" style="border-left-color: #4CD964">
+                    <div style="font-weight:bold; margin-bottom:5px">由布院之森 3號</div>
+                    <div class="ticket-row">
+                        <span class="ticket-label">時間</span>
+                        <span class="ticket-val">2/01 10:11 發</span>
+                    </div>
+                    <div class="ticket-row">
+                        <span class="ticket-label">座位</span>
+                        <span class="ticket-val">4號車 7番 CD</span>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom:10px">🎟️ Busan Pass 攻略</h3>
+                <div class="card">
+                    <ul style="padding-left:20px; margin:0; line-height:1.6; font-size:0.9rem; color:#555">
+                        <li><strong>啟用：</strong> 1/26 13:00 @ Spa Land</li>
+                        <li><strong>失效：</strong> 1/28 12:59</li>
+                        <li><strong>必玩：</strong> 天空膠囊 (需預約)、海岸列車、X the Sky、松島纜車、滑車。</li>
+                    </ul>
+                </div>
+                <div style="height: 50px"></div>
             `;
         }
 
         function renderBudget() {
-            const savedData = JSON.parse(localStorage.getItem('budgetData')) || [];
+            const savedData = JSON.parse(localStorage.getItem('budgetData_2026')) || [];
             const total = savedData.reduce((sum, item) => sum + parseInt(item.amount), 0);
-
-            let listHtml = savedData.map((item, id) => `
-                <div class="expense-item">
-                    <div>
-                        <div class="text-bold">${item.desc}</div>
-                        <div class="text-sm">${item.date}</div>
-                    </div>
-                    <div style="display:flex; align-items:center;">
-                        <span class="text-bold">¥/₩ ${item.amount}</span>
-                        <i class="fa-solid fa-trash btn-delete" onclick="deleteBudget(${id})"></i>
-                    </div>
-                </div>
-            `).join('');
 
             return `
                 <div class="header">
-                     <div>
-                        <span>EXPENSES</span>
+                    <div>
+                        <span>WALLET</span>
                         <h1>Budget</h1>
                     </div>
                 </div>
 
-                <div class="budget-header">
-                    <div class="text-sm" style="color: rgba(255,255,255,0.8);">Total Spent</div>
-                    <div class="total-amount">${total.toLocaleString()}</div>
-                </div>
-
-                <div class="card">
-                    <div class="input-group">
-                        <input type="text" id="b-desc" placeholder="項目 (e.g. 拉麵)">
-                        <input type="number" id="b-amount" placeholder="金額" inputmode="numeric">
+                <div class="budget-total">
+                    <div style="font-size:0.8rem; opacity:0.8">Total Expenses</div>
+                    <div style="font-size:2.5rem; font-weight:700; font-family:'Playfair Display'">
+                        ${total.toLocaleString()}
                     </div>
-                    <button class="btn-add" style="width:100%; padding: 12px;" onclick="addBudget()">新增支出 +</button>
                 </div>
 
                 <div class="card">
-                    <h3 style="margin-bottom: 15px;">消費紀錄</h3>
-                    ${savedData.length === 0 ? '<p class="text-sm" style="text-align:center;">目前沒有資料</p>' : listHtml}
+                    <div style="display:flex; gap:10px; margin-bottom:15px">
+                        <input type="text" id="b-desc" placeholder="項目" style="flex:1; padding:10px; border:1px solid #eee; border-radius:8px;">
+                        <input type="number" id="b-amount" placeholder="金額" style="width:80px; padding:10px; border:1px solid #eee; border-radius:8px;">
+                    </div>
+                    <button onclick="addBudget()" style="width:100%; background:var(--color-primary); color:white; border:none; padding:12px; border-radius:12px; font-weight:bold; font-size:1rem;">記一筆</button>
                 </div>
-                 <div style="height: 50px;"></div>
+
+                <div class="card">
+                    <h3 style="margin-bottom:15px">消費明細</h3>
+                    ${savedData.length === 0 ? '<div class="text-sm" style="text-align:center; padding:20px">尚無資料</div>' : ''}
+                    ${savedData.map((item, i) => `
+                        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f5f5f5">
+                            <div>
+                                <div style="font-weight:600">${item.desc}</div>
+                                <div class="text-xs">${item.date}</div>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:10px">
+                                <span style="font-weight:bold">${parseInt(item.amount).toLocaleString()}</span>
+                                <i class="fa-solid fa-trash" style="color:#ff6b6b; cursor:pointer" onclick="deleteBudget(${i})"></i>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div style="height: 50px"></div>
             `;
         }
 
-        // --- Logic & Interactivity ---
-
-        function switchTab(tabName) {
-            // UI Update
+        // Logic
+        function switchTab(tab) {
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            event.currentTarget.classList.add('active'); // Note: this depends on event bubbling, simpler to re-select based on index logic but this works for onclick
-
-            // Render Content
-            window.scrollTo(0, 0);
-            if (tabName === 'itinerary') app.innerHTML = renderItinerary();
-            if (tabName === 'guide') app.innerHTML = renderGuide();
-            if (tabName === 'budget') app.innerHTML = renderBudget();
+            const idx = ['itinerary', 'guide', 'budget'].indexOf(tab);
+            document.querySelectorAll('.nav-item')[idx].classList.add('active');
             
-            // Re-apply correct nav active state (fix for initial load logic separation)
-            const navs = document.querySelectorAll('.nav-item');
-            navs.forEach(n => n.classList.remove('active'));
-            if(tabName === 'itinerary') navs[0].classList.add('active');
-            if(tabName === 'guide') navs[1].classList.add('active');
-            if(tabName === 'budget') navs[2].classList.add('active');
+            window.scrollTo(0, 0);
+            if (tab === 'itinerary') app.innerHTML = renderItinerary();
+            if (tab === 'guide') app.innerHTML = renderGuide();
+            if (tab === 'budget') app.innerHTML = renderBudget();
         }
 
         function toggleTimeline(index) {
-            const container = document.getElementById(`timeline-${index}`);
+            const el = document.getElementById(`timeline-${index}`);
             const icon = document.getElementById(`icon-${index}`);
-            
-            if (container.classList.contains('open')) {
-                container.classList.remove('open');
+            if (el.classList.contains('open')) {
+                el.classList.remove('open');
                 icon.style.transform = 'rotate(0deg)';
             } else {
-                container.classList.add('open');
+                el.classList.add('open');
                 icon.style.transform = 'rotate(180deg)';
             }
         }
 
-        // Budget Logic
         function addBudget() {
             const desc = document.getElementById('b-desc').value;
             const amount = document.getElementById('b-amount').value;
+            if (!desc || !amount) return;
             
-            if (!desc || !amount) return alert("請輸入項目與金額");
-
-            const newData = {
-                desc: desc,
-                amount: amount,
-                date: new Date().toLocaleDateString()
-            };
-
-            const currentData = JSON.parse(localStorage.getItem('budgetData')) || [];
-            currentData.unshift(newData); // Add to top
-            localStorage.setItem('budgetData', JSON.stringify(currentData));
-            
-            app.innerHTML = renderBudget(); // Re-render
-            // Keep tab active styling logic intact implicitly
-            document.querySelectorAll('.nav-item')[2].classList.add('active');
+            const data = JSON.parse(localStorage.getItem('budgetData_2026')) || [];
+            data.unshift({ desc, amount, date: new Date().toLocaleDateString() });
+            localStorage.setItem('budgetData_2026', JSON.stringify(data));
+            app.innerHTML = renderBudget();
         }
 
         function deleteBudget(index) {
-            if(!confirm("確定要刪除這筆資料嗎？")) return;
-            
-            const currentData = JSON.parse(localStorage.getItem('budgetData')) || [];
-            currentData.splice(index, 1);
-            localStorage.setItem('budgetData', JSON.stringify(currentData));
-            
+            if(!confirm('刪除此筆資料？')) return;
+            const data = JSON.parse(localStorage.getItem('budgetData_2026')) || [];
+            data.splice(index, 1);
+            localStorage.setItem('budgetData_2026', JSON.stringify(data));
             app.innerHTML = renderBudget();
-            document.querySelectorAll('.nav-item')[2].classList.add('active');
         }
 
-        // --- Initialization ---
+        // Init
         document.addEventListener('DOMContentLoaded', () => {
             app.innerHTML = renderItinerary();
         });
