@@ -5,30 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#FFF9FA">
-    <title>2026 Trip ✈️</title>
+    <meta name="theme-color" content="#FFF5F7"> <title>Kitty & Daniel's Trip 🎀</title>
     
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063822.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --color-primary: #FFB7C5;
-            --color-secondary: #89CFF0;
-            --color-bg: #FFF9FA;
-            --color-card: #FFFFFF;
-            --color-text-main: #2C2C2E;
-            --color-text-sub: #8E8E93;
-            --color-border: #E5E5EA;
+            /* Sanrio Theme Colors */
+            --kitty-red: #FF3B30;
+            --kitty-pink: #FFABC8;
+            --daniel-blue: #89CFF0;
+            --charmmy-purple: #DCD0FF;
+            --cream-bg: #FFF5F7;
+            
+            --color-text-main: #5D4037; /* Brownish text for softer look */
+            --color-text-sub: #9E8B85;
             --color-line: #E0E0E0;
             
-            --radius-card: 20px;
-            --radius-btn: 10px;
-            --shadow: 0 4px 15px rgba(0,0,0,0.03);
+            --radius-card: 24px;
+            --radius-btn: 14px;
+            --shadow: 0 8px 20px rgba(255, 171, 200, 0.25);
             
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
@@ -38,8 +39,13 @@
         
         body {
             margin: 0; padding: 0;
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--color-bg);
+            font-family: 'Zen Maru Gothic', 'Quicksand', sans-serif; /* Rounded cute fonts */
+            background-color: var(--cream-bg);
+            /* Polka Dot Background */
+            background-image: radial-gradient(var(--kitty-pink) 15%, transparent 16%), radial-gradient(var(--kitty-pink) 15%, transparent 16%);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.98; /* Blend slightly */
             color: var(--color-text-main);
             height: 100vh;
             overflow-y: auto;
@@ -52,217 +58,327 @@
             margin: 0 auto;
         }
 
-        /* Typography */
-        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0; color: #333; }
-        .subtitle { color: var(--color-text-sub); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
+        /* Hero Header */
+        .hero-section {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            border: 3px solid white;
+            position: relative;
+        }
+        /* Bow decoration on header */
+        .hero-section::after {
+            content: '🎀';
+            position: absolute;
+            top: -15px;
+            right: -10px;
+            font-size: 3rem;
+            transform: rotate(15deg);
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        h1 { 
+            font-family: 'Quicksand', sans-serif; 
+            font-size: 1.8rem; 
+            margin: 10px 0 5px 0; 
+            color: var(--color-text-main);
+            letter-spacing: -0.5px;
+        }
+        .subtitle { 
+            color: var(--kitty-pink); 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            background: white;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--kitty-pink);
+        }
+
+        /* Character Icons in Header */
+        .char-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
 
         /* Card Style */
         .card {
-            background: var(--color-card);
+            background: #FFFFFF;
             border-radius: var(--radius-card);
-            padding: 18px;
-            margin-bottom: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
-            scroll-margin-top: 20px; /* For smooth scroll positioning */
+            border: 2px solid white;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
         }
         
+        /* Active Card Style */
+        .card.active-card {
+            border: 2px solid var(--kitty-pink);
+            transform: scale(1.02);
+        }
+
         /* Day Header */
         .day-header {
             display: flex;
             align-items: center;
             cursor: pointer;
+            z-index: 2;
+            position: relative;
         }
         .date-box {
             text-align: center;
             margin-right: 15px;
-            min-width: 45px;
+            min-width: 50px;
+            background: var(--cream-bg);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px dashed var(--kitty-pink);
         }
-        .date-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; line-height: 1; color: var(--color-primary); }
-        .date-day { font-size: 0.75rem; color: var(--color-text-sub); font-weight: 500; margin-top: 4px; }
+        .date-num { font-size: 1.4rem; font-weight: 700; line-height: 1; color: var(--kitty-red); }
+        .date-day { font-size: 0.7rem; color: var(--color-text-main); font-weight: 700; margin-top: 2px; }
+        
         .day-info { flex: 1; }
-        .day-title { font-size: 1.1rem; font-weight: 700; color: #333; margin-bottom: 2px; }
+        .day-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
         .day-loc { font-size: 0.8rem; color: var(--color-text-sub); display: flex; align-items: center; gap: 4px; }
         
-        /* Timeline Structure */
+        /* Timeline */
         .timeline {
             display: none;
-            padding-left: 6px;
+            padding-left: 8px;
             margin-top: 20px;
-            border-top: 1px solid #F5F5F5;
-            padding-top: 15px;
+            border-top: 2px dashed #F0F0F0;
+            padding-top: 20px;
         }
-        .timeline.open { display: block; animation: fadeIn 0.4s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+        .timeline.open { display: block; animation: popIn 0.4s ease; }
+        @keyframes popIn { 
+            0% { opacity: 0; transform: scale(0.95); } 
+            100% { opacity: 1; transform: scale(1); } 
+        }
 
-        /* Event Item */
+        /* Event Node */
         .event-node {
             position: relative;
-            padding-left: 24px;
+            padding-left: 32px;
             padding-bottom: 25px;
         }
         
         .event-node::before {
             content: '';
             position: absolute;
-            left: 5px;
-            top: 10px;
-            bottom: -10px;
+            left: 11px; /* Center line */
+            top: 15px;
+            bottom: -15px;
             width: 2px;
             background: var(--color-line);
             z-index: 0;
+            border-left: 2px dotted var(--color-text-sub); /* Dotted line like stitching */
+            background: none;
+            width: 0;
         }
         .event-node:last-child { padding-bottom: 0; }
         .event-node:last-child::before { display: none; }
 
-        /* Dot */
-        .event-dot {
+        /* Themed Icons (The Dots) */
+        .event-icon {
             position: absolute;
             left: 0;
-            top: 7px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid var(--color-secondary);
+            top: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
             z-index: 1;
-            box-shadow: 0 0 0 2px white;
+            background: white;
+            border-radius: 50%;
         }
-        .dot-transport { border-color: #B39DDB; }
-        .dot-stay { border-color: var(--color-primary); }
-        .dot-food { border-color: #FFCC80; }
 
-        /* Content */
+        /* Event Content */
         .event-time {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            color: var(--color-secondary);
-            margin-bottom: 2px;
+            color: var(--kitty-pink);
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
             gap: 6px;
         }
         
         .event-title { 
-            font-size: 0.95rem; 
-            font-weight: 600; 
-            color: #333; 
+            font-size: 1rem; 
+            font-weight: 700; 
+            color: var(--color-text-main); 
             margin-bottom: 6px; 
             line-height: 1.4;
         }
 
-        /* Travel Time Tag */
+        /* Travel Tag */
         .travel-tag {
             display: inline-flex;
             align-items: center;
-            font-size: 0.75rem;
-            color: #666;
-            background: #F0F0F5;
+            font-size: 0.7rem;
+            color: white;
+            background: var(--daniel-blue); /* Daniel helps travel! */
             padding: 2px 8px;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-left: 6px;
-            font-weight: 400;
+            font-weight: 700;
             vertical-align: middle;
+            box-shadow: 0 2px 5px rgba(137, 207, 240, 0.4);
         }
 
-        /* Badges */
+        /* Pass Badge */
         .pass-badge {
-            background: #FF3B30;
+            background: var(--kitty-red);
             color: white;
-            padding: 1px 6px;
-            border-radius: 4px;
+            padding: 2px 8px;
+            border-radius: 10px;
             font-size: 0.65rem;
+            box-shadow: 0 2px 5px rgba(255, 59, 48, 0.3);
         }
-        .pass-free { background: #34C759; }
+        .pass-free { background: #4CD964; }
 
         /* Ticket Block */
         .ticket-block {
-            background: #F2F8FD;
-            border: 1px solid #D1E9FF;
-            border-radius: 12px;
-            padding: 10px;
-            margin: 6px 0 10px 0;
-            font-size: 0.8rem;
-            color: #444;
+            background: #FDF5E6; /* Creamy paper */
+            border: 2px solid #FFE4B5;
+            border-radius: 16px;
+            padding: 12px;
+            margin: 8px 0 12px 0;
+            font-size: 0.85rem;
+            color: #5D4037;
             display: flex;
             align-items: center;
+            position: relative;
         }
-        .ticket-icon { font-size: 1.1rem; color: var(--color-secondary); margin-right: 10px; }
-        .ticket-code { font-weight: 700; color: #007AFF; margin-right: 6px;}
+        .ticket-block::after {
+            content: ''; /* Stitching effect */
+            position: absolute;
+            top: 4px; left: 4px; right: 4px; bottom: 4px;
+            border: 1px dashed #DEB887;
+            border-radius: 12px;
+            pointer-events: none;
+        }
+        .ticket-icon { font-size: 1.2rem; color: var(--daniel-blue); margin-right: 12px; z-index: 1;}
+        .ticket-info { z-index: 1; }
+        .ticket-code { font-weight: 900; color: var(--daniel-blue); margin-right: 6px;}
 
         /* Buttons */
-        .action-row { display: flex; gap: 8px; margin-top: 4px; }
+        .action-row { display: flex; gap: 10px; margin-top: 8px; }
         .btn-nav {
             flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            padding: 8px;
+            gap: 6px;
+            padding: 10px;
             border-radius: var(--radius-btn);
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 700;
             text-decoration: none;
-            border: 1px solid transparent;
+            border: none;
+            transition: transform 0.1s;
         }
-        .btn-naver { background: #03C75A; color: white; }
-        .btn-uber { background: black; color: white; }
-        .btn-google { background: #4285F4; color: white; }
-        .btn-copy { background: #F7F7F7; color: #333; border: 1px solid #DDD; }
+        .btn-nav:active { transform: scale(0.95); }
+        
+        .btn-naver { background: #03C75A; color: white; box-shadow: 0 4px 10px rgba(3, 199, 90, 0.3); }
+        .btn-uber { background: var(--color-text-main); color: white; box-shadow: 0 4px 10px rgba(93, 64, 55, 0.3); }
+        .btn-google { background: #4285F4; color: white; box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3); }
+        .btn-copy { 
+            flex: 0 0 50px; 
+            background: #FFF; 
+            color: var(--color-text-sub); 
+            border: 2px solid #EEE; 
+            font-size: 1.1rem;
+        }
 
-        /* Toast Notification */
+        /* Cute Toast */
         #toast {
             visibility: hidden;
-            min-width: 250px;
-            background-color: #333;
+            background-color: var(--color-text-main);
             color: #fff;
             text-align: center;
             border-radius: 50px;
-            padding: 12px;
+            padding: 12px 24px;
             position: fixed;
             z-index: 1000;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            font-weight: 700;
             opacity: 0;
-            transition: opacity 0.3s, bottom 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+
+        /* Theme Accents (Stickers) */
+        .theme-sticker {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 4rem;
+            opacity: 0.1;
+            pointer-events: none;
+            z-index: 0;
+        }
 
     </style>
 </head>
 <body>
 
     <div id="app">
-        <div class="subtitle">2026/01/26 - 02/05</div>
-        <h1>Our Trip 2026</h1>
-        <p style="color:#888; margin-bottom: 25px; font-size: 0.9rem;">Busan <span style="color:#FFB7C5">❤</span> Kyushu</p>
+        <div class="hero-section">
+            <div class="char-row">
+                <span title="Dear Daniel">🤵</span>
+                <span title="Hello Kitty">🎀</span>
+                <span title="Charmmy">🐈</span>
+            </div>
+            <div class="subtitle">2026/01/26 - 02/05</div>
+            <h1>Our Sweet Trip</h1>
+            <p style="color:#9E8B85; font-size: 0.9rem; margin-top:5px;">Busan & Kyushu</p>
+        </div>
         
         <div id="itinerary-list"></div>
     </div>
 
-    <div id="toast"><i class="fa-solid fa-check"></i> 地址已複製</div>
+    <div id="toast">
+        <i class="fa-solid fa-paw" style="color: var(--kitty-pink)"></i> 
+        <span>Address Copied!</span>
+    </div>
 
     <script>
-        // Data Structure
+        // --- Data Structure with THEMES ---
+        // theme: 'kitty' (Red/Pink), 'daniel' (Blue), 'charmmy' (Purple/Lace)
         const itinerary = [
             {
                 date: "26", day: "Mon", fullDate: "2026-01-26",
-                location: "Busan", title: "Day 1: 飛往釜山",
+                location: "Busan", title: "Day 1: Hello Busan!", theme: "kitty",
                 events: [
                     {
                         time: "06:10", title: "抵達金海機場 (PUS)",
-                        travel: "🚕 40-50min",
+                        travel: "🚕 40m",
                         cat: "transport",
-                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS 06:10" }
+                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }
                     },
                     {
                         time: "08:00", title: "海雲台 Prugio City (S07)",
                         address: "부산시 해운대구 해운대해변로298번길 29",
-                        addressEn: "29 Haeundaehaebyeon-ro 298beon-gil, Haeundae-gu, Busan",
+                        addressEn: "29 Haeundaehaebyeon-ro 298beon-gil",
                         country: "KR",
                         cat: "stay"
                     },
@@ -296,7 +412,7 @@
             },
             {
                 date: "27", day: "Tue", fullDate: "2026-01-27",
-                location: "Busan", title: "Day 2: 膠囊列車",
+                location: "Busan", title: "Day 2: 膠囊列車 Date", theme: "kitty",
                 events: [
                     {
                         time: "09:30", title: "天空膠囊列車 (Sky Capsule)",
@@ -322,7 +438,7 @@
             },
             {
                 date: "29", day: "Thu", fullDate: "2026-01-29",
-                location: "Busan Port", title: "Day 4: 登船夜",
+                location: "Busan Port", title: "Day 4: 登船夜", theme: "daniel",
                 events: [
                     {
                         time: "17:00", title: "抵達釜山港碼頭",
@@ -333,17 +449,17 @@
                     {
                         time: "18:30", title: "報到截止 & 登船",
                         cat: "transport",
-                        ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航 (船上過夜)" }
+                        ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航" }
                     }
                 ]
             },
             {
                 date: "30", day: "Fri", fullDate: "2026-01-30",
-                location: "Fukuoka", title: "Day 5: 抵達福岡",
+                location: "Fukuoka", title: "Day 5: 早安 Daniel", theme: "daniel",
                 events: [
                     {
                         time: "07:30", title: "抵達博多港",
-                        travel: "🚌 20min",
+                        travel: "🚌 20m",
                         address: "福岡市博多区沖浜町14-1",
                         country: "JP",
                         cat: "transport"
@@ -358,7 +474,7 @@
             },
             {
                 date: "01", day: "Sun", fullDate: "2026-02-01",
-                location: "Yufuin", title: "Day 7: 由布院之森",
+                location: "Yufuin", title: "Day 7: 由布院之森", theme: "charmmy",
                 events: [
                     {
                         time: "10:11", title: "博多站出發",
@@ -380,7 +496,7 @@
             },
             {
                 date: "05", day: "Thu", fullDate: "2026-02-05",
-                location: "Saga/Home", title: "Day 11: 返程",
+                location: "Saga/Home", title: "Day 11: Sweet Home", theme: "charmmy",
                 events: [
                     {
                         time: "09:30", title: "前往佐賀機場 (HSG)",
@@ -391,7 +507,7 @@
                     {
                         time: "12:15", title: "虎航 IT247 起飛",
                         cat: "transport",
-                        ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE 13:45" }
+                        ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE" }
                     }
                 ]
             }
@@ -404,8 +520,15 @@
             let html = '';
 
             itinerary.forEach((day, index) => {
+                // Determine Sticker based on Theme
+                let sticker = '';
+                if(day.theme === 'kitty') sticker = '🎀'; // Bow
+                if(day.theme === 'daniel') sticker = '🎩'; // Top Hat (Daniel vibe)
+                if(day.theme === 'charmmy') sticker = '🗝️'; // Key (Charmmy's key)
+
                 html += `
                 <div class="card" id="card-${index}">
+                    <div class="theme-sticker">${sticker}</div>
                     <div class="day-header" onclick="toggleDay(${index})">
                         <div class="date-box">
                             <div class="date-num">${day.date}</div>
@@ -413,13 +536,13 @@
                         </div>
                         <div class="day-info">
                             <div class="day-title">${day.title}</div>
-                            <div class="day-loc"><i class="fa-solid fa-location-dot" style="color:#FFB7C5"></i> ${day.location}</div>
+                            <div class="day-loc"><i class="fa-solid fa-location-dot" style="color:var(--kitty-pink)"></i> ${day.location}</div>
                         </div>
-                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:#ddd; transition:0.3s"></i>
+                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:var(--kitty-pink); transition:0.3s"></i>
                     </div>
 
                     <div id="timeline-${index}" class="timeline">
-                        ${day.events.map((event) => renderEvent(event)).join('')}
+                        ${day.events.map((event) => renderEvent(event, day.theme)).join('')}
                     </div>
                 </div>
                 `;
@@ -428,24 +551,42 @@
             container.innerHTML = html;
         }
 
-        function renderEvent(event) {
+        function renderEvent(event, theme) {
+            // Theme Icons
+            let dotIcon = '';
+            if (theme === 'kitty') dotIcon = '🍎';
+            else if (theme === 'daniel') dotIcon = '💎';
+            else if (theme === 'charmmy') dotIcon = '🧶';
+            
+            // Override dot icon based on cat logic if needed, but let's stick to theme for consistency
+            // Or use specific emojis:
+            // Transport: 🚌, Food: 🍰, Stay: 🏨, Sight: 🎡
+            
+            // Let's use CSS emojis for dots based on category instead for clarity, but styled with theme color
+            let displayIcon = '';
+            if (event.cat === 'transport') displayIcon = '🚌';
+            if (event.cat === 'food') displayIcon = '🍰';
+            if (event.cat === 'stay') displayIcon = '🏰';
+            if (event.cat === 'sight') displayIcon = '🎡';
+            if (event.pass) displayIcon = '🎟️';
+
             // Pass badges
             let passBadge = '';
-            if (event.pass === 'start') passBadge = '<span class="pass-badge">Pass 啟用</span>';
-            if (event.pass === 'free') passBadge = '<span class="pass-badge pass-free">Pass 免費</span>';
+            if (event.pass === 'start') passBadge = '<span class="pass-badge">Pass Start</span>';
+            if (event.pass === 'free') passBadge = '<span class="pass-badge pass-free">Free</span>';
 
             // Ticket Block
             let ticketHtml = '';
             if (event.ticket) {
                 let icon = 'fa-ticket';
-                if (event.ticket.type === 'flight') icon = 'fa-plane';
-                if (event.ticket.type === 'train') icon = 'fa-train';
-                if (event.ticket.type === 'ferry') icon = 'fa-ship';
+                if (event.ticket.type === 'flight') icon = 'fa-plane-departure';
+                if (event.ticket.type === 'train') icon = 'fa-train-subway';
+                if (event.ticket.type === 'ferry') icon = 'fa-anchor';
                 
                 ticketHtml = `
                     <div class="ticket-block">
                         <i class="fa-solid ${icon} ticket-icon"></i>
-                        <div>
+                        <div class="ticket-info">
                             <span class="ticket-code">${event.ticket.code}</span>
                             <span>${event.ticket.info}</span>
                         </div>
@@ -475,12 +616,12 @@
                 }
             }
 
-            // Travel Info (Now inline)
+            // Travel Info
             let travelHtml = event.travel ? `<span class="travel-tag">${event.travel}</span>` : '';
 
             return `
                 <div class="event-node">
-                    <div class="event-dot dot-${event.cat}"></div>
+                    <div class="event-icon">${displayIcon}</div>
                     <div class="event-content">
                         <div class="event-time">
                             ${event.time}
@@ -503,8 +644,10 @@
             itinerary.forEach((_, i) => {
                 const tl = document.getElementById(`timeline-${i}`);
                 const ar = document.getElementById(`arrow-${i}`);
+                const cd = document.getElementById(`card-${i}`);
                 if (i !== index) {
                     tl.classList.remove('open');
+                    cd.classList.remove('active-card');
                     ar.style.transform = 'rotate(0deg)';
                 }
             });
@@ -512,19 +655,22 @@
             // 2. Toggle clicked one
             const targetTl = document.getElementById(`timeline-${index}`);
             const targetAr = document.getElementById(`arrow-${index}`);
+            const targetCard = document.getElementById(`card-${index}`);
+            
             const isOpening = !targetTl.classList.contains('open');
 
             if (isOpening) {
                 targetTl.classList.add('open');
+                targetCard.classList.add('active-card');
                 targetAr.style.transform = 'rotate(180deg)';
                 
                 // 3. Scroll to top
                 setTimeout(() => {
-                    const card = document.getElementById(`card-${index}`);
-                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    targetCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
             } else {
                 targetTl.classList.remove('open');
+                targetCard.classList.remove('active-card');
                 targetAr.style.transform = 'rotate(0deg)';
             }
         }
@@ -544,17 +690,15 @@
         // Initialization
         document.addEventListener('DOMContentLoaded', () => {
             renderApp();
-
-            // Auto-open logic based on date
-            // Note: Since trip is in 2026, this will only trigger if user system date matches.
-            // Otherwise defaults to first day.
+            
+            // Auto open logic
             const today = new Date().toISOString().split('T')[0];
             const todayIndex = itinerary.findIndex(day => day.fullDate === today);
             
             if (todayIndex !== -1) {
                 toggleDay(todayIndex);
             } else {
-                toggleDay(0); // Default to Day 1
+                toggleDay(0);
             }
         });
 
