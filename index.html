@@ -6,36 +6,32 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#FFF9FA">
-    <meta name="description" content="2026 Busan & Kyushu Trip">
-    <title>2026 Our Trip ❤️</title>
+    <title>2026 Trip ✈️</title>
     
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063822.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS Reset & Variables --- */
         :root {
-            /* Sanrio Palette 2.0 */
             --color-primary: #FFB7C5; /* Melody Pink */
             --color-secondary: #89CFF0; /* Cinnamoroll Blue */
-            --color-accent: #FFD700; /* Pompompurin Yellow */
-            --color-danger: #FF6B6B; /* Pass Start Red */
-            --color-success: #4CD964; /* Pass Free Green */
             --color-bg: #FFF9FA;
             --color-card: #FFFFFF;
             --color-text-main: #2C2C2E;
             --color-text-sub: #8E8E93;
-            --color-border: #F2F2F7;
+            --color-border: #E5E5EA;
+            --color-line: #E0E0E0;
             
-            --radius-lg: 24px;
-            --radius-md: 16px;
+            --radius-card: 20px;
+            --radius-btn: 12px;
+            --shadow: 0 4px 20px rgba(0,0,0,0.03);
+            
             --safe-top: env(safe-area-inset-top);
             --safe-bottom: env(safe-area-inset-bottom);
-            --nav-height: 85px;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -45,527 +41,534 @@
             font-family: 'Noto Sans TC', sans-serif;
             background-color: var(--color-bg);
             color: var(--color-text-main);
-            height: 100dvh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            height: 100vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         #app {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: calc(var(--safe-top) + 20px) 20px calc(var(--nav-height) + 20px);
-            scroll-behavior: smooth;
+            padding: calc(var(--safe-top) + 20px) 16px calc(var(--safe-bottom) + 40px);
+            max-width: 600px;
+            margin: 0 auto;
         }
-        #app::-webkit-scrollbar { display: none; }
 
         /* Typography */
-        h1, h2 { font-family: 'Playfair Display', serif; margin: 0; }
-        .text-sm { font-size: 0.85rem; color: var(--color-text-sub); }
-        .text-xs { font-size: 0.75rem; color: var(--color-text-sub); }
-        .text-bold { font-weight: 700; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin: 0; color: #333; }
+        .subtitle { color: var(--color-text-sub); font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px; }
 
-        /* Components */
-        .header {
-            margin-bottom: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-        .header h1 { font-size: 2.2rem; background: -webkit-linear-gradient(45deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .header span { font-size: 0.9rem; color: var(--color-text-sub); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
-
+        /* Card Style */
         .card {
             background: var(--color-card);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius-card);
             padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
-            transition: transform 0.2s;
-            position: relative;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
             border: 1px solid rgba(0,0,0,0.02);
+            transition: transform 0.2s;
         }
-        .card:active { transform: scale(0.98); }
-
-        /* Pass Badge */
-        .pass-badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            color: white;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-        .pass-start { background-color: var(--color-danger); }
-        .pass-free { background-color: var(--color-success); }
-        .pass-expire { background-color: var(--color-text-sub); }
-
-        /* Timeline */
-        .day-header { display: flex; align-items: center; margin-bottom: 5px; }
-        .day-date { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; width: 60px; line-height: 1; text-align: center; margin-right: 15px; color: var(--color-primary); }
-        .day-date small { display: block; font-size: 0.7rem; font-family: 'Noto Sans TC'; color: var(--color-text-sub); font-weight: 400; margin-top: 4px; }
-        .day-info { flex: 1; }
-        .day-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 2px; }
         
-        .timeline-container { display: none; margin-top: 20px; padding-left: 8px; }
-        .timeline-container.open { display: block; animation: slideDown 0.3s ease; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .event-item {
-            position: relative;
-            padding-left: 24px;
-            padding-bottom: 24px;
-            border-left: 2px solid var(--color-border);
-        }
-        .event-item:last-child { border-left: 2px solid transparent; }
-        
-        .event-dot {
-            position: absolute;
-            left: -6px;
-            top: 0;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--color-text-sub);
-            border: 2px solid white;
-            box-shadow: 0 0 0 2px var(--color-border);
-        }
-        .dot-transport { background: #B39DDB; }
-        .dot-food { background: #FFCC80; }
-        .dot-sight { background: var(--color-primary); }
-        .dot-stay { background: var(--color-secondary); }
-
-        .event-time { font-size: 0.8rem; color: var(--color-primary); font-weight: 700; margin-bottom: 4px; }
-        .event-name { font-size: 1rem; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; flex-wrap: wrap;}
-        .event-desc { font-size: 0.9rem; color: #555; line-height: 1.5; }
-        .address-box {
-            background: #F8F9FA;
-            padding: 8px;
-            border-radius: 8px;
-            margin-top: 6px;
-            font-size: 0.75rem;
-            color: #666;
+        /* Day Header */
+        .day-header {
             display: flex;
             align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .date-box {
+            text-align: center;
+            margin-right: 15px;
+            min-width: 50px;
+        }
+        .date-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; line-height: 1; color: var(--color-primary); }
+        .date-day { font-size: 0.75rem; color: var(--color-text-sub); font-weight: 500; margin-top: 4px; }
+        .day-info { flex: 1; }
+        .day-title { font-size: 1.15rem; font-weight: 700; color: #333; margin-bottom: 4px; }
+        .day-loc { font-size: 0.85rem; color: var(--color-text-sub); display: flex; align-items: center; gap: 4px; }
+        
+        /* Timeline Structure */
+        .timeline {
+            display: none;
+            padding-left: 8px;
+            margin-top: 10px;
+        }
+        .timeline.open { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Event Item */
+        .event-node {
+            position: relative;
+            padding-left: 28px;
+            padding-bottom: 0; /* Changed for travel connector */
+        }
+        
+        /* Vertical Line Logic */
+        .event-node::before {
+            content: '';
+            position: absolute;
+            left: 5px; /* (12px dot width / 2) - 1px border */
+            top: 12px;
+            bottom: -12px; /* Extend to connect to next */
+            width: 2px;
+            background: var(--color-line);
+            z-index: 0;
+        }
+        .event-node:last-child::before { display: none; } /* No line after last item */
+
+        /* Dot */
+        .event-dot {
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid var(--color-secondary);
+            z-index: 1;
+            box-shadow: 0 0 0 2px white;
+        }
+        .dot-transport { border-color: #B39DDB; }
+        .dot-stay { border-color: var(--color-primary); }
+        .dot-food { border-color: #FFCC80; }
+
+        /* Content */
+        .event-content {
+            padding-bottom: 20px;
+        }
+        .event-time {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .pass-badge {
+            background: #FF3B30;
+            color: white;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+        }
+        .pass-free { background: #34C759; }
+
+        .event-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; color: #333; }
+        .event-desc { font-size: 0.9rem; color: #666; line-height: 1.5; margin-bottom: 8px; }
+
+        /* Ticket Block */
+        .ticket-block {
+            background: #F2F8FD;
+            border: 1px solid #D1E9FF;
+            border-radius: 12px;
+            padding: 12px;
+            margin: 8px 0;
+            font-size: 0.85rem;
+            color: #444;
+            display: flex;
             justify-content: space-between;
-            border: 1px solid #EEE;
+            align-items: center;
         }
-        .btn-copy { color: var(--color-secondary); cursor: pointer; padding: 4px; }
+        .ticket-icon { font-size: 1.2rem; color: var(--color-secondary); margin-right: 10px; }
+        .ticket-details { flex: 1; }
+        .ticket-code { font-weight: 700; color: #007AFF; display: block; }
 
-        /* Guide & Tickets */
-        .ticket-card {
-            background: linear-gradient(135deg, #fff, #fefefe);
-            border: 1px solid var(--color-border);
-            border-left: 4px solid var(--color-secondary);
+        /* Action Buttons (Nav) */
+        .action-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
         }
-        .ticket-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.9rem; }
-        .ticket-label { color: var(--color-text-sub); }
-        .ticket-val { font-weight: 600; }
-
-        /* Budget */
-        .budget-total { text-align: center; padding: 20px; background: var(--color-primary); color: white; border-radius: var(--radius-lg); margin-bottom: 20px; box-shadow: 0 8px 16px rgba(255, 183, 197, 0.4); }
-
-        /* Nav */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; width: 100%;
-            height: calc(var(--nav-height) + var(--safe-bottom));
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-top: 1px solid rgba(0,0,0,0.05);
-            display: flex; justify-content: space-around;
-            padding-bottom: var(--safe-bottom);
-            z-index: 999;
+        .btn-nav {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--radius-btn);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            border: 1px solid transparent;
         }
-        .nav-item { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #CCC; transition: 0.3s; }
-        .nav-item.active { color: var(--color-primary); transform: translateY(-2px); }
-        .nav-item i { font-size: 1.4rem; margin-bottom: 4px; }
-        .nav-item span { font-size: 0.7rem; font-weight: 500; }
+        .btn-nav:active { opacity: 0.7; }
+        
+        .btn-naver { background: #03C75A; color: white; }
+        .btn-uber { background: black; color: white; }
+        .btn-google { background: #4285F4; color: white; }
+        .btn-copy { background: #F0F0F0; color: #333; border: 1px solid #DDD; }
 
-        /* Toast */
-        #toast {
-            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
-            background: rgba(0,0,0,0.8); color: white; padding: 8px 16px; border-radius: 20px;
-            font-size: 0.85rem; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 2000;
+        /* Travel Connector (The time between events) */
+        .travel-connector {
+            position: relative;
+            padding-left: 28px;
+            height: 40px; /* Space for the pill */
+            display: flex;
+            align-items: center;
         }
+        .travel-connector::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--color-line);
+            z-index: 0;
+        }
+        .travel-pill {
+            position: relative;
+            z-index: 1;
+            background: white;
+            border: 1px solid var(--color-line);
+            color: var(--color-text-sub);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
     </style>
 </head>
 <body>
 
     <div id="app">
-        </div>
-
-    <div id="toast">已複製地址</div>
-
-    <nav class="bottom-nav">
-        <div class="nav-item active" onclick="switchTab('itinerary')">
-            <i class="fa-solid fa-calendar-check"></i>
-            <span>行程</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('guide')">
-            <i class="fa-solid fa-ticket"></i>
-            <span>攻略</span>
-        </div>
-        <div class="nav-item" onclick="switchTab('budget')">
-            <i class="fa-solid fa-wallet"></i>
-            <span>記帳</span>
-        </div>
-    </nav>
+        <div class="subtitle">2026/01/26 - 02/05</div>
+        <h1>Our Travel Log</h1>
+        <p style="color:#888; margin-bottom: 30px; font-size: 0.9rem;">Busan <span style="color:#FFB7C5">❤</span> Kyushu</p>
+        
+        <div id="itinerary-list"></div>
+    </div>
 
     <script>
-        // --- Data ---
-        const tripDates = {
-            start: "2026-01-26",
-            end: "2026-02-05"
-        };
-
-        const itineraryData = [
+        // Data Structure
+        const itinerary = [
             {
-                date: "01/26", day: "Mon", fullDate: "2026-01-26",
-                loc: "Busan", title: "飛往釜山 & Pass啟用", 
+                date: "26", day: "Mon", month: "Jan",
+                location: "Busan", title: "Day 1: 飛往釜山",
                 events: [
-                    { time: "06:10", title: "抵達金海機場 (PUS)", desc: "Eastar Jet ZE984。出關後搭計程車(約50分, ₩3-4萬)", cat: "transport", dot: "transport" },
-                    { time: "08:00", title: "前往 S07 寄放行李", desc: "Haeundae Prugio City A棟", cat: "stay", dot: "stay", address: "부산시 해운대구 해운대해변로298번길 29, A동" },
-                    { time: "08:30", title: "早餐：錦繡河豚湯", desc: "走路5分鐘，清爽湯頭解飛機疲勞", cat: "food", dot: "food", address: "부산 해운대구 중동1로43번길 23" },
-                    { time: "09:30", title: "海景咖啡 / 海雲台散步", desc: "Rendezja-vous 或 冬柏島", cat: "sight", dot: "sight", address: "부산 해운대구 달맞이길62번길 23" },
-                    { time: "11:30", title: "午餐：嚴泳白豬肉湯飯", desc: "海雲台店，走路20分或叫車", cat: "food", dot: "food", address: "부산 해운대구 구남로24번길 39" },
-                    { time: "13:00", title: "Spa Land 汗蒸幕", desc: "五星級汗蒸幕", cat: "sight", dot: "sight", pass: "start" },
-                    { time: "17:30", title: "S07 Check-in", desc: "回住宿休息整理", cat: "stay", dot: "stay" },
-                    { time: "18:30", title: "Busan X the Sky", desc: "100樓夜景", cat: "sight", dot: "sight", pass: "free" }
+                    {
+                        time: "06:10", title: "抵達金海機場 (PUS)",
+                        desc: "入境後搭計程車前往海雲台",
+                        cat: "transport",
+                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS 06:10" },
+                        travelToNext: "🚕 40-50min (約₩35,000)"
+                    },
+                    {
+                        time: "08:00", title: "海雲台 Prugio City (S07)",
+                        desc: "寄放行李 (A棟)。地標：해운대 푸르지오 시티",
+                        address: "부산시 해운대구 해운대해변로298번길 29",
+                        addressEn: "29 Haeundaehaebyeon-ro 298beon-gil, Haeundae-gu, Busan",
+                        country: "KR",
+                        cat: "stay",
+                        travelToNext: "🚶 5min"
+                    },
+                    {
+                        time: "08:30", title: "錦繡河豚湯",
+                        desc: "24小時營業，清淡解酒湯",
+                        address: "부산 해운대구 중동1로43번길 23",
+                        country: "KR",
+                        cat: "food",
+                        travelToNext: "🚶 15min"
+                    },
+                    {
+                        time: "09:30", title: "Rendezja-vous 海雲台",
+                        desc: "海景咖啡廳休息",
+                        address: "부산 해운대구 달맞이길62번길 23",
+                        country: "KR",
+                        cat: "food"
+                    },
+                    {
+                        time: "13:00", title: "Spa Land 汗蒸幕",
+                        desc: "🔴 Pass 啟用點 (出示QR Code)",
+                        address: "부산 해운대구 센텀남대로 35",
+                        country: "KR",
+                        cat: "sight",
+                        pass: "start"
+                    },
+                    {
+                        time: "18:30", title: "Busan X the Sky",
+                        desc: "🟢 Pass 免費入場 (100樓夜景)",
+                        address: "부산 해운대구 달맞이길 30",
+                        country: "KR",
+                        cat: "sight",
+                        pass: "free"
+                    }
                 ]
             },
             {
-                date: "01/27", day: "Tue", fullDate: "2026-01-27",
-                loc: "Busan", title: "膠囊列車與海濱", 
+                date: "27", day: "Tue", month: "Jan",
+                location: "Busan", title: "Day 2: 膠囊列車",
                 events: [
-                    { time: "09:30", title: "天空膠囊列車", desc: "尾浦站出發 (已預約)", cat: "sight", dot: "sight", pass: "free" },
-                    { time: "中午", title: "青沙浦午餐", desc: "海鮮烤貝或網美咖啡廳", cat: "food", dot: "food" },
-                    { time: "下午", title: "海濱列車 / 松島纜車", desc: "Pass 行程跑透透", cat: "sight", dot: "sight", pass: "free" },
-                    { time: "晚上", title: "The Bay 101", desc: "摩天樓倒影夜景", cat: "sight", dot: "sight" }
+                    {
+                        time: "09:30", title: "天空膠囊列車 (Sky Capsule)",
+                        desc: "已預約：尾浦站出發 → 青沙浦",
+                        address: "부산 해운대구 달맞이길62번길 13",
+                        country: "KR",
+                        cat: "sight",
+                        ticket: { type: "ticket", code: "RESERVED", info: "09:30 Mipo Station" }
+                    },
+                    {
+                        time: "11:00", title: "青沙浦 (Cheongsapo)",
+                        desc: "平交道灌籃高手場景、烤貝午餐",
+                        address: "부산 해운대구 청사포로 128",
+                        country: "KR",
+                        cat: "food",
+                        travelToNext: "🚃 海濱列車"
+                    },
+                    {
+                        time: "14:00", title: "松島龍宮雲橋 / 纜車",
+                        desc: "🟢 Pass 免費",
+                        address: "부산 서구 송도해변로 171",
+                        country: "KR",
+                        cat: "sight",
+                        pass: "free"
+                    }
                 ]
             },
             {
-                date: "01/28", day: "Wed", fullDate: "2026-01-28",
-                loc: "Busan", title: "甘川洞 & Pass 最後衝刺", 
+                date: "29", day: "Thu", month: "Jan",
+                location: "Busan Port", title: "Day 4: 登船夜",
                 events: [
-                    { time: "上午", title: "甘川洞文化村", desc: "跟小王子拍照，換手翻書", cat: "sight", dot: "sight", pass: "free" },
-                    { time: "12:59", title: "⚠️ Pass 失效", desc: "48小時結束", cat: "transport", dot: "transport", pass: "expire" },
-                    { time: "下午", title: "南浦洞 / BIFF廣場", desc: "逛街、吃堅果糖餅", cat: "sight", dot: "sight" },
-                    { time: "晚餐", title: "富平罐頭夜市", desc: "各式韓國小吃", cat: "food", dot: "food" }
+                    {
+                        time: "17:00", title: "抵達釜山港碼頭",
+                        desc: "請務必準時抵達，進行出境手續",
+                        address: "부산 동구 충장대로 206",
+                        country: "KR",
+                        cat: "transport"
+                    },
+                    {
+                        time: "18:30", title: "報到截止 & 登船",
+                        desc: "新山茶花號 (New Camellia)",
+                        cat: "transport",
+                        ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航 (船上過夜)" }
+                    }
                 ]
             },
             {
-                date: "01/29", day: "Thu", fullDate: "2026-01-29",
-                loc: "Busan", title: "告別釜山 & 登船", 
+                date: "30", day: "Fri", month: "Jan",
+                location: "Fukuoka", title: "Day 5: 抵達福岡",
                 events: [
-                    { time: "上午", title: "最後採買 / 樂天超市", desc: "把伴手禮買齊", cat: "sight", dot: "sight" },
-                    { time: "17:00", title: "抵達釜山港碼頭", desc: "務必準時！", cat: "transport", dot: "transport", address: "부산 동구 충장대로 206" },
-                    { time: "18:30", title: "最後報到截止", desc: "Check-in 結束", cat: "transport", dot: "transport" },
-                    { time: "20:00", title: "新山茶花號 出發", desc: "前往福岡！享用特等艙", cat: "stay", dot: "stay" }
+                    {
+                        time: "07:30", title: "抵達博多港",
+                        desc: "入境日本",
+                        address: "福岡市博多区沖浜町14-1",
+                        country: "JP",
+                        cat: "transport",
+                        travelToNext: "🚌 20min"
+                    },
+                    {
+                        time: "09:00", title: "博多站 (Hakata Sta.)",
+                        desc: "寄放行李",
+                        address: "福岡市博多区博多駅中央街1-1",
+                        country: "JP",
+                        cat: "transport"
+                    },
+                    {
+                        time: "晚餐", title: "博多牛腸鍋",
+                        desc: "推薦：前田屋 / やま中",
+                        address: "福岡市博多区博多駅前3-26-5",
+                        country: "JP",
+                        cat: "food"
+                    }
                 ]
             },
             {
-                date: "01/30", day: "Fri", fullDate: "2026-01-30",
-                loc: "Fukuoka", title: "早安福岡", 
+                date: "01", day: "Sun", month: "Feb",
+                location: "Yufuin", title: "Day 7: 由布院之森",
                 events: [
-                    { time: "07:30", title: "抵達博多港", desc: "入境日本", cat: "transport", dot: "transport" },
-                    { time: "上午", title: "大濠公園", desc: "星巴克、美術館", cat: "sight", dot: "sight" },
-                    { time: "下午", title: "天神/博多逛街", desc: "三麗鷗商店巡禮", cat: "sight", dot: "sight" },
-                    { time: "晚餐", title: "博多牛腸鍋", desc: "前田屋 或 やま中", cat: "food", dot: "food" }
+                    {
+                        time: "10:11", title: "博多站出發",
+                        desc: "搭乘觀光列車前往由布院",
+                        cat: "transport",
+                        ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" },
+                        travelToNext: "🚆 2hr 16m"
+                    },
+                    {
+                        time: "12:27", title: "抵達由布院",
+                        desc: "車站對面寄放行李",
+                        address: "大分県由布市湯布院町川北8-2",
+                        country: "JP",
+                        cat: "sight"
+                    },
+                    {
+                        time: "15:00", title: "由布院花卉村",
+                        desc: "Yufuin Floral Village (吉卜力風)",
+                        address: "大分県由布市湯布院町川上1503-3",
+                        country: "JP",
+                        cat: "sight"
+                    },
+                    {
+                        time: "住宿", title: "由布院溫泉旅館",
+                        desc: "享受一泊二食",
+                        cat: "stay"
+                    }
                 ]
             },
             {
-                date: "01/31", day: "Sat", fullDate: "2026-01-31",
-                loc: "Fukuoka", title: "福岡市區 / 演唱會預備?", 
+                date: "05", day: "Thu", month: "Feb",
+                location: "Saga/Home", title: "Day 11: 返程",
                 events: [
-                    { time: "全日", title: "市區自由行 / 追星", desc: "根據 SMTOWN 行程調整", cat: "sight", dot: "sight" },
-                    { time: "晚上", title: "中洲屋台", desc: "體驗日本路邊攤文化", cat: "food", dot: "food" }
-                ]
-            },
-            {
-                date: "02/01", day: "Sun", fullDate: "2026-02-01",
-                loc: "Yufuin", title: "由布院之森", 
-                events: [
-                    { time: "10:11", title: "博多站出發", desc: "由布院之森 3號 (4號車 7番CD)", cat: "transport", dot: "transport" },
-                    { time: "12:27", title: "抵達由布院", desc: "寄放行李", cat: "transport", dot: "transport" },
-                    { time: "下午", title: "湯之坪街道", desc: "史努比茶屋、花卉村", cat: "sight", dot: "sight" },
-                    { time: "住宿", title: "由布院溫泉旅館", desc: "一泊二食", cat: "stay", dot: "stay" }
-                ]
-            },
-            {
-                date: "02/02", day: "Mon", fullDate: "2026-02-02",
-                loc: "Fukuoka", title: "金鱗湖晨霧", 
-                events: [
-                    { time: "07:00", title: "金鱗湖", desc: "夢幻晨霧", cat: "sight", dot: "sight" },
-                    { time: "中午", title: "返回博多", desc: "搭乘 JR", cat: "transport", dot: "transport" },
-                    { time: "下午", title: "LaLaport 福岡", desc: "看鋼彈", cat: "sight", dot: "sight" }
-                ]
-            },
-            {
-                date: "02/03", day: "Tue", fullDate: "2026-02-03",
-                loc: "Saga", title: "移動至佐賀", 
-                events: [
-                    { time: "上午", title: "太宰府天滿宮", desc: "吃梅枝餅", cat: "sight", dot: "sight" },
-                    { time: "下午", title: "前往佐賀", desc: "JR 特急", cat: "transport", dot: "transport" },
-                    { time: "晚餐", title: "佐賀牛餐廳 季樂", desc: "入口即化", cat: "food", dot: "food" }
-                ]
-            },
-            {
-                date: "02/04", day: "Wed", fullDate: "2026-02-04",
-                loc: "Saga", title: "武雄圖書館", 
-                events: [
-                    { time: "上午", title: "武雄市圖書館", desc: "最美圖書館", cat: "sight", dot: "sight" },
-                    { time: "午餐", title: "佐賀牛便當", desc: "武雄溫泉站 Kairo堂", cat: "food", dot: "food" },
-                    { time: "下午", title: "御船山樂園", desc: "teamLab", cat: "sight", dot: "sight" }
-                ]
-            },
-            {
-                date: "02/05", day: "Thu", fullDate: "2026-02-05",
-                loc: "Home", title: "甜蜜返家", 
-                events: [
-                    { time: "上午", title: "前往佐賀機場 (HSG)", desc: "搭乘機場巴士", cat: "transport", dot: "transport" },
-                    { time: "12:15", title: "虎航 IT247 起飛", desc: "再見九州", cat: "transport", dot: "transport" },
-                    { time: "13:45", title: "抵達桃園 (TPE)", desc: "旅程結束", cat: "stay", dot: "stay" }
+                    {
+                        time: "09:30", title: "前往佐賀機場 (HSG)",
+                        desc: "搭乘機場巴士",
+                        address: "佐賀県佐賀市川副町大字犬井道947",
+                        country: "JP",
+                        cat: "transport"
+                    },
+                    {
+                        time: "12:15", title: "虎航 IT247 起飛",
+                        desc: "再見九州！",
+                        cat: "transport",
+                        ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE 13:45" }
+                    }
                 ]
             }
         ];
 
-        // --- Functions ---
-        const app = document.getElementById('app');
+        // --- RENDER LOGIC ---
 
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const toast = document.getElementById('toast');
-                toast.style.opacity = '1';
-                setTimeout(() => toast.style.opacity = '0', 2000);
-            });
-        }
+        function renderApp() {
+            const container = document.getElementById('itinerary-list');
+            let html = '';
 
-        function renderItinerary() {
-            let html = `
-                <div class="header">
-                    <div>
-                        <span>Jan 26 - Feb 05</span>
-                        <h1>Our Trip 2026</h1>
-                    </div>
-                    <div style="text-align:right">
-                        <span style="font-size:2rem;">🇰🇷 🛳️ 🇯🇵</span>
-                    </div>
-                </div>
-            `;
-
-            itineraryData.forEach((day, index) => {
-                const isToday = false; // Logic for real date can be added
+            itinerary.forEach((day, index) => {
                 html += `
-                <div class="card" onclick="toggleTimeline(${index})">
-                    <div class="day-header">
-                        <div class="day-date">
-                            ${day.date}
-                            <small>${day.day}</small>
+                <div class="card">
+                    <div class="day-header" onclick="toggleDay(${index})">
+                        <div class="date-box">
+                            <div class="date-num">${day.date}</div>
+                            <div class="date-day">${day.day}</div>
                         </div>
                         <div class="day-info">
                             <div class="day-title">${day.title}</div>
-                            <div class="text-sm"><i class="fa-solid fa-location-dot" style="color:var(--color-primary)"></i> ${day.loc}</div>
+                            <div class="day-loc"><i class="fa-solid fa-location-dot" style="color:#FFB7C5"></i> ${day.location}</div>
                         </div>
-                        <i id="icon-${index}" class="fa-solid fa-chevron-down" style="color: #ccc; transition: 0.3s"></i>
+                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:#ddd; transition:0.2s"></i>
                     </div>
-                    
-                    <div id="timeline-${index}" class="timeline-container ${index === 0 ? 'open' : ''}">
-                        ${day.events.map(e => `
-                            <div class="event-item">
-                                <div class="event-dot dot-${e.dot}"></div>
-                                <div class="event-time">${e.time}
-                                    ${e.pass === 'start' ? '<span class="pass-badge pass-start">Pass 啟用</span>' : ''}
-                                    ${e.pass === 'free' ? '<span class="pass-badge pass-free">Pass 免費</span>' : ''}
-                                    ${e.pass === 'expire' ? '<span class="pass-badge pass-expire">Pass 失效</span>' : ''}
-                                </div>
-                                <div class="event-name">${e.title}</div>
-                                <div class="event-desc">${e.desc}</div>
-                                ${e.address ? `
-                                    <div class="address-box">
-                                        <span>${e.address}</span>
-                                        <i class="fa-regular fa-copy btn-copy" onclick="event.stopPropagation(); copyToClipboard('${e.address}')"></i>
-                                    </div>
-                                ` : ''}
-                            </div>
-                        `).join('')}
+
+                    <div id="timeline-${index}" class="timeline ${index <= 1 ? 'open' : ''}"> ${day.events.map((event, i) => renderEvent(event, i, day.events.length)).join('')}
                     </div>
                 </div>
                 `;
             });
-            html += '<div style="height: 50px"></div>';
-            return html;
+
+            container.innerHTML = html;
         }
 
-        function renderGuide() {
-            return `
-                <div class="header">
-                    <div>
-                        <span>INFO & TICKETS</span>
-                        <h1>Guide</h1>
-                    </div>
-                </div>
+        function renderEvent(event, index, total) {
+            // Pass badges
+            let passBadge = '';
+            if (event.pass === 'start') passBadge = '<span class="pass-badge">Pass 啟用</span>';
+            if (event.pass === 'free') passBadge = '<span class="pass-badge pass-free">Pass 免費</span>';
 
-                <h3 style="margin-bottom:10px">✈️ 航班資訊</h3>
-                <div class="card ticket-card">
-                    <div class="ticket-row">
-                        <span class="ticket-label">去程 (1/26)</span>
-                        <span class="ticket-val">ZE984</span>
-                    </div>
-                    <div class="ticket-row">
-                        <span>TPE 02:50</span>
-                        <span><i class="fa-solid fa-arrow-right"></i></span>
-                        <span>PUS 06:10</span>
-                    </div>
-                    <hr style="border:0; border-top:1px dashed #eee; margin:10px 0;">
-                    <div class="ticket-row">
-                        <span class="ticket-label">回程 (2/05)</span>
-                        <span class="ticket-val">IT247</span>
-                    </div>
-                    <div class="ticket-row">
-                        <span>HSG 12:15</span>
-                        <span><i class="fa-solid fa-arrow-right"></i></span>
-                        <span>TPE 13:45</span>
-                    </div>
-                </div>
-
-                <h3 style="margin-bottom:10px">🛳️ 新山茶花號</h3>
-                <div class="card ticket-card" style="border-left-color: var(--color-primary)">
-                    <div class="ticket-row">
-                        <span class="ticket-label">日期</span>
-                        <span class="ticket-val">1/29 (四)</span>
-                    </div>
-                    <div class="ticket-row">
-                        <span class="ticket-label">房型</span>
-                        <span class="ticket-val">特等艙雙床</span>
-                    </div>
-                    <div class="ticket-row" style="color: var(--color-danger); font-weight:bold">
-                        <span class="ticket-label" style="color:inherit">最後報到</span>
-                        <span>18:30 (17:00抵達)</span>
-                    </div>
-                </div>
-
-                <h3 style="margin-bottom:10px">🚆 關鍵交通</h3>
-                <div class="card ticket-card" style="border-left-color: #4CD964">
-                    <div style="font-weight:bold; margin-bottom:5px">由布院之森 3號</div>
-                    <div class="ticket-row">
-                        <span class="ticket-label">時間</span>
-                        <span class="ticket-val">2/01 10:11 發</span>
-                    </div>
-                    <div class="ticket-row">
-                        <span class="ticket-label">座位</span>
-                        <span class="ticket-val">4號車 7番 CD</span>
-                    </div>
-                </div>
-
-                <h3 style="margin-bottom:10px">🎟️ Busan Pass 攻略</h3>
-                <div class="card">
-                    <ul style="padding-left:20px; margin:0; line-height:1.6; font-size:0.9rem; color:#555">
-                        <li><strong>啟用：</strong> 1/26 13:00 @ Spa Land</li>
-                        <li><strong>失效：</strong> 1/28 12:59</li>
-                        <li><strong>必玩：</strong> 天空膠囊 (需預約)、海岸列車、X the Sky、松島纜車、滑車。</li>
-                    </ul>
-                </div>
-                <div style="height: 50px"></div>
-            `;
-        }
-
-        function renderBudget() {
-            const savedData = JSON.parse(localStorage.getItem('budgetData_2026')) || [];
-            const total = savedData.reduce((sum, item) => sum + parseInt(item.amount), 0);
-
-            return `
-                <div class="header">
-                    <div>
-                        <span>WALLET</span>
-                        <h1>Budget</h1>
-                    </div>
-                </div>
-
-                <div class="budget-total">
-                    <div style="font-size:0.8rem; opacity:0.8">Total Expenses</div>
-                    <div style="font-size:2.5rem; font-weight:700; font-family:'Playfair Display'">
-                        ${total.toLocaleString()}
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div style="display:flex; gap:10px; margin-bottom:15px">
-                        <input type="text" id="b-desc" placeholder="項目" style="flex:1; padding:10px; border:1px solid #eee; border-radius:8px;">
-                        <input type="number" id="b-amount" placeholder="金額" style="width:80px; padding:10px; border:1px solid #eee; border-radius:8px;">
-                    </div>
-                    <button onclick="addBudget()" style="width:100%; background:var(--color-primary); color:white; border:none; padding:12px; border-radius:12px; font-weight:bold; font-size:1rem;">記一筆</button>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-bottom:15px">消費明細</h3>
-                    ${savedData.length === 0 ? '<div class="text-sm" style="text-align:center; padding:20px">尚無資料</div>' : ''}
-                    ${savedData.map((item, i) => `
-                        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid #f5f5f5">
-                            <div>
-                                <div style="font-weight:600">${item.desc}</div>
-                                <div class="text-xs">${item.date}</div>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:10px">
-                                <span style="font-weight:bold">${parseInt(item.amount).toLocaleString()}</span>
-                                <i class="fa-solid fa-trash" style="color:#ff6b6b; cursor:pointer" onclick="deleteBudget(${i})"></i>
-                            </div>
+            // Ticket Block
+            let ticketHtml = '';
+            if (event.ticket) {
+                let icon = 'fa-ticket';
+                if (event.ticket.type === 'flight') icon = 'fa-plane';
+                if (event.ticket.type === 'train') icon = 'fa-train';
+                if (event.ticket.type === 'ferry') icon = 'fa-ship';
+                
+                ticketHtml = `
+                    <div class="ticket-block">
+                        <i class="fa-solid ${icon} ticket-icon"></i>
+                        <div class="ticket-details">
+                            <span class="ticket-code">${event.ticket.code}</span>
+                            <span>${event.ticket.info}</span>
                         </div>
-                    `).join('')}
+                    </div>
+                `;
+            }
+
+            // Navigation Buttons (Deep Linking)
+            let navButtons = '';
+            if (event.address) {
+                const encodedAddr = encodeURIComponent(event.address);
+                const encodedAddrEn = encodeURIComponent(event.addressEn || event.address);
+                
+                // Copy Button
+                navButtons += `<button class="btn-nav btn-copy" onclick="copyAddr('${event.address}')"><i class="fa-regular fa-copy"></i> 複製</button>`;
+
+                if (event.country === 'KR') {
+                    // Naver Map (App Scheme with Web Fallback)
+                    // Note: Direct scheme 'nmap://' might fail if app not installed. 
+                    // Using https://map.naver.com is safer for web apps, but user asked for App link.
+                    // We use a universal intent approach.
+                    const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
+                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                    
+                    navButtons += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
+                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+                } else if (event.country === 'JP') {
+                    // Google Maps
+                    const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
+                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+
+                    navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
+                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+                }
+            }
+
+            // Travel Connector (Visual time between events)
+            let connectorHtml = '';
+            if (event.travelToNext) {
+                connectorHtml = `
+                    <div class="travel-connector">
+                        <div class="travel-pill">
+                            ${event.travelToNext}
+                        </div>
+                    </div>
+                `;
+            }
+
+            return `
+                <div class="event-node">
+                    <div class="event-dot dot-${event.cat}"></div>
+                    <div class="event-content">
+                        <div class="event-time">
+                            ${event.time}
+                            ${passBadge}
+                        </div>
+                        <div class="event-title">${event.title}</div>
+                        <div class="event-desc">${event.desc}</div>
+                        ${ticketHtml}
+                        ${navButtons ? `<div class="action-row">${navButtons}</div>` : ''}
+                    </div>
                 </div>
-                <div style="height: 50px"></div>
+                ${connectorHtml}
             `;
         }
 
-        // Logic
-        function switchTab(tab) {
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-            const idx = ['itinerary', 'guide', 'budget'].indexOf(tab);
-            document.querySelectorAll('.nav-item')[idx].classList.add('active');
-            
-            window.scrollTo(0, 0);
-            if (tab === 'itinerary') app.innerHTML = renderItinerary();
-            if (tab === 'guide') app.innerHTML = renderGuide();
-            if (tab === 'budget') app.innerHTML = renderBudget();
-        }
-
-        function toggleTimeline(index) {
-            const el = document.getElementById(`timeline-${index}`);
-            const icon = document.getElementById(`icon-${index}`);
-            if (el.classList.contains('open')) {
-                el.classList.remove('open');
-                icon.style.transform = 'rotate(0deg)';
+        // Interactivity
+        function toggleDay(index) {
+            const tl = document.getElementById(`timeline-${index}`);
+            const arrow = document.getElementById(`arrow-${index}`);
+            if (tl.classList.contains('open')) {
+                tl.classList.remove('open');
+                arrow.style.transform = 'rotate(0deg)';
             } else {
-                el.classList.add('open');
-                icon.style.transform = 'rotate(180deg)';
+                tl.classList.add('open');
+                arrow.style.transform = 'rotate(180deg)';
             }
         }
 
-        function addBudget() {
-            const desc = document.getElementById('b-desc').value;
-            const amount = document.getElementById('b-amount').value;
-            if (!desc || !amount) return;
-            
-            const data = JSON.parse(localStorage.getItem('budgetData_2026')) || [];
-            data.unshift({ desc, amount, date: new Date().toLocaleDateString() });
-            localStorage.setItem('budgetData_2026', JSON.stringify(data));
-            app.innerHTML = renderBudget();
-        }
-
-        function deleteBudget(index) {
-            if(!confirm('刪除此筆資料？')) return;
-            const data = JSON.parse(localStorage.getItem('budgetData_2026')) || [];
-            data.splice(index, 1);
-            localStorage.setItem('budgetData_2026', JSON.stringify(data));
-            app.innerHTML = renderBudget();
+        function copyAddr(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('地址已複製: ' + text);
+            }).catch(err => {
+                console.error('Copy failed', err);
+            });
         }
 
         // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            app.innerHTML = renderItinerary();
-        });
+        document.addEventListener('DOMContentLoaded', renderApp);
 
     </script>
 </body>
