@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#FFF5F7">
-    <title>Kitty & Daniel Trip 🎀</title>
+    <title>To 小寶 🎀</title>
     
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063822.png">
     
@@ -39,6 +39,7 @@
             margin: 0; padding: 0;
             font-family: 'Zen Maru Gothic', sans-serif;
             background-color: var(--cream-bg);
+            /* Polka Dot Background */
             background-image: radial-gradient(var(--kitty-pink) 15%, transparent 16%), radial-gradient(var(--kitty-pink) 15%, transparent 16%);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
@@ -82,14 +83,13 @@
             margin-bottom: 16px;
             box-shadow: var(--shadow);
             border: 2px solid white;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: border-color 0.3s ease;
             position: relative;
             overflow: hidden;
-            scroll-margin-top: 20px;
+            scroll-margin-top: 20px; /* Important for scrollIntoView */
         }
         .card.active-card {
             border-color: var(--kitty-pink);
-            transform: scale(1.01);
         }
 
         /* Day Header */
@@ -105,21 +105,17 @@
         .day-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
         .day-loc { font-size: 0.8rem; color: var(--text-sub); display: flex; align-items: center; gap: 4px; }
         
-        /* Smooth Animation Timeline */
+        /* Timeline - No auto-collapse logic, just simple open/close */
         .timeline {
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            display: none;
             padding-left: 8px;
-        }
-        .timeline.open {
-            max-height: 2000px; /* Large enough to fit content */
-            opacity: 1;
             margin-top: 20px;
             border-top: 2px dashed #F0F0F0;
             padding-top: 20px;
+            animation: fadeIn 0.4s ease;
         }
+        .timeline.open { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Event Node */
         .event-node { position: relative; padding-left: 32px; padding-bottom: 25px; }
@@ -145,6 +141,24 @@
             font-size: 1rem; font-weight: 700; color: var(--text-main); 
             margin-bottom: 6px; line-height: 1.4;
         }
+
+        /* Love Note (New Feature) */
+        .love-note {
+            background: #FFF9C4; /* Soft Yellow */
+            color: #5D4037;
+            padding: 10px 14px;
+            border-radius: 16px;
+            border-bottom-left-radius: 2px; /* Speech bubble effect */
+            font-size: 0.85rem;
+            margin: 8px 0 12px 0;
+            position: relative;
+            line-height: 1.5;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .love-note i { color: #FFB300; margin-top: 3px; }
 
         /* Travel Tag (Right after title) */
         .travel-tag {
@@ -203,7 +217,7 @@
             </div>
             <div class="subtitle">2026/01/26 - 02/05</div>
             <h1>Our Sweet Trip</h1>
-            <p style="color:#9E8B85; font-size: 0.9rem; margin-top:5px;">Busan & Kyushu</p>
+            <p style="color:#9E8B85; font-size: 0.9rem; margin-top:5px;">To My Dear 小寶</p>
         </div>
         <div id="itinerary-list"></div>
     </div>
@@ -224,7 +238,8 @@
                         time: "06:10", title: "抵達金海機場 (PUS)",
                         travel: "🚕 50min",
                         cat: "transport",
-                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }
+                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" },
+                        note: "小寶～我們終於出發了！上機前先抱一個 ❤️"
                     },
                     {
                         time: "08:00", title: "寄放行李 S07",
@@ -239,7 +254,8 @@
                         travel: "🚶 5min",
                         address: "부산 해운대구 중동1로43번길 23",
                         country: "KR",
-                        cat: "food"
+                        cat: "food",
+                        note: "這家湯頭超鮮甜，幫妳暖暖胃～"
                     },
                     {
                         time: "09:30", title: "海景咖啡 / 散步",
@@ -261,7 +277,8 @@
                         address: "부산 해운대구 센텀남대로 35",
                         country: "KR",
                         cat: "sight",
-                        pass: "start"
+                        pass: "start",
+                        note: "可以綁可愛的羊角頭拍照喔！"
                     },
                     {
                         time: "17:30", title: "S07 Check-in",
@@ -288,7 +305,8 @@
                         address: "부산 해운대구 달맞이길62번길 13",
                         country: "KR",
                         cat: "sight",
-                        ticket: { type: "ticket", code: "RESERVED", info: "09:30 Mipo Station" }
+                        ticket: { type: "ticket", code: "RESERVED", info: "09:30 Mipo Station" },
+                        note: "特地預約了這班車，只有我們兩個看海超浪漫！"
                     },
                     {
                         time: "11:30", title: "海濱列車 (To Songjeong)",
@@ -311,7 +329,8 @@
                         address: "부산 기장군 기장읍 시랑리 산60-1",
                         country: "KR",
                         cat: "sight",
-                        pass: "free"
+                        pass: "free",
+                        note: "來比賽賽車！輸的人要親一下 😘"
                     },
                     {
                         time: "15:30", title: "回海雲台拿行李",
@@ -362,7 +381,8 @@
                         address: "부산 사하구 감내2로 170-1",
                         country: "KR",
                         cat: "sight",
-                        pass: "free"
+                        pass: "free",
+                        note: "小寶，這個要趕在Pass失效前去換，一起拍動動書！"
                     },
                     {
                         time: "14:00", title: "白淺灘文化村",
@@ -387,7 +407,8 @@
                         travel: "🚕 10min",
                         address: "부산 중구 중앙대로 2",
                         country: "KR",
-                        cat: "food"
+                        cat: "food",
+                        note: "把想吃的零食都買齊，帶去船上吃！"
                     },
                     {
                         time: "16:30", title: "前往釜山港碼頭",
@@ -399,7 +420,8 @@
                     {
                         time: "18:30", title: "報到截止 & 登船",
                         cat: "transport",
-                        ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航" }
+                        ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航" },
+                        note: "今晚我們要睡在船上囉～ 🚢"
                     }
                 ]
             },
@@ -412,7 +434,8 @@
                         travel: "🚌 20min",
                         address: "福岡市博多区沖浜町14-1",
                         country: "JP",
-                        cat: "transport"
+                        cat: "transport",
+                        note: "小寶早安！我們到日本啦🇯🇵"
                     },
                     {
                         time: "09:00", title: "博多站 (Hakata Sta.)",
@@ -430,7 +453,8 @@
                         time: "10:11", title: "博多站出發",
                         travel: "🚆 2hr 16m",
                         cat: "transport",
-                        ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }
+                        ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" },
+                        note: "這台火車超可愛，我有搶到好位子喔！"
                     },
                     {
                         time: "12:27", title: "抵達由布院",
@@ -440,7 +464,8 @@
                     },
                     {
                         time: "住宿", title: "由布院溫泉旅館",
-                        cat: "stay"
+                        cat: "stay",
+                        note: "晚上一起泡溫泉放鬆一下～"
                     }
                 ]
             },
@@ -457,7 +482,8 @@
                     {
                         time: "12:15", title: "虎航 IT247 起飛",
                         cat: "transport",
-                        ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE" }
+                        ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE" },
+                        note: "雖然要回家了，但跟小寶去哪裡都開心！❤️"
                     }
                 ]
             }
@@ -529,6 +555,17 @@
                 `;
             }
 
+            // Love Note Logic
+            let noteHtml = '';
+            if (event.note) {
+                noteHtml = `
+                    <div class="love-note">
+                        <i class="fa-solid fa-comment-dots"></i>
+                        <span>${event.note}</span>
+                    </div>
+                `;
+            }
+
             let navButtons = '';
             if (event.address) {
                 const encodedAddr = encodeURIComponent(event.address);
@@ -549,7 +586,6 @@
                 }
             }
 
-            // Travel Tag logic (Right after title)
             let travelHtml = event.travel ? `<span class="travel-tag">${event.travel}</span>` : '';
 
             return `
@@ -558,6 +594,7 @@
                     <div class="event-content">
                         <div class="event-time">${event.time} ${passBadge}</div>
                         <div class="event-title">${event.title} ${travelHtml}</div>
+                        ${noteHtml}
                         ${ticketHtml}
                         ${navButtons ? `<div class="action-row">${navButtons}</div>` : ''}
                     </div>
@@ -565,33 +602,30 @@
             `;
         }
 
-        // --- Smooth Animation Logic ---
+        // --- Toggle Logic: Independent Open + Scroll Top ---
         function toggleDay(index) {
-            itinerary.forEach((_, i) => {
-                const tl = document.getElementById(`timeline-${i}`);
-                const ar = document.getElementById(`arrow-${i}`);
-                const cd = document.getElementById(`card-${i}`);
+            const tl = document.getElementById(`timeline-${index}`);
+            const ar = document.getElementById(`arrow-${index}`);
+            const cd = document.getElementById(`card-${index}`);
+            
+            const isOpening = !tl.classList.contains('open');
+
+            if (isOpening) {
+                // Open it
+                tl.classList.add('open');
+                cd.classList.add('active-card');
+                ar.style.transform = 'rotate(180deg)';
                 
-                if (i === index) {
-                    // Toggle Clicked
-                    const isOpening = !tl.classList.contains('open');
-                    if (isOpening) {
-                        tl.classList.add('open');
-                        cd.classList.add('active-card');
-                        ar.style.transform = 'rotate(180deg)';
-                        setTimeout(() => cd.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
-                    } else {
-                        tl.classList.remove('open');
-                        cd.classList.remove('active-card');
-                        ar.style.transform = 'rotate(0deg)';
-                    }
-                } else {
-                    // Close others smoothly
-                    tl.classList.remove('open');
-                    cd.classList.remove('active-card');
-                    ar.style.transform = 'rotate(0deg)';
-                }
-            });
+                // Scroll to top
+                setTimeout(() => {
+                    cd.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 150);
+            } else {
+                // Close it
+                tl.classList.remove('open');
+                cd.classList.remove('active-card');
+                ar.style.transform = 'rotate(0deg)';
+            }
         }
 
         function copyAddr(text) {
@@ -605,7 +639,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             renderApp();
             
-            // Auto open logic based on date
+            // Auto open today
             const today = new Date().toISOString().split('T')[0];
             const todayIndex = itinerary.findIndex(day => day.fullDate === today);
             if (todayIndex !== -1) toggleDay(todayIndex);
