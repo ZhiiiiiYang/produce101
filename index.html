@@ -23,7 +23,6 @@
             --cream-bg: #FFF5F7;
             --text-main: #5D4037;
             --text-sub: #9E8B85;
-            --night-bg: #2C3E50; /* Night stay color */
             
             --radius-card: 24px;
             --radius-btn: 14px;
@@ -118,7 +117,7 @@
             content: ''; position: absolute; left: 11px; top: 15px; bottom: -15px; width: 0;
             border-left: 2px dotted var(--text-sub); z-index: 0;
         }
-        .event-node:last-child { padding-bottom: 20px; } /* Space for Stay Footer */
+        .event-node:last-child { padding-bottom: 20px; }
         .event-node:last-child::before { display: none; }
 
         .event-icon {
@@ -140,7 +139,6 @@
         }
         .love-note i { color: #FFB300; margin-top: 3px; }
         
-        /* Mosaic Effect */
         .note-content { transition: filter 0.5s ease; }
         .blurred .note-content { 
             filter: blur(6px); 
@@ -151,22 +149,23 @@
         .lock-icon { display: none; font-size: 0.8rem; color: #aaa; margin-left: auto; }
         .blurred .lock-icon { display: inline-block; }
 
-        /* Stay Footer */
+        /* Stay Footer (Updated Style) */
         .stay-footer {
-            background: var(--night-bg);
+            /* Dreamy Purple-Pink Gradient for Cute Night Mode */
+            background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
             color: white;
             padding: 15px;
             border-radius: 16px;
             margin-top: 10px;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(44, 62, 80, 0.3);
+            box-shadow: 0 5px 15px rgba(161, 140, 209, 0.4);
         }
         .stay-footer::before {
-            content: '🌙'; position: absolute; top: -5px; right: 10px; font-size: 4rem; opacity: 0.1;
+            content: '🌙'; position: absolute; top: -5px; right: 10px; font-size: 4rem; opacity: 0.2;
         }
-        .stay-label { font-size: 0.75rem; opacity: 0.8; margin-bottom: 4px; letter-spacing: 1px; }
-        .stay-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+        .stay-label { font-size: 0.75rem; opacity: 0.9; margin-bottom: 4px; letter-spacing: 1px; font-weight: bold; }
+        .stay-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         
         .travel-tag { display: inline-flex; align-items: center; font-size: 0.7rem; color: white; background: var(--daniel-blue); padding: 2px 8px; border-radius: 12px; margin-left: 6px; font-weight: 700; vertical-align: middle; }
         .pass-badge { background: var(--kitty-red); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; }
@@ -189,11 +188,13 @@
         }
         .btn-nav:active { transform: scale(0.95); }
         .btn-naver { background: #03C75A; color: white; }
-        .btn-uber { background: white; color: black; }
-        .btn-google { background: #4285F4; color: white; }
-        .btn-copy { flex: 0 0 50px; background: rgba(255,255,255,0.2); color: inherit; border: 1px solid rgba(255,255,255,0.3); font-size: 1.1rem; backdrop-filter: blur(5px); }
         
-        /* Light copy button for normal rows */
+        /* Updated Uber Button - Black with White Text */
+        .btn-uber { background: #000000; color: #FFFFFF; }
+        
+        .btn-google { background: #4285F4; color: white; }
+        .btn-copy { flex: 0 0 50px; background: rgba(255,255,255,0.3); color: white; border: 1px solid rgba(255,255,255,0.4); font-size: 1.1rem; backdrop-filter: blur(5px); }
+        
         .light-row .btn-copy { background: #FFF; color: #555; border: 2px solid #EEE; }
 
         /* Toast */
@@ -271,7 +272,7 @@
                 },
                 events: [
                     { time: "09:30", title: "天空膠囊列車", travel: "🚶 15min / 🚕 5min", address: "부산 해운대구 달맞이길62번길 13", country: "KR", cat: "sight", ticket: { type: "ticket", code: "RESERVED", info: "09:30 Mipo" }, note: "特地預約了這班車，只有我們兩個在小車廂看海超浪漫！" },
-                    { time: "11:30", title: "海濱列車 (To Songjeong)", travel: "🚆 Pass Free", address: "부산 해운대구 송정중앙로8번길 60", country: "KR", cat: "sight", pass: "free", note: "坐火車看海，手牽手不要放開喔～" },
+                    { time: "11:30", title: "海濱列車 (To Songjeong)", travel: "🚆 Pass Free", address: "부산 해운대구 송정중앙로8번길 60", country: "KR", cat: "sight", note: "坐火車看海，手牽手不要放開喔～" },
                     { time: "12:00", title: "Coralani 海景咖啡", travel: "🚶 13min", address: "부산 기장군 기장읍 기장해안로 32", country: "KR", cat: "food", note: "這裡的甜點妳一定會喜歡，我要拍下妳吃的樣子。" },
                     { time: "13:30", title: "Skyline Luge 滑車", travel: "🚕 10min", address: "부산 기장군 기장읍 시랑리 산60-1", country: "KR", cat: "sight", pass: "free", note: "來比賽賽車！輸的人晚上要幫對方按摩 😜" },
                     { time: "15:30", title: "回海雲台拿行李", travel: "🚕 30min", address: "부산시 해운대구 해운대해변로298번길 29, A동", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "transport", note: "跟我們第一晚的家說拜拜～前往下一站！" },
@@ -374,198 +375,4 @@
                     <div class="day-header" onclick="toggleDay(${index})">
                         <div class="date-box">
                             <div class="date-num">${day.date}</div>
-                            <div class="date-day">${day.day}</div>
-                        </div>
-                        <div class="day-info">
-                            <div class="day-title">${day.title}</div>
-                            <div class="day-loc"><i class="fa-solid fa-location-dot" style="color:var(--kitty-pink)"></i> ${day.location}</div>
-                        </div>
-                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:var(--kitty-pink); transition:0.3s"></i>
-                    </div>
-
-                    <div id="timeline-${index}" class="timeline">
-                        ${day.events.map((event) => renderEvent(event, day.fullDate)).join('')}
-                        ${renderStayFooter(day.stay)}
-                    </div>
-                </div>
-                `;
-            });
-
-            container.innerHTML = html;
-        }
-
-        function renderEvent(event, dateStr) {
-            let displayIcon = '📍';
-            if (event.cat === 'transport') displayIcon = '🚌';
-            if (event.cat === 'food') displayIcon = '🍰';
-            if (event.cat === 'stay') displayIcon = '🏰';
-            if (event.cat === 'sight') displayIcon = '🎡';
-            if (event.pass) displayIcon = '🎟️';
-
-            let passBadge = '';
-            if (event.pass === 'start') passBadge = '<span class="pass-badge">Pass Start</span>';
-            if (event.pass === 'free') passBadge = '<span class="pass-badge pass-free">Free</span>';
-
-            let ticketHtml = '';
-            if (event.ticket) {
-                let icon = 'fa-ticket';
-                if (event.ticket.type === 'flight') icon = 'fa-plane-departure';
-                if (event.ticket.type === 'train') icon = 'fa-train-subway';
-                if (event.ticket.type === 'ferry') icon = 'fa-anchor';
-                
-                ticketHtml = `
-                    <div class="ticket-block">
-                        <i class="fa-solid ${icon} ticket-icon"></i>
-                        <div>
-                            <span class="ticket-code">${event.ticket.code}</span>
-                            <span>${event.ticket.info}</span>
-                        </div>
-                    </div>
-                `;
-            }
-
-            // Mosaic Logic
-            let blurClass = 'blurred';
-            // Check time
-            if (event.time && event.time.includes(':')) {
-                const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
-                const now = new Date().getTime();
-                const diffMins = (eventTime - now) / 60000;
-                // Reveal if within 30 mins or past
-                if (diffMins <= 30) {
-                    blurClass = ''; 
-                }
-            } else if (event.time && (event.time.includes('上午') || event.time.includes('下午'))) {
-                 // Manual handling or just keep blurred until manually revealed
-            }
-
-            let noteHtml = '';
-            if (event.note) {
-                noteHtml = `
-                    <div class="love-note ${blurClass}">
-                        <i class="fa-solid fa-heart"></i>
-                        <span class="note-content">${event.note}</span>
-                        <i class="fa-solid fa-lock lock-icon"></i>
-                    </div>
-                `;
-            }
-
-            let navButtons = '';
-            if (event.address) {
-                const encodedAddr = encodeURIComponent(event.address);
-                const encodedAddrEn = encodeURIComponent(event.addressEn || event.address);
-                
-                navButtons += `<button class="btn-nav btn-copy" onclick="copyAddr('${event.address}')"><i class="fa-regular fa-copy"></i></button>`;
-
-                if (event.country === 'KR') {
-                    const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
-                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
-                    navButtons += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
-                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
-                } else if (event.country === 'JP') {
-                    const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
-                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
-                    navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
-                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
-                }
-            }
-
-            let travelHtml = event.travel ? `<span class="travel-tag">${event.travel}</span>` : '';
-
-            return `
-                <div class="event-node">
-                    <div class="event-icon">${displayIcon}</div>
-                    <div class="event-content">
-                        <div class="event-time">${event.time} ${passBadge}</div>
-                        <div class="event-title">${event.title} ${travelHtml}</div>
-                        ${noteHtml}
-                        ${ticketHtml}
-                        ${navButtons ? `<div class="action-row light-row">${navButtons}</div>` : ''}
-                    </div>
-                </div>
-            `;
-        }
-
-        // Dedicated Accommodation Footer
-        function renderStayFooter(stay) {
-            if (!stay) return '';
-            
-            const encodedAddr = encodeURIComponent(stay.address);
-            const encodedAddrEn = encodeURIComponent(stay.addressEn || stay.address);
-            
-            let btns = `<button class="btn-nav btn-copy" onclick="copyAddr('${stay.address}')"><i class="fa-regular fa-copy"></i></button>`;
-            
-            if (stay.country === 'KR') {
-                const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
-                const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
-                btns += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
-                btns += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
-            } else if (stay.country === 'JP') {
-                const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
-                const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
-                btns += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
-                btns += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
-            } else {
-                 btns = ''; // No buttons for TW/Home
-            }
-
-            return `
-                <div class="stay-footer">
-                    <div class="stay-label"><i class="fa-solid fa-moon"></i> TONIGHT</div>
-                    <div class="stay-name">${stay.name}</div>
-                    <div class="action-row" style="margin-top:0">
-                        ${btns}
-                    </div>
-                </div>
-            `;
-        }
-
-        // --- Interaction ---
-        function toggleDay(index) {
-            const tl = document.getElementById(`timeline-${index}`);
-            const ar = document.getElementById(`arrow-${index}`);
-            const cd = document.getElementById(`card-${index}`);
-            
-            const isOpening = !tl.classList.contains('open');
-
-            if (isOpening) {
-                tl.classList.add('open');
-                cd.classList.add('active-card');
-                ar.style.transform = 'rotate(180deg)';
-                setTimeout(() => cd.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
-            } else {
-                tl.classList.remove('open');
-                cd.classList.remove('active-card');
-                ar.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        function copyAddr(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                const x = document.getElementById("toast");
-                x.className = "show";
-                setTimeout(() => x.className = x.className.replace("show", ""), 2000);
-            });
-        }
-
-        // Dev Button
-        function revealAll() {
-            document.querySelectorAll('.love-note').forEach(el => {
-                el.classList.remove('blurred');
-            });
-            alert('所有馬賽克已解除 (預覽模式)');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderApp();
-            
-            // Auto open today
-            const today = new Date().toISOString().split('T')[0];
-            const todayIndex = itinerary.findIndex(day => day.fullDate === today);
-            if (todayIndex !== -1) toggleDay(todayIndex);
-            else toggleDay(0);
-        });
-
-    </script>
-</body>
-</html>
+                            <div class="date-day">${day.day}
