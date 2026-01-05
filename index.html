@@ -376,4 +376,196 @@
                             <div class="date-num">${day.date}</div>
                             <div class="date-day">${day.day}</div>
                         </div>
-                        <div class="day-info
+                        <div class="day-info">
+                            <div class="day-title">${day.title}</div>
+                            <div class="day-loc"><i class="fa-solid fa-location-dot" style="color:var(--kitty-pink)"></i> ${day.location}</div>
+                        </div>
+                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:var(--kitty-pink); transition:0.3s"></i>
+                    </div>
+
+                    <div id="timeline-${index}" class="timeline">
+                        ${day.events.map((event) => renderEvent(event, day.fullDate)).join('')}
+                        ${renderStayFooter(day.stay)}
+                    </div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function renderEvent(event, dateStr) {
+            let displayIcon = '📍';
+            if (event.cat === 'transport') displayIcon = '🚌';
+            if (event.cat === 'food') displayIcon = '🍰';
+            if (event.cat === 'stay') displayIcon = '🏰';
+            if (event.cat === 'sight') displayIcon = '🎡';
+            if (event.pass) displayIcon = '🎟️';
+
+            let passBadge = '';
+            if (event.pass === 'start') passBadge = '<span class="pass-badge">Pass Start</span>';
+            if (event.pass === 'free') passBadge = '<span class="pass-badge pass-free">Free</span>';
+
+            let ticketHtml = '';
+            if (event.ticket) {
+                let icon = 'fa-ticket';
+                if (event.ticket.type === 'flight') icon = 'fa-plane-departure';
+                if (event.ticket.type === 'train') icon = 'fa-train-subway';
+                if (event.ticket.type === 'ferry') icon = 'fa-anchor';
+                
+                ticketHtml = `
+                    <div class="ticket-block">
+                        <i class="fa-solid ${icon} ticket-icon"></i>
+                        <div>
+                            <span class="ticket-code">${event.ticket.code}</span>
+                            <span>${event.ticket.info}</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Mosaic Logic
+            let blurClass = 'blurred';
+            // Check time
+            if (event.time && event.time.includes(':')) {
+                const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
+                const now = new Date().getTime();
+                const diffMins = (eventTime - now) / 60000;
+                // Reveal if within 30 mins or past
+                if (diffMins <= 30) {
+                    blurClass = ''; 
+                }
+            } else if (event.time && (event.time.includes('上午') || event.time.includes('下午'))) {
+                 // Manual handling or just keep blurred until manually revealed
+            }
+
+            let noteHtml = '';
+            if (event.note) {
+                noteHtml = `
+                    <div class="love-note ${blurClass}">
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="note-content">${event.note}</span>
+                        <i class="fa-solid fa-lock lock-icon"></i>
+                    </div>
+                `;
+            }
+
+            let navButtons = '';
+            if (event.address) {
+                const encodedAddr = encodeURIComponent(event.address);
+                const encodedAddrEn = encodeURIComponent(event.addressEn || event.address);
+                
+                navButtons += `<button class="btn-nav btn-copy" onclick="copyAddr('${event.address}')"><i class="fa-regular fa-copy"></i></button>`;
+
+                if (event.country === 'KR') {
+                    const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
+                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                    navButtons += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
+                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+                } else if (event.country === 'JP') {
+                    const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
+                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                    navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
+                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+                }
+            }
+
+            let travelHtml = event.travel ? `<span class="travel-tag">${event.travel}</span>` : '';
+
+            return `
+                <div class="event-node">
+                    <div class="event-icon">${displayIcon}</div>
+                    <div class="event-content">
+                        <div class="event-time">${event.time} ${passBadge}</div>
+                        <div class="event-title">${event.title} ${travelHtml}</div>
+                        ${noteHtml}
+                        ${ticketHtml}
+                        ${navButtons ? `<div class="action-row light-row">${navButtons}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Dedicated Accommodation Footer
+        function renderStayFooter(stay) {
+            if (!stay) return '';
+            
+            const encodedAddr = encodeURIComponent(stay.address);
+            const encodedAddrEn = encodeURIComponent(stay.addressEn || stay.address);
+            
+            let btns = `<button class="btn-nav btn-copy" onclick="copyAddr('${stay.address}')"><i class="fa-regular fa-copy"></i></button>`;
+            
+            if (stay.country === 'KR') {
+                const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
+                const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                btns += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
+                btns += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+            } else if (stay.country === 'JP') {
+                const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
+                const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                btns += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
+                btns += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+            } else {
+                 btns = ''; // No buttons for TW/Home
+            }
+
+            return `
+                <div class="stay-footer">
+                    <div class="stay-label"><i class="fa-solid fa-moon"></i> TONIGHT</div>
+                    <div class="stay-name">${stay.name}</div>
+                    <div class="action-row" style="margin-top:0">
+                        ${btns}
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- Interaction ---
+        function toggleDay(index) {
+            const tl = document.getElementById(`timeline-${index}`);
+            const ar = document.getElementById(`arrow-${index}`);
+            const cd = document.getElementById(`card-${index}`);
+            
+            const isOpening = !tl.classList.contains('open');
+
+            if (isOpening) {
+                tl.classList.add('open');
+                cd.classList.add('active-card');
+                ar.style.transform = 'rotate(180deg)';
+                setTimeout(() => cd.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+            } else {
+                tl.classList.remove('open');
+                cd.classList.remove('active-card');
+                ar.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function copyAddr(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const x = document.getElementById("toast");
+                x.className = "show";
+                setTimeout(() => x.className = x.className.replace("show", ""), 2000);
+            });
+        }
+
+        // Dev Button
+        function revealAll() {
+            document.querySelectorAll('.love-note').forEach(el => {
+                el.classList.remove('blurred');
+            });
+            alert('所有馬賽克已解除 (預覽模式)');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderApp();
+            
+            // Auto open today
+            const today = new Date().toISOString().split('T')[0];
+            const todayIndex = itinerary.findIndex(day => day.fullDate === today);
+            if (todayIndex !== -1) toggleDay(todayIndex);
+            else toggleDay(0);
+        });
+
+    </script>
+</body>
+</html>
