@@ -35,28 +35,68 @@
         body {
             margin: 0; padding: 0;
             font-family: 'Zen Maru Gothic', sans-serif;
+            height: 100vh;
+            overflow: hidden; /* Prevent double scrollbars on desktop */
+            
+            /* Desktop Background (Neutral) */
+            background-color: #F0F2F5; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- Main App Container (The "Phone") --- */
+        #app {
+            /* Mobile Default (Full Screen) */
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding: calc(var(--safe-top) + 20px) 16px calc(var(--safe-bottom) + 80px);
+            position: relative;
+            
+            /* The Kitty Theme Background lives here now */
             background-color: var(--cream-bg);
             background-image: radial-gradient(var(--kitty-pink) 15%, transparent 16%), radial-gradient(var(--kitty-pink) 15%, transparent 16%);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
-            opacity: 0.99;
-            color: var(--text-main);
-            height: 100vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
-        #app {
-            padding: calc(var(--safe-top) + 20px) 16px calc(var(--safe-bottom) + 80px);
-            max-width: 600px;
-            margin: 0 auto;
+        /* --- Desktop Mode Styles --- */
+        @media (min-width: 600px) {
+            #app {
+                width: 450px; /* iPhone Pro Max width approx */
+                height: 90vh;
+                max-height: 900px;
+                border-radius: 40px;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+                border: 8px solid #FFFFFF; /* Bezel */
+                margin: auto;
+                /* Adjust Scrollbar */
+                scrollbar-width: none; /* Firefox */
+            }
+            #app::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
+            
+            /* Fix Toast Position relative to app */
+            #toast { position: absolute; bottom: 40px; }
+            #toast.show { bottom: 80px; }
+            
+            /* Fix Falling Emojis to contain within app */
+            #app { overflow: hidden auto; } /* Hidden x, Auto y */
         }
 
-        /* --- Progress Runner --- */
+        /* --- Scroll Progress Runner --- */
         #progress-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 6px;
+            position: sticky; /* Stays at top of #app */
+            top: -20px; /* Offset padding */
+            left: 0; 
+            width: calc(100% + 32px); /* Compensate padding */
+            margin-left: -16px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.5);
             z-index: 9999; pointer-events: none;
+            margin-bottom: 20px;
         }
         #progress-bar {
             height: 100%; width: 0%;
@@ -67,11 +107,11 @@
         }
         #runner-icon {
             position: absolute;
-            right: -12px; /* Adjust based on icon width */
-            top: 2px;
+            right: -12px;
+            top: -2px; /* Adjust vertical align */
             font-size: 1.5rem;
-            line-height: 0;
-            transform: scaleX(-1); /* Face right */
+            line-height: 1;
+            transform: scaleX(-1);
             filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
         }
 
@@ -92,7 +132,6 @@
         }
         h1 { font-family: 'Quicksand', sans-serif; margin: 10px 0 5px 0; color: var(--text-main); }
         
-        /* Interactive Subtitle */
         .subtitle { 
             color: var(--kitty-pink); font-weight: 700; font-size: 0.9rem; 
             background: white; padding: 6px 16px; border-radius: 20px; 
@@ -101,7 +140,6 @@
         }
         .subtitle:active { transform: scale(0.95); background: #FFF0F5; }
 
-        /* Interactive Emoji Row */
         .char-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; font-size: 2.5rem; cursor: pointer; }
         .char-item { transition: transform 0.1s; display: inline-block; }
         .char-item:active { transform: scale(1.2) rotate(10deg); }
@@ -235,24 +273,26 @@
 
         /* Falling Emoji Animation */
         .falling-emoji {
-            position: fixed; top: -50px; z-index: 9999;
+            position: absolute; /* Relative to #app */
+            top: -50px; z-index: 9999;
             font-size: 2rem; pointer-events: none;
             animation: fall linear forwards;
         }
         @keyframes fall {
-            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+            to { transform: translateY(900px) rotate(360deg); opacity: 0; }
         }
 
     </style>
 </head>
 <body>
 
-    <div id="progress-container">
-        <div id="progress-bar">
-            <div id="runner-icon">🏃‍♀️</div> </div>
-    </div>
-
     <div id="app">
+        <div id="progress-container">
+            <div id="progress-bar">
+                <div id="runner-icon">🏃‍♀️</div>
+            </div>
+        </div>
+
         <div class="hero-section">
             <div class="char-row">
                 <span class="char-item" onclick="makeRain('💎')">🐻</span>
@@ -276,6 +316,7 @@
     <script>
         // Data Structure
         const itinerary = [
+            // Day 1: 1/26
             {
                 date: "26", day: "Mon", fullDate: "2026-01-26",
                 location: "Busan", title: "Day 1: 飛往釜山 & 海雲台", theme: "kitty",
@@ -296,6 +337,7 @@
                     { time: "18:30", title: "Busan X the Sky", travel: "🚶 6min", address: "부산 해운대구 달맞이길 30", country: "KR", cat: "sight", pass: "free", note: "帶妳去最高的地方看夜景，像星星一樣美✨" }
                 ]
             },
+            // Day 2: 1/27
             {
                 date: "27", day: "Tue", fullDate: "2026-01-27",
                 location: "Busan", title: "Day 2: 東釜山海岸", theme: "kitty",
@@ -316,6 +358,7 @@
                     { time: "20:30", title: "釜山塔 (鑽石塔)", travel: "🚶 20min", country: "KR", cat: "sight", pass: "free", note: "再看一次夜景，每次看都覺得有妳在身邊真好。" }
                 ]
             },
+            // Day 3: 1/28
             {
                 date: "28", day: "Wed", fullDate: "2026-01-28",
                 location: "Busan", title: "Day 3: 文化村 & Pass", theme: "kitty",
@@ -332,6 +375,7 @@
                     { time: "14:00", title: "白淺灘文化村", travel: "🚕 15min", address: "부산 영도구 영선동4가 605-3", country: "KR", cat: "sight", note: "這裡有很多漂亮的咖啡廳，我們找一家發呆一下午吧。" }
                 ]
             },
+            // Day 4: 1/29
             {
                 date: "29", day: "Thu", fullDate: "2026-01-29",
                 location: "Busan Port", title: "Day 4: 告別釜山", theme: "daniel",
@@ -348,35 +392,101 @@
                     { time: "18:30", title: "報到截止 & 登船", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航" }, note: "今晚我們要睡在海上，搖搖晃晃的很好睡喔 🚢" }
                 ]
             },
+            // Day 5: 1/30
             {
                 date: "30", day: "Fri", fullDate: "2026-01-30",
                 location: "Fukuoka", title: "Day 5: 早安 Daniel", theme: "daniel",
                 stay: {
-                    name: "博多站飯店 (待定)",
-                    address: "福岡市博多区博多駅中央街1-1",
-                    addressEn: "1-1 Hakataekichuogai, Hakata Ward, Fukuoka",
+                    name: "LIFE FIELD #710",
+                    address: "福岡県福岡市博多区銀天町2-2-21",
+                    addressEn: "2-chōme-2-21 Gintenmachi, Hakata Ward, Fukuoka",
                     country: "JP"
                 },
                 events: [
                     { time: "07:30", title: "抵達博多港", travel: "🚌 20min", address: "福岡市博多区沖浜町14-1", country: "JP", cat: "transport", note: "小寶早安！睜開眼我們就在日本啦🇯🇵" },
-                    { time: "09:00", title: "博多站 (Hakata Sta.)", address: "福岡市博多区博多駅中央街1-1", country: "JP", cat: "transport", note: "先去把行李丟掉，然後開始爆買三麗鷗！" }
+                    { time: "09:00", title: "博多站 / 飯店寄放行李", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "transport", note: "先去放行李，這間飯店在銀天町，感覺附近很多好吃的！" },
+                    { time: "16:00", title: "LIFE FIELD Check-in", cat: "stay", note: "這兩天我們住這，可以好好休息一下～" }
                 ]
             },
+            // Day 6: 1/31 (Fukuoka Free Day)
+            {
+                date: "31", day: "Sat", fullDate: "2026-01-31",
+                location: "Fukuoka", title: "Day 6: 福岡散策", theme: "daniel",
+                stay: {
+                    name: "LIFE FIELD #710",
+                    address: "福岡県福岡市博多区銀天町2-2-21",
+                    addressEn: "2-chōme-2-21 Gintenmachi, Hakata Ward, Fukuoka",
+                    country: "JP"
+                },
+                events: [
+                    { time: "10:00", title: "市區逛街 / 咖啡廳", cat: "sight", note: "今天沒有鬧鐘，睡飽飽再出門逛街！" },
+                    { time: "18:00", title: "天神屋台 / 美食", cat: "food", note: "晚上帶妳去吃屋台，體驗一下日本路邊攤的氣氛！" }
+                ]
+            },
+            // Day 7: 2/01 (To Yufuin)
             {
                 date: "01", day: "Sun", fullDate: "2026-02-01",
                 location: "Yufuin", title: "Day 7: 由布院之森", theme: "charmmy",
                 stay: {
-                    name: "由布院溫泉旅館",
-                    address: "大分県由布市湯布院町川北8-2",
-                    addressEn: "Yufuin, Oita",
+                    name: "由布院獨棟 (Yufuin)",
+                    address: "大分県由布市湯布院町川上1777-1",
+                    addressEn: "1777-1 Yufuinchō Kawakami, Yufu, Oita",
                     country: "JP"
                 },
                 events: [
                     { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！" },
-                    { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川北8-2", country: "JP", cat: "sight", note: "這裡空氣超好的～感覺很像童話世界。" },
-                    { time: "住宿", title: "由布院溫泉旅館", cat: "stay", note: "晚上一起泡溫泉，我要幫妳刷背背 ❤️" }
+                    { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川上1777-1", country: "JP", cat: "sight", note: "這裡空氣超好的～感覺很像童話世界。" },
+                    { time: "15:00", title: "Check-in 享受溫泉", cat: "stay", note: "今晚住獨棟的，一定要跟妳一起泡溫泉，我要幫妳刷背背 ❤️" }
                 ]
             },
+            // Day 8: 2/02 (Back to Fukuoka)
+            {
+                date: "02", day: "Mon", fullDate: "2026-02-02",
+                location: "Fukuoka", title: "Day 8: 金鱗湖晨霧", theme: "charmmy",
+                stay: {
+                    name: "PHOENIX 薬院",
+                    address: "福岡市中央区大宮1-6-5",
+                    addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
+                    country: "JP"
+                },
+                events: [
+                    { time: "07:00", title: "金鱗湖晨霧", cat: "sight", note: "雖然有點早，但聽說晨霧很美，我們去散步一下？" },
+                    { time: "12:00", title: "返回福岡市區", cat: "transport", note: "跟可愛的由布院說掰掰，回市區繼續吃好料！" },
+                    { time: "16:00", title: "PHOENIX 薬院 Check-in", address: "福岡市中央区大宮1-6-5", country: "JP", cat: "stay", note: "接下來兩天住這間，聽說交通很方便喔～" }
+                ]
+            },
+            // Day 9: 2/03 (Fukuoka)
+            {
+                date: "03", day: "Tue", fullDate: "2026-02-03",
+                location: "Fukuoka", title: "Day 9: 藥院咖啡巡禮", theme: "charmmy",
+                stay: {
+                    name: "PHOENIX 薬院",
+                    address: "福岡市中央区大宮1-6-5",
+                    addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
+                    country: "JP"
+                },
+                events: [
+                    { time: "10:00", title: "藥院周邊散策", cat: "food", note: "這一區有很多厲害的咖啡廳，帶妳去拍網美照！" },
+                    { time: "18:00", title: "最後的福岡晚餐", cat: "food", note: "想吃燒肉還是壽司？今天都依妳！" }
+                ]
+            },
+            // Day 10: 2/04 (Move to Saga)
+            {
+                date: "04", day: "Wed", fullDate: "2026-02-04",
+                location: "Saga", title: "Day 10: 前往佐賀", theme: "charmmy",
+                stay: {
+                    name: "Tapstay Hotel",
+                    address: "佐賀県佐賀市駅前中央1-2-25",
+                    addressEn: "1 Chome-2-25 Ekimae Chuo, Saga",
+                    country: "JP"
+                },
+                events: [
+                    { time: "10:00", title: "移動至佐賀", cat: "transport", note: "這是我們旅程的最後一站了，去看看佐賀阿嬤（誤）" },
+                    { time: "15:00", title: "Tapstay Hotel Check-in", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP", cat: "stay", note: "就在車站旁邊，明天去機場超方便！" },
+                    { time: "18:00", title: "佐賀牛大餐", cat: "food", note: "來佐賀一定要吃佐賀牛啊！入口即化超幸福～" }
+                ]
+            },
+            // Day 11: 2/05
             {
                 date: "05", day: "Thu", fullDate: "2026-02-05",
                 location: "Saga/Home", title: "Day 11: Sweet Home", theme: "charmmy",
@@ -397,15 +507,27 @@
         
         // 1. Scroll Runner
         window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let container = document.getElementById('app'); // Use app as reference for height
+            if (window.innerWidth >= 600) container = document.getElementById('app');
+            else container = document.documentElement;
+
+            let winScroll = container.scrollTop || document.body.scrollTop || document.documentElement.scrollTop;
+            let height = container.scrollHeight - container.clientHeight;
+            
+            // Adjust calculation for element scroll vs window scroll
+            if (window.innerWidth >= 600) {
+                 winScroll = document.getElementById('app').scrollTop;
+                 height = document.getElementById('app').scrollHeight - document.getElementById('app').clientHeight;
+            }
+            
             let scrolled = (winScroll / height) * 100;
             if(scrolled > 100) scrolled = 100;
             document.getElementById("progress-bar").style.width = scrolled + "%";
-            
-            // Update Icon based on theme (Optional, or just use Kitty Emoji)
             document.getElementById("runner-icon").innerHTML = "🐱"; 
         };
+        
+        // Ensure scroll runner works on desktop element scroll
+        document.getElementById('app').addEventListener('scroll', window.onscroll);
 
         // 2. Love Counter
         let isShowingDays = false;
@@ -426,15 +548,15 @@
 
         // 3. Falling Emoji Rain
         function makeRain(char) {
+            const container = document.getElementById('app');
             for (let i = 0; i < 15; i++) {
                 const el = document.createElement('div');
                 el.innerText = char;
                 el.className = 'falling-emoji';
-                el.style.left = Math.random() * 100 + 'vw';
-                el.style.animationDuration = (Math.random() * 2 + 1.5) + 's'; // 1.5-3.5s fall
-                document.body.appendChild(el);
-                
-                // Remove after anim
+                // Random position within the app container width
+                el.style.left = (Math.random() * 80 + 10) + '%';
+                el.style.animationDuration = (Math.random() * 2 + 1.5) + 's'; 
+                container.appendChild(el);
                 setTimeout(() => el.remove(), 3500);
             }
         }
@@ -509,12 +631,9 @@
             // Love Note Mosaic
             let blurClass = 'blurred';
             if (event.time && event.time.includes(':')) {
-                // Logic to check date/time
-                // For demo, we keep blurred unless user hits dev button
-                // Or real-time check:
                 const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
                 const now = new Date().getTime();
-                // if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
+                if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
             }
 
             let noteHtml = '';
