@@ -52,6 +52,29 @@
             margin: 0 auto;
         }
 
+        /* --- Progress Runner --- */
+        #progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 6px;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 9999; pointer-events: none;
+        }
+        #progress-bar {
+            height: 100%; width: 0%;
+            background: var(--kitty-pink);
+            position: relative;
+            border-radius: 0 3px 3px 0;
+            transition: width 0.1s linear;
+        }
+        #runner-icon {
+            position: absolute;
+            right: -12px; /* Adjust based on icon width */
+            top: 2px;
+            font-size: 1.5rem;
+            line-height: 0;
+            transform: scaleX(-1); /* Face right */
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+
         /* Hero */
         .hero-section {
             text-align: center;
@@ -68,8 +91,20 @@
             font-size: 2rem; transform: rotate(15deg);
         }
         h1 { font-family: 'Quicksand', sans-serif; margin: 10px 0 5px 0; color: var(--text-main); }
-        .subtitle { color: var(--kitty-pink); font-weight: 700; font-size: 0.9rem; background: white; padding: 4px 12px; border-radius: 20px; border: 1px solid var(--kitty-pink); display: inline-block; }
-        .char-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 10px; font-size: 2.5rem; }
+        
+        /* Interactive Subtitle */
+        .subtitle { 
+            color: var(--kitty-pink); font-weight: 700; font-size: 0.9rem; 
+            background: white; padding: 6px 16px; border-radius: 20px; 
+            border: 1px solid var(--kitty-pink); display: inline-block;
+            cursor: pointer; user-select: none; transition: transform 0.1s;
+        }
+        .subtitle:active { transform: scale(0.95); background: #FFF0F5; }
+
+        /* Interactive Emoji Row */
+        .char-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; font-size: 2.5rem; cursor: pointer; }
+        .char-item { transition: transform 0.1s; display: inline-block; }
+        .char-item:active { transform: scale(1.2) rotate(10deg); }
 
         /* Card */
         .card {
@@ -129,7 +164,7 @@
         .event-time { font-size: 0.8rem; font-weight: 700; color: var(--kitty-pink); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
         .event-title { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; line-height: 1.4; }
 
-        /* Love Note (Mosaic) */
+        /* Love Note */
         .love-note {
             background: #FFF9C4; color: #5D4037; padding: 10px 14px;
             border-radius: 16px; border-bottom-left-radius: 2px;
@@ -141,25 +176,16 @@
         
         .note-content { transition: filter 0.5s ease; }
         .blurred .note-content { 
-            filter: blur(6px); 
-            user-select: none; 
-            pointer-events: none; 
-            opacity: 0.7;
+            filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.7;
         }
         .lock-icon { display: none; font-size: 0.8rem; color: #aaa; margin-left: auto; }
         .blurred .lock-icon { display: inline-block; }
 
-        /* Stay Footer (Updated Style) */
+        /* Stay Footer */
         .stay-footer {
-            /* Dreamy Purple-Pink Gradient for Cute Night Mode */
             background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
-            color: white;
-            padding: 15px;
-            border-radius: 16px;
-            margin-top: 10px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(161, 140, 209, 0.4);
+            color: white; padding: 15px; border-radius: 16px; margin-top: 10px;
+            position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(161, 140, 209, 0.4);
         }
         .stay-footer::before {
             content: '🌙'; position: absolute; top: -5px; right: 10px; font-size: 4rem; opacity: 0.2;
@@ -188,13 +214,9 @@
         }
         .btn-nav:active { transform: scale(0.95); }
         .btn-naver { background: #03C75A; color: white; }
-        
-        /* Updated Uber Button - Black with White Text */
         .btn-uber { background: #000000; color: #FFFFFF; }
-        
         .btn-google { background: #4285F4; color: white; }
         .btn-copy { flex: 0 0 50px; background: rgba(255,255,255,0.3); color: white; border: 1px solid rgba(255,255,255,0.4); font-size: 1.1rem; backdrop-filter: blur(5px); }
-        
         .light-row .btn-copy { background: #FFF; color: #555; border: 2px solid #EEE; }
 
         /* Toast */
@@ -208,23 +230,36 @@
         #toast.show { visibility: visible; opacity: 1; bottom: 80px; }
 
         /* Dev Button */
-        .dev-btn {
-            display: block; width: 100%; padding: 15px; margin-top: 40px;
-            background: #EEE; color: #AAA; border: none; border-radius: 12px;
-            font-size: 0.8rem; cursor: pointer;
-        }
+        .dev-btn { display: block; width: 100%; padding: 15px; margin-top: 40px; background: #EEE; color: #AAA; border: none; border-radius: 12px; font-size: 0.8rem; cursor: pointer; }
         .theme-sticker { position: absolute; bottom: 10px; right: 10px; font-size: 4rem; opacity: 0.1; pointer-events: none; }
+
+        /* Falling Emoji Animation */
+        .falling-emoji {
+            position: fixed; top: -50px; z-index: 9999;
+            font-size: 2rem; pointer-events: none;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
 
     </style>
 </head>
 <body>
 
+    <div id="progress-container">
+        <div id="progress-bar">
+            <div id="runner-icon">🏃‍♀️</div> </div>
+    </div>
+
     <div id="app">
         <div class="hero-section">
             <div class="char-row">
-                <span>🐻</span><span>🎀</span><span>🐱</span>
+                <span class="char-item" onclick="makeRain('💎')">🐻</span>
+                <span class="char-item" onclick="makeRain('💗')">🎀</span>
+                <span class="char-item" onclick="makeRain('🐾')">🐱</span>
             </div>
-            <div class="subtitle">2026/01/26 - 02/05</div>
+            <div class="subtitle" id="days-counter" onclick="toggleDays()">2026/01/26 - 02/05</div>
             <h1>Our Sweet Trip</h1>
             <p style="color:#9E8B85; font-size: 0.9rem; margin-top:5px;">With my 小寶</p>
         </div>
@@ -272,7 +307,7 @@
                 },
                 events: [
                     { time: "09:30", title: "天空膠囊列車", travel: "🚶 15min / 🚕 5min", address: "부산 해운대구 달맞이길62번길 13", country: "KR", cat: "sight", ticket: { type: "ticket", code: "RESERVED", info: "09:30 Mipo" }, note: "特地預約了這班車，只有我們兩個在小車廂看海超浪漫！" },
-                    { time: "11:30", title: "海濱列車 (To Songjeong)", travel: "🚆 Pass Free", address: "부산 해운대구 송정중앙로8번길 60", country: "KR", cat: "sight", note: "坐火車看海，手牽手不要放開喔～" },
+                    { time: "11:30", title: "海濱列車 (To Songjeong)", address: "부산 해운대구 송정중앙로8번길 60", country: "KR", cat: "sight", note: "坐火車看海，手牽手不要放開喔～" },
                     { time: "12:00", title: "Coralani 海景咖啡", travel: "🚶 13min", address: "부산 기장군 기장읍 기장해안로 32", country: "KR", cat: "food", note: "這裡的甜點妳一定會喜歡，我要拍下妳吃的樣子。" },
                     { time: "13:30", title: "Skyline Luge 滑車", travel: "🚕 10min", address: "부산 기장군 기장읍 시랑리 산60-1", country: "KR", cat: "sight", pass: "free", note: "來比賽賽車！輸的人晚上要幫對方按摩 😜" },
                     { time: "15:30", title: "回海雲台拿行李", travel: "🚕 30min", address: "부산시 해운대구 해운대해변로298번길 29, A동", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "transport", note: "跟我們第一晚的家說拜拜～前往下一站！" },
@@ -343,36 +378,3 @@
                 ]
             },
             {
-                date: "05", day: "Thu", fullDate: "2026-02-05",
-                location: "Saga/Home", title: "Day 11: Sweet Home", theme: "charmmy",
-                stay: {
-                    name: "甜蜜的家",
-                    address: "Taiwan",
-                    addressEn: "Taiwan",
-                    country: "TW"
-                },
-                events: [
-                    { time: "09:30", title: "前往佐賀機場 (HSG)", address: "佐賀県佐賀市川副町大字犬井道947", country: "JP", cat: "transport", note: "行李箱是不是滿到蓋不起來了？哈哈。" },
-                    { time: "12:15", title: "虎航 IT247 起飛", cat: "transport", ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE" }, note: "雖然旅程結束了，但跟小寶在一起，每天都是最棒的旅行！愛妳 ❤️" }
-                ]
-            }
-        ];
-
-        // --- Logic ---
-        function renderApp() {
-            const container = document.getElementById('itinerary-list');
-            let html = '';
-
-            itinerary.forEach((day, index) => {
-                let sticker = '';
-                if(day.theme === 'kitty') sticker = '🎀';
-                if(day.theme === 'daniel') sticker = '🎩';
-                if(day.theme === 'charmmy') sticker = '🗝️';
-
-                html += `
-                <div class="card" id="card-${index}">
-                    <div class="theme-sticker">${sticker}</div>
-                    <div class="day-header" onclick="toggleDay(${index})">
-                        <div class="date-box">
-                            <div class="date-num">${day.date}</div>
-                            <div class="date-day">${day.day}
