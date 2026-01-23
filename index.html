@@ -36,102 +36,67 @@
             margin: 0; padding: 0;
             font-family: 'Zen Maru Gothic', sans-serif;
             height: 100vh;
-            overflow: hidden; /* Prevent double scrollbars on desktop */
-            
-            /* Desktop Background (Neutral) */
-            background-color: #F0F2F5; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            overflow: hidden;
+            background-color: #F0F2F5; /* Desktop Bg */
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* --- Main App Container (The "Phone") --- */
+        /* Phone Simulator */
         #app {
-            /* Mobile Default (Full Screen) */
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            overflow-x: hidden;
+            width: 100%; height: 100%;
+            overflow-y: auto; overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             padding: calc(var(--safe-top) + 20px) 16px calc(var(--safe-bottom) + 80px);
             position: relative;
-            
-            /* The Kitty Theme Background lives here now */
             background-color: var(--cream-bg);
             background-image: radial-gradient(var(--kitty-pink) 15%, transparent 16%), radial-gradient(var(--kitty-pink) 15%, transparent 16%);
             background-size: 30px 30px;
             background-position: 0 0, 15px 15px;
         }
 
-        /* --- Desktop Mode Styles --- */
         @media (min-width: 600px) {
             #app {
-                width: 450px; /* iPhone Pro Max width approx */
-                height: 90vh;
-                max-height: 900px;
-                border-radius: 40px;
-                box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-                border: 8px solid #FFFFFF; /* Bezel */
-                margin: auto;
-                /* Adjust Scrollbar */
-                scrollbar-width: none; /* Firefox */
+                width: 450px; height: 90vh; max-height: 900px;
+                border-radius: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+                border: 8px solid #FFFFFF; margin: auto;
+                scrollbar-width: none;
             }
-            #app::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
-            
-            /* Fix Toast Position relative to app */
+            #app::-webkit-scrollbar { display: none; }
             #toast { position: absolute; bottom: 40px; }
             #toast.show { bottom: 80px; }
-            
-            /* Fix Falling Emojis to contain within app */
-            #app { overflow: hidden auto; } /* Hidden x, Auto y */
+            #app { overflow: hidden auto; }
         }
 
-        /* --- Scroll Progress Runner --- */
+        /* Scroll Progress */
         #progress-container {
-            position: sticky; /* Stays at top of #app */
-            top: -20px; /* Offset padding */
-            left: 0; 
-            width: calc(100% + 32px); /* Compensate padding */
-            margin-left: -16px;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.5);
-            z-index: 9999; pointer-events: none;
-            margin-bottom: 20px;
+            position: sticky; top: -20px; left: 0; 
+            width: calc(100% + 32px); margin-left: -16px;
+            height: 6px; background: rgba(255, 255, 255, 0.5);
+            z-index: 9999; pointer-events: none; margin-bottom: 20px;
         }
         #progress-bar {
-            height: 100%; width: 0%;
-            background: var(--kitty-pink);
-            position: relative;
-            border-radius: 0 3px 3px 0;
+            height: 100%; width: 0%; background: var(--kitty-pink);
+            position: relative; border-radius: 0 3px 3px 0;
             transition: width 0.1s linear;
         }
         #runner-icon {
-            position: absolute;
-            right: -12px;
-            top: -2px; /* Adjust vertical align */
-            font-size: 1.5rem;
-            line-height: 1;
-            transform: scaleX(-1);
+            position: absolute; right: -12px; top: -2px;
+            font-size: 1.5rem; line-height: 1; transform: scaleX(-1);
             filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
         }
 
         /* Hero */
         .hero-section {
-            text-align: center;
-            margin-bottom: 30px;
-            background: rgba(255,255,255,0.95);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(255, 171, 200, 0.25);
-            border: 3px solid white;
-            position: relative;
+            text-align: center; margin-bottom: 30px;
+            background: rgba(255,255,255,0.95); padding: 20px;
+            border-radius: 20px; box-shadow: 0 8px 20px rgba(255, 171, 200, 0.25);
+            border: 3px solid white; position: relative;
         }
         .hero-section::after {
             content: '❤️'; position: absolute; top: -10px; right: -5px;
             font-size: 2rem; transform: rotate(15deg);
         }
         h1 { font-family: 'Quicksand', sans-serif; margin: 10px 0 5px 0; color: var(--text-main); }
-        
         .subtitle { 
             color: var(--kitty-pink); font-weight: 700; font-size: 0.9rem; 
             background: white; padding: 6px 16px; border-radius: 20px; 
@@ -139,27 +104,21 @@
             cursor: pointer; user-select: none; transition: transform 0.1s;
         }
         .subtitle:active { transform: scale(0.95); background: #FFF0F5; }
-
         .char-row { display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; font-size: 2.5rem; cursor: pointer; }
         .char-item { transition: transform 0.1s; display: inline-block; }
         .char-item:active { transform: scale(1.2) rotate(10deg); }
 
         /* Card */
         .card {
-            background: #FFFFFF;
-            border-radius: var(--radius-card);
-            padding: 20px;
-            margin-bottom: 16px;
+            background: #FFFFFF; border-radius: var(--radius-card);
+            padding: 20px; margin-bottom: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 2px solid white;
-            transition: border-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            scroll-margin-top: 20px;
+            border: 2px solid white; transition: border-color 0.3s ease;
+            position: relative; overflow: hidden; scroll-margin-top: 20px;
         }
         .card.active-card { border-color: var(--kitty-pink); }
 
-        /* Day Header */
+        /* Timeline */
         .day-header { display: flex; align-items: center; cursor: pointer; position: relative; z-index: 2; }
         .date-box {
             text-align: center; margin-right: 15px; min-width: 50px;
@@ -172,19 +131,15 @@
         .day-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
         .day-loc { font-size: 0.8rem; color: var(--text-sub); display: flex; align-items: center; gap: 4px; }
         
-        /* Timeline */
         .timeline {
-            display: none;
-            padding-left: 8px;
-            margin-top: 20px;
-            border-top: 2px dashed #F0F0F0;
-            padding-top: 20px;
+            display: none; padding-left: 8px; margin-top: 20px;
+            border-top: 2px dashed #F0F0F0; padding-top: 20px;
             animation: fadeIn 0.4s ease;
         }
         .timeline.open { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Event Node */
+        /* Events */
         .event-node { position: relative; padding-left: 32px; padding-bottom: 30px; }
         .event-node::before {
             content: ''; position: absolute; left: 11px; top: 15px; bottom: -15px; width: 0;
@@ -192,13 +147,11 @@
         }
         .event-node:last-child { padding-bottom: 20px; }
         .event-node:last-child::before { display: none; }
-
         .event-icon {
             position: absolute; left: 0; top: 0; width: 24px; height: 24px;
             display: flex; align-items: center; justify-content: center;
             font-size: 1.2rem; z-index: 1; background: white; border-radius: 50%;
         }
-
         .event-time { font-size: 0.8rem; font-weight: 700; color: var(--kitty-pink); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
         .event-title { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; line-height: 1.4; }
 
@@ -211,11 +164,8 @@
             transition: all 0.5s ease;
         }
         .love-note i { color: #FFB300; margin-top: 3px; }
-        
         .note-content { transition: filter 0.5s ease; }
-        .blurred .note-content { 
-            filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.7;
-        }
+        .blurred .note-content { filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.7; }
         .lock-icon { display: none; font-size: 0.8rem; color: #aaa; margin-left: auto; }
         .blurred .lock-icon { display: inline-block; }
 
@@ -225,9 +175,7 @@
             color: white; padding: 15px; border-radius: 16px; margin-top: 10px;
             position: relative; overflow: hidden; box-shadow: 0 5px 15px rgba(161, 140, 209, 0.4);
         }
-        .stay-footer::before {
-            content: '🌙'; position: absolute; top: -5px; right: 10px; font-size: 4rem; opacity: 0.2;
-        }
+        .stay-footer::before { content: '🌙'; position: absolute; top: -5px; right: 10px; font-size: 4rem; opacity: 0.2; }
         .stay-label { font-size: 0.75rem; opacity: 0.9; margin-bottom: 4px; letter-spacing: 1px; font-weight: bold; }
         .stay-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; text-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         
@@ -235,6 +183,7 @@
         .pass-badge { background: var(--kitty-red); color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.65rem; }
         .pass-free { background: #4CD964; }
 
+        /* Tickets & Buttons */
         .ticket-block {
             background: #FDF5E6; border: 2px solid #FFE4B5; border-radius: 16px;
             padding: 12px; margin: 8px 0 12px 0; font-size: 0.85rem; color: #5D4037;
@@ -243,7 +192,6 @@
         .ticket-icon { font-size: 1.2rem; color: var(--daniel-blue); margin-right: 12px; }
         .ticket-code { font-weight: 900; color: var(--daniel-blue); margin-right: 6px; }
 
-        /* Buttons */
         .action-row { display: flex; gap: 10px; margin-top: 8px; }
         .btn-nav {
             flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -257,7 +205,6 @@
         .btn-copy { flex: 0 0 50px; background: rgba(255,255,255,0.3); color: white; border: 1px solid rgba(255,255,255,0.4); font-size: 1.1rem; backdrop-filter: blur(5px); }
         .light-row .btn-copy { background: #FFF; color: #555; border: 2px solid #EEE; }
 
-        /* Toast */
         #toast {
             visibility: hidden; background-color: var(--text-main); color: #fff;
             text-align: center; border-radius: 50px; padding: 12px 24px;
@@ -267,20 +214,10 @@
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 80px; }
 
-        /* Dev Button */
         .dev-btn { display: block; width: 100%; padding: 15px; margin-top: 40px; background: #EEE; color: #AAA; border: none; border-radius: 12px; font-size: 0.8rem; cursor: pointer; }
         .theme-sticker { position: absolute; bottom: 10px; right: 10px; font-size: 4rem; opacity: 0.1; pointer-events: none; }
-
-        /* Falling Emoji Animation */
-        .falling-emoji {
-            position: absolute; /* Relative to #app */
-            top: -50px; z-index: 9999;
-            font-size: 2rem; pointer-events: none;
-            animation: fall linear forwards;
-        }
-        @keyframes fall {
-            to { transform: translateY(900px) rotate(360deg); opacity: 0; }
-        }
+        .falling-emoji { position: absolute; top: -50px; z-index: 9999; font-size: 2rem; pointer-events: none; animation: fall linear forwards; }
+        @keyframes fall { to { transform: translateY(900px) rotate(360deg); opacity: 0; } }
 
     </style>
 </head>
@@ -316,69 +253,70 @@
     <script>
         // Data Structure
         const itinerary = [
-            // Day 1: 1/26
+            // Day 1: 1/26 (Updated)
             {
                 date: "26", day: "Mon", fullDate: "2026-01-26",
                 location: "Busan", title: "Day 1: 飛往釜山 & 海雲台", theme: "kitty",
                 stay: {
                     name: "Airbnb (海雲台)",
-                    address: "부산시 해운대구 해운대해변로298번길 29, A동",
-                    addressEn: "29 Haeundaehaebyeon-ro 298beon-gil",
+                    address: "부산시 해운대구 해운대해변로298번길 29, A동 409호",
+                    addressEn: "29 Haeundaehaebyeon-ro 298beon-gil, Haeundae-gu, Busan",
                     country: "KR"
                 },
                 events: [
-                    { time: "06:10", title: "抵達金海機場 (PUS)", travel: "🚕 50min", cat: "transport", ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }, note: "終於要出發了！小寶準備好了嗎？我們去韓國玩囉～" },
-                    { time: "08:00", title: "寄放行李 Airbnb", travel: "🚕 40min", address: "부산시 해운대구 해운대해변로298번길 29, A동", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "stay", note: "先把行李丟著，就可以輕鬆去吃早餐啦！" },
-                    { time: "08:30", title: "錦繡河豚湯", travel: "🚶 5min", address: "부산 해운대구 중동1로43번길 23", country: "KR", cat: "food", note: "聽說這家湯頭超鮮甜，幫妳暖暖胃～" },
-                    { time: "09:30", title: "海景咖啡 / 散步", travel: "🚶 15min", address: "부산 해운대구 달맞이길62번길 23", country: "KR", cat: "food", note: "第一張合照就在這裡拍吧！笑一個～" },
-                    { time: "11:30", title: "嚴泳白豬肉湯飯", travel: "🚶 20min", address: "부산 해운대구 구남로24번길 39", country: "KR", cat: "food", note: "釜山必吃的豬肉湯飯，這家肉超嫩的！" },
-                    { time: "13:00", title: "Spa Land 汗蒸幕", travel: "🚕 13min", address: "부산 해운대구 센텀남대로 35", country: "KR", cat: "sight", pass: "start", note: "可以綁可愛的羊角頭拍照喔！要把疲勞都蒸掉！" },
-                    { time: "17:30", title: "Airbnb Check-in", travel: "🚕 15min", cat: "stay", note: "終於可以進房間滾床單休息一下了～" },
-                    { time: "18:30", title: "Busan X the Sky", travel: "🚶 6min", address: "부산 해운대구 달맞이길 30", country: "KR", cat: "sight", pass: "free", note: "帶妳去最高的地方看夜景，像星星一樣美✨" }
+                    { time: "06:10", title: "抵達金海機場 (PUS)", travel: "ZE984", cat: "transport", ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }, note: "終於要出發了！小寶準備好了嗎？我們去韓國玩囉～" },
+                    { time: "07:30", title: "機場巴士 → 海雲台", travel: "🚌 1hr10m", desc: "搭乘機場巴士1號，前往海雲台", cat: "transport" },
+                    { time: "09:00", title: "寄放行李 Airbnb", travel: "🚶 4F 409", address: "부산시 해운대구 해운대해변로298번길 29, A동 409호", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "stay", note: "先去把行李丟在409號房，輕鬆開始玩！" },
+                    { time: "09:30", title: "錦繡河豚湯", travel: "🚶 5min", address: "부산 해운대구 중동1로43번길 23", country: "KR", cat: "food", note: "第一餐吃好一點，河豚湯幫妳補補氣！" },
+                    { time: "11:00", title: "海雲台紀念品 / T1 Basecamp", cat: "sight", note: "先去換我們的釜山Pass，然後去逛逛！" },
+                    { time: "12:30", title: "天空膠囊列車 (尾浦出發)", travel: "需12:00抵達", address: "부산 해운대구 달맞이길62번길 13", country: "KR", cat: "sight", ticket: { type: "ticket", code: "RESERVED", info: "12:30 Mipo" }, note: "我們的小車廂！準備好相機，要幫妳拍美美的照片❤️" },
+                    { time: "14:10", title: "海岸列車 (青沙浦 → 松亭)", travel: "🚆 Pass", address: "부산 해운대구 청사포로 128", country: "KR", cat: "sight", note: "記得要先開通釜山Pass喔！" },
+                    { time: "15:00", title: "Skyline Luge / Coralani Cafe", address: "부산 기장군 기장읍 시랑리 산60-1", country: "KR", cat: "sight", pass: "free", note: "滑車比賽開始！輸的人晚上要幫對方按摩 😜" },
+                    { time: "17:12", title: "海岸列車 (松亭 → 尾浦)", travel: "🚆 回程", cat: "transport" },
+                    { time: "18:30", title: "嚴湧帛豬肉湯飯", travel: "⚠️ 19:00 Last Order", address: "부산 해운대구 구남로24번길 39", country: "KR", cat: "food", note: "釜山必吃的豬肉湯飯，趕在關門前去吃！" },
+                    { time: "20:00", title: "Spa Land 汗蒸幕", travel: "⚠️ 22:00 Last Entry", address: "부산 해운대구 센텀남대로 35", country: "KR", cat: "sight", pass: "free", note: "可以綁可愛的羊角頭，把今天的疲勞都蒸掉！" }
                 ]
             },
-            // Day 2: 1/27
+            // Day 2: 1/27 (Updated)
             {
                 date: "27", day: "Tue", fullDate: "2026-01-27",
-                location: "Busan", title: "Day 2: 東釜山海岸", theme: "kitty",
+                location: "Busan", title: "Day 2: 水樂園 & 樂天世界", theme: "kitty",
                 stay: {
-                    name: "Twotone House",
+                    name: "Twotone House (釜山站)",
                     address: "부산광역시 동구 초량동 970-10",
                     addressEn: "970-10 Choryang-dong, Dong-gu, Busan",
                     country: "KR"
                 },
                 events: [
-                    { time: "09:30", title: "天空膠囊列車", travel: "🚶 15min / 🚕 5min", address: "부산 해운대구 달맞이길62번길 13", country: "KR", cat: "sight", ticket: { type: "ticket", code: "RESERVED", info: "09:30 Mipo" }, note: "特地預約了這班車，只有我們兩個在小車廂看海超浪漫！" },
-                    { time: "11:30", title: "海濱列車 (To Songjeong)", address: "부산 해운대구 송정중앙로8번길 60", country: "KR", cat: "sight", note: "坐火車看海，手牽手不要放開喔～" },
-                    { time: "12:00", title: "Coralani 海景咖啡", travel: "🚶 13min", address: "부산 기장군 기장읍 기장해안로 32", country: "KR", cat: "food", note: "這裡的甜點妳一定會喜歡，我要拍下妳吃的樣子。" },
-                    { time: "13:30", title: "Skyline Luge 滑車", travel: "🚕 10min", address: "부산 기장군 기장읍 시랑리 산60-1", country: "KR", cat: "sight", pass: "free", note: "來比賽賽車！輸的人晚上要幫對方按摩 😜" },
-                    { time: "15:30", title: "回海雲台拿行李", travel: "🚕 30min", address: "부산시 해운대구 해운대해변로298번길 29, A동", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "transport", note: "跟我們第一晚的家說拜拜～前往下一站！" },
-                    { time: "17:00", title: "Twotone House 入住", travel: "🚕 40min", cat: "stay", note: "換新家囉！希望這裡也很舒適～" },
-                    { time: "18:30", title: "札嘎其市場 / 南浦洞", travel: "🚕 10min", cat: "food", note: "帶妳去吃好吃的海鮮，小寶要吃飽飽！" },
-                    { time: "20:30", title: "釜山塔 (鑽石塔)", travel: "🚶 20min", country: "KR", cat: "sight", pass: "free", note: "再看一次夜景，每次看都覺得有妳在身邊真好。" }
+                    { time: "10:00", title: "Club D Oasis", address: "부산 해운대구 달맞이길 30", country: "KR", cat: "sight", pass: "free", note: "早上先去玩水放鬆一下！" },
+                    { time: "12:00", title: "Solsot 釜飯 (樂天店)", address: "부산 기장군 기장읍 동부산관광로 8", country: "KR", cat: "food" },
+                    { time: "14:00", title: "樂天世界 Lotte World", address: "부산 기장군 기장읍 동부산관광로 42", country: "KR", cat: "sight", pass: "free", note: "穿校服拍照？還是要戴可愛髮箍？" },
+                    { time: "17:00", title: "回海雲台拿行李", travel: "🚕 30min", address: "부산시 해운대구 해운대해변로298번길 29, A동 409호", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "transport", note: "跟海雲台的家說掰掰，我們要移動去市區囉！" },
+                    { time: "18:30", title: "前往釜山站 Airbnb", travel: "🚕 1hr", address: "부산광역시 동구 초량동 970-10", addressEn: "970-10 Choryang-dong, Dong-gu, Busan", country: "KR", cat: "stay" },
+                    { time: "20:00", title: "西面烤腸 / 拍貼機", cat: "food", note: "晚上去吃烤腸，順便拍超可愛的人生四格！" }
                 ]
             },
-            // Day 3: 1/28
+            // Day 3: 1/28 (Updated)
             {
                 date: "28", day: "Wed", fullDate: "2026-01-28",
-                location: "Busan", title: "Day 3: 文化村 & Pass", theme: "kitty",
+                location: "Busan", title: "Day 3: 市區逛街 & 遊艇", theme: "kitty",
                 stay: {
-                    name: "Twotone House",
+                    name: "Twotone House (釜山站)",
                     address: "부산광역시 동구 초량동 970-10",
                     addressEn: "970-10 Choryang-dong, Dong-gu, Busan",
                     country: "KR"
                 },
                 events: [
-                    { time: "09:00", title: "松島海上纜車", travel: "🚕 20min", address: "부산 서구 송도해변로 171", country: "KR", cat: "sight", pass: "free", note: "在海上飛行的感覺！不要怕，我會抓緊妳的手。" },
-                    { time: "10:30", title: "移動至甘川洞", travel: "🚕 15min", cat: "transport", note: "要去見小王子囉，他一定沒有我愛妳。" },
-                    { time: "11:00", title: "手翻書 (移動的照片商店)", travel: "⚠️ 12:59 失效", address: "부산 사하구 감내2로 170-1", country: "KR", cat: "sight", pass: "free", note: "小寶，這個要趕在Pass失效前去換，一起做一本動動書留念！" },
-                    { time: "14:00", title: "白淺灘文化村", travel: "🚕 15min", address: "부산 영도구 영선동4가 605-3", country: "KR", cat: "sight", note: "這裡有很多漂亮的咖啡廳，我們找一家發呆一下午吧。" }
+                    { time: "10:30", title: "西面商圈 / 樂天百貨", cat: "sight", note: "小寶準備好錢包了嗎？我們要開始逛街囉！" },
+                    { time: "12:30", title: "Shake Shack / 田浦洞", cat: "food", note: "吃個漢堡補充體力，下午繼續戰田浦咖啡街！" },
+                    { time: "17:00", title: "Yacht Holic 遊艇", travel: "⚠️ 17:30 啟航", address: "부산 해운대구 해운대해변로 84", country: "KR", cat: "sight", pass: "free", note: "夕陽下的遊艇超浪漫，要抱緊緊喔 ❤️" },
+                    { time: "19:00", title: "83haechi 烤肉 / 廣安里", cat: "food", note: "看完廣安大橋夜景，吃頓好吃的烤肉做Ending！" }
                 ]
             },
-            // Day 4: 1/29
+            // Day 4: 1/29 (Updated)
             {
                 date: "29", day: "Thu", fullDate: "2026-01-29",
-                location: "Busan Port", title: "Day 4: 告別釜山", theme: "daniel",
+                location: "Busan Port", title: "Day 4: 南浦洞 & 登船", theme: "daniel",
                 stay: {
                     name: "新山茶花號 (船上)",
                     address: "부산 동구 충장대로 206",
@@ -386,10 +324,12 @@
                     country: "KR"
                 },
                 events: [
-                    { time: "11:00", title: "釜山站寄放行李", travel: "🚶 10min", cat: "transport", note: "最後一天在釜山了，有點捨不得呢。" },
-                    { time: "13:00", title: "樂天超市 (光復店)", travel: "🚕 10min", address: "부산 중구 중앙대로 2", country: "KR", cat: "food", note: "把想吃的零食都買齊，帶去船上開派對！" },
-                    { time: "16:30", title: "前往釜山港碼頭", travel: "🚕 15min", address: "부산 동구 충장대로 206", country: "KR", cat: "transport", note: "記得檢查護照喔！我們要去日本囉～" },
-                    { time: "18:30", title: "報到截止 & 登船", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 啟航" }, note: "今晚我們要睡在海上，搖搖晃晃的很好睡喔 🚢" }
+                    { time: "10:00", title: "Busan Travel Lounge", desc: "免費寄放行李", address: "부산 동구 중앙대로 206", country: "KR", cat: "transport", note: "先把行李解決掉，最後一天也要玩好玩滿！" },
+                    { time: "11:00", title: "白淺灘文化村 / 胡同醬蟹", cat: "food", note: "吃醬蟹要記得先吃驅蟲藥喔 😂" },
+                    { time: "14:00", title: "南浦洞 / BIFF廣場", cat: "sight", note: "去買妳想吃的元祖糖餅，再去Artbox逛逛。" },
+                    { time: "16:00", title: "樂天超市 光復店", cat: "food", note: "最後衝刺！買零食帶去船上吃！" },
+                    { time: "17:00", title: "抵達釜山港報到", travel: "3F大廳", address: "부산 동구 충장대로 206", country: "KR", cat: "transport", note: "記得填寫日本入境卡，我們要去睡船上囉 🚢" },
+                    { time: "20:00", title: "新山茶花號 啟航", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 → 07:30" } }
                 ]
             },
             // Day 5: 1/30
@@ -514,7 +454,6 @@
             let winScroll = container.scrollTop || document.body.scrollTop || document.documentElement.scrollTop;
             let height = container.scrollHeight - container.clientHeight;
             
-            // Adjust calculation for element scroll vs window scroll
             if (window.innerWidth >= 600) {
                  winScroll = document.getElementById('app').scrollTop;
                  height = document.getElementById('app').scrollHeight - document.getElementById('app').clientHeight;
@@ -526,7 +465,6 @@
             document.getElementById("runner-icon").innerHTML = "🐱"; 
         };
         
-        // Ensure scroll runner works on desktop element scroll
         document.getElementById('app').addEventListener('scroll', window.onscroll);
 
         // 2. Love Counter
@@ -553,7 +491,6 @@
                 const el = document.createElement('div');
                 el.innerText = char;
                 el.className = 'falling-emoji';
-                // Random position within the app container width
                 el.style.left = (Math.random() * 80 + 10) + '%';
                 el.style.animationDuration = (Math.random() * 2 + 1.5) + 's'; 
                 container.appendChild(el);
@@ -628,7 +565,6 @@
                 `;
             }
 
-            // Love Note Mosaic
             let blurClass = 'blurred';
             if (event.time && event.time.includes(':')) {
                 const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
@@ -752,7 +688,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             renderApp();
-            // Auto open today or first day
             const today = new Date().toISOString().split('T')[0];
             const todayIndex = itinerary.findIndex(day => day.fullDate === today);
             if (todayIndex !== -1) toggleDay(todayIndex);
