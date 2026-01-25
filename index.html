@@ -202,6 +202,9 @@
             text-decoration: none; border: none; transition: transform 0.1s;
         }
         
+        /* Force 2 per row for specific grids */
+        .btn-grid { flex: 1 0 45% !important; }
+
         .btn-nav:active { transform: scale(0.95); }
         .btn-naver { background: #03C75A; color: white; }
         .btn-uber { background: #000000; color: #FFFFFF; }
@@ -288,9 +291,7 @@
                         cat: "transport", 
                         multiLinks: [
                             { name: "機場 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B3%B5%ED%95%AD%EC%A7%84%EC%9E%85%EB%A1%9C%20165&appname=com.travel.app" },
-                            { name: "機場 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=165%20Gonghangjinip-ro%2C%20Gangseo-gu%2C%20Busan" },
-                            { name: "海雲台 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EB%B3%80%EB%A1%9C%20287&appname=com.travel.app" },
-                            { name: "海雲台 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=287%20Haeundaehaebyeon-ro%2C%20Haeundae-gu%2C%20Busan" }
+                            { name: "海雲台 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EB%B3%80%EB%A1%9C%20287&appname=com.travel.app" }
                         ]
                     },
                     { 
@@ -380,7 +381,7 @@
                     }
                 ]
             },
-            // Day 2: 1/27 (Updated)
+            // Day 2: 1/27
             {
                 date: "27", day: "Tue", fullDate: "2026-01-27",
                 location: "Busan", title: "Day 2: 水樂園 & 樂天世界", theme: "kitty",
@@ -422,10 +423,14 @@
                     country: "KR"
                 },
                 events: [
-                    { time: "10:30", title: "西面商圈 / 樂天百貨", cat: "sight", note: "小寶準備好錢包了嗎？我們要開始逛街囉！" },
-                    { time: "12:30", title: "Shake Shack / 田浦洞", cat: "food", note: "吃個漢堡補充體力，下午繼續戰田浦咖啡街！" },
-                    { time: "17:00", title: "Yacht Holic 遊艇", travel: "⚠️ 17:30 啟航", address: "부산 해운대구 해운대해변로 84", country: "KR", cat: "sight", pass: "free", note: "夕陽下的遊艇超浪漫，要抱緊緊喔 ❤️" },
-                    { time: "19:00", title: "83haechi 烤肉 / 廣安里", cat: "food", note: "看完廣安大橋夜景，吃頓好吃的烤肉做Ending！" }
+                    { time: "10:30", title: "西面商圈 / 樂天百貨", travel: "地鐵25分", address: "부산 부산진구 가야대로 772", country: "KR", cat: "sight", note: "血拼囉！！！大買特買！！！" },
+                    { time: "12:30", title: "Shake Shack (西面店)", address: "부산 부산진구 중앙대로 672", country: "KR", cat: "food", note: "這也是小寶推薦的店！！！一定好ㄔ！！！" },
+                    { time: "14:30", title: "田浦洞咖啡街", address: "부산 부산진구 전포동 686-4", country: "KR", cat: "sight" },
+                    { time: "17:00", title: "Yacht Holic 遊艇", travel: "Uber 18分/地鐵45分", address: "부산 해운대구 해운대해변로 84", country: "KR", cat: "sight", pass: "free", note: "最期待的遊艇行程！！！一起看漂亮夜景拍好看的照片！！！謝謝小寶幫忙預定！！！" },
+                    { time: "19:30", title: "晚餐 83haechi 廣安里店", desc: "請先看候位狀況", address: "부산 수영구 민락수변로 7", country: "KR", cat: "food", note: "一起吃好吃烤肉！下次回臺北請簡正欣烤看誰比較厲害" },
+                    { time: "21:00", title: "廣安里海水浴場 / 大橋", address: "부산 수영구 광안해변로 219", country: "KR", cat: "sight", note: "喜歡跟妳散步聊天打蘑菇" },
+                    { time: "21:30", title: "拍貼機 Mono Mansion", address: "부산 수영구 광안해변로 179", country: "KR", cat: "sight", note: "繼續拍好看照片！" },
+                    { time: "22:30", title: "回釜山站 Airbnb", address: "부산광역시 동구 초량동 970-10", country: "KR", cat: "stay", note: "小寶一整天又辛苦嚕！！！" }
                 ]
             },
             // Day 4: 1/29
@@ -439,12 +444,25 @@
                     country: "KR"
                 },
                 events: [
-                    { time: "10:00", title: "Busan Travel Lounge", desc: "免費寄放行李", address: "부산 동구 중앙대로 206", country: "KR", cat: "transport", note: "先把行李解決掉，最後一天也要玩好玩滿！" },
-                    { time: "11:00", title: "白淺灘文化村 / 胡同醬蟹", cat: "food", note: "吃醬蟹要記得先吃驅蟲藥喔 😂" },
-                    { time: "14:00", title: "南浦洞 / BIFF廣場", cat: "sight", note: "去買妳想吃的元祖糖餅，再去Artbox逛逛。" },
-                    { time: "16:00", title: "樂天超市 光復店", cat: "food", note: "最後衝刺！買零食帶去船上吃！" },
-                    { time: "17:00", title: "抵達釜山港報到", travel: "3F大廳", address: "부산 동구 충장대로 206", country: "KR", cat: "transport", note: "記得填寫日本入境卡，我們要去睡船上囉 🚢" },
-                    { time: "20:00", title: "新山茶花號 啟航", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 → 07:30" } }
+                    { time: "11:00", title: "Check out 睡飽飽", cat: "stay", note: "今天可以睡飽一點！！！喜歡跟妳睡覺！！！" },
+                    { time: "11:30", title: "Busan Travel Lounge", desc: "寄放行李", address: "부산 동구 중앙대로 206", country: "KR", cat: "transport" },
+                    { time: "12:30", title: "白淺灘文化村", travel: "公車30分", address: "부산 영도구 영선동4가 605-3", country: "KR", cat: "sight", note: "散步聊天打蘑菇～～～" },
+                    { time: "14:00", title: "午餐 胡同醬蟹", travel: "公車30分", address: "부산 동구 중앙대로226번길 3-6", country: "KR", cat: "food", note: "我超期待的醬蟹！！！希望肚子可以撐住～～～ (先吃驅蟲藥)" },
+                    { time: "15:30", title: "南浦洞 / 光復路時尚街", travel: "地鐵15分", address: "부산 중구 광복중앙로 2", country: "KR", cat: "sight", note: "一起買好看衣服！" },
+                    { 
+                        time: "16:30", title: "南浦洞拍貼機", 
+                        cat: "sight", 
+                        multiLinks: [
+                            { name: "Haru Film", url: "nmap://search?query=%ED%95%98%EB%A3%A8%ED%95%84%EB%A6%84%20%EB%82%A8%ED%8F%AC%EC%A0%90&appname=com.travel.app" },
+                            { name: "Photoism", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EC%9D%B4%EC%A6%98%20%EB%82%A8%ED%8F%AC&appname=com.travel.app" }
+                        ],
+                        note: "拍更多拍貼！！！"
+                    },
+                    { time: "17:00", title: "BIFF 廣場 / 糖餅", address: "부산 중구 비프광장로", country: "KR", cat: "food", note: "吃小寶最期待的糖餅！" },
+                    { time: "17:30", title: "樂天超市 光復店", address: "부산 중구 중앙대로 2", country: "KR", cat: "food", note: "採買船上要吃的東西！！！" },
+                    { time: "18:00", title: "前往釜山港", travel: "Uber 10分", address: "부산 동구 충장대로 206", country: "KR", cat: "transport" },
+                    { time: "18:30", title: "釜山港報到", desc: "3F大廳領票/填卡, 2F拿鑰匙", cat: "transport", note: "第一次在船上。。。睡覺" },
+                    { time: "20:00", title: "新山茶花號 啟航", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 → 07:30" }, note: "小寶好好睡歐～～～希望不會太晃～～～" }
                 ]
             },
             // Day 5: 1/30
@@ -701,7 +719,7 @@
                 // Special case for Moneybox & Photo Booths
                 navButtons = event.multiLinks.map(link => {
                     let cls = 'btn-google';
-                    if(link.name.includes('Naver') || link.name.includes('Photo') || link.name.includes('Analog')) cls = 'btn-naver';
+                    if(link.name.includes('Naver') || link.name.includes('Photo') || link.name.includes('Analog') || link.name.includes('Haru')) cls = 'btn-naver';
                     if(link.name.includes('Uber')) cls = 'btn-uber';
                     return `<a href="${link.url}" class="btn-nav btn-grid ${cls}">${link.name}</a>`;
                 }).join('');
