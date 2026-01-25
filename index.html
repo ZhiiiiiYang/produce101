@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#FFF5F7">
+    
     <title>With 小寶 🎀</title>
     
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/3063/3063822.png">
@@ -202,7 +203,6 @@
             text-decoration: none; border: none; transition: transform 0.1s;
         }
         
-        /* Force 2 per row for specific grids like Moneybox */
         .btn-grid { flex: 1 0 45% !important; }
 
         .btn-nav:active { transform: scale(0.95); }
@@ -221,7 +221,7 @@
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 80px; }
 
-        .dev-btn { display: none; } /* HIDDEN */
+        .dev-btn { display: none; }
         .theme-sticker { position: absolute; bottom: 10px; right: 10px; font-size: 4rem; opacity: 0.1; pointer-events: none; }
         .falling-emoji { position: absolute; top: -50px; z-index: 9999; font-size: 2rem; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(900px) rotate(360deg); opacity: 0; } }
@@ -332,16 +332,10 @@
                     { time: "20:00", title: "新山茶花號 啟航", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 → 07:30" }, note: "小寶好好睡歐～～～希望不會太晃～～～" }
                 ]
             },
-            // Day 5: 1/30 (Updated Day 5 - With A/B Plans)
             {
                 date: "30", day: "Fri", fullDate: "2026-01-30",
                 location: "Fukuoka", title: "Day 5: 抵達福岡 & 太宰府", theme: "daniel",
-                stay: {
-                    name: "LIFE FIELD #710",
-                    address: "福岡県福岡市博多区銀天町2-2-21",
-                    addressEn: "2-chōme-2-21 Gintenmachi, Hakata Ward, Fukuoka",
-                    country: "JP"
-                },
+                stay: { name: "LIFE FIELD #710", address: "福岡県福岡市博多区銀天町2-2-21", addressEn: "2-chōme-2-21 Gintenmachi", country: "JP" },
                 events: [
                     { time: "07:30", title: "抵達博多港", travel: "Bus 20min", address: "福岡市博多区沖浜町14-1", country: "JP", cat: "transport", note: "小寶早安！睜開眼我們就在日本啦🇯🇵" },
                     { time: "08:30", title: "[方案 A] 先衝民宿 (南福岡)", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "transport", note: "先去放行李，再輕鬆去太宰府！" },
@@ -358,16 +352,10 @@
                     { time: "21:30", title: "回飯店 LIFE FIELD #710", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "stay", note: "終於可以休息了～今天走好多路，辛苦小寶了！" }
                 ]
             },
-            // Day 6: 1/31 (Updated Day 6)
             {
                 date: "31", day: "Sat", fullDate: "2026-01-31",
                 location: "Fukuoka", title: "Day 6: SMTOWN & Sanrio", theme: "daniel",
-                stay: {
-                    name: "LIFE FIELD #710",
-                    address: "福岡県福岡市博多区銀天町2-2-21",
-                    addressEn: "2-chōme-2-21 Gintenmachi, Hakata Ward, Fukuoka",
-                    country: "JP"
-                },
+                stay: { name: "LIFE FIELD #710", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP" },
                 events: [
                     { time: "09:00", title: "大濠公園", address: "福岡市中央区大濠公園1", country: "JP", cat: "sight", note: "早起來公園散步，呼吸新鮮空氣！" },
                     { time: "10:00", title: "FUK COFFEE Parks", address: "1 Chome-4-20 Arato, Chuo Ward, Fukuoka, 810-0062", country: "JP", cat: "food", note: "來吃這家的布丁，聽說超好吃的！" },
@@ -376,16 +364,10 @@
                     { time: "21:00", title: "回飯店休息", cat: "stay", note: "今天太High了，晚上要好好睡一覺！" }
                 ]
             },
-            // Day 7: 2/01 (Updated Day 7)
             {
                 date: "01", day: "Sun", fullDate: "2026-02-01",
                 location: "Yufuin", title: "Day 7: 由布院之森", theme: "charmmy",
-                stay: {
-                    name: "由布院獨棟",
-                    address: "大分県由布市湯布院町川上1777-1",
-                    addressEn: "1777-1 Yufuinchō Kawakami, Yufu, Oita",
-                    country: "JP"
-                },
+                stay: { name: "由布院獨棟", address: "大分県由布市湯布院町川上1777-1", country: "JP" },
                 events: [
                     { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", address: "日本〒812-0012 Fukuoka, Hakata Ward, 博多駅中央街1−1", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('博多駅')}" }] },
                     { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川北8-2", country: "JP", cat: "sight", note: "寄放行李在寄物櫃或遊客中心。這裡空氣超好的～感覺很像童話世界。" },
@@ -395,16 +377,10 @@
                     { time: "18:00", title: "Check-in 享受溫泉", cat: "stay", note: "今晚住獨棟的，一定要跟妳一起泡溫泉，我要幫妳刷背背 ❤️" }
                 ]
             },
-            // Day 8: 2/02 (Updated Day 8)
             {
                 date: "02", day: "Mon", fullDate: "2026-02-02",
                 location: "Fukuoka", title: "Day 8: 金鱗湖晨霧", theme: "charmmy",
-                stay: {
-                    name: "PHOENIX 薬院",
-                    address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013",
-                    addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
-                    country: "JP"
-                },
+                stay: { name: "PHOENIX 薬院", address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013", country: "JP" },
                 events: [
                     { time: "06:30", title: "金鱗湖晨霧", address: "1561-1 Yufuincho Kawakami, Yufu, Oita 879-5102", country: "JP", cat: "sight", note: "早起是值得的！這景象真的像仙境一樣！" },
                     { time: "09:00", title: "天祖神社 & 花卉村", multiLinks: [{name: "天祖神社", url: "https://www.google.com/maps/search/?api=1&query=1750+Yufuincho+Kawakami,+Yufu,+Oita+879-5102"}, {name: "花卉村", url: "https://www.google.com/maps/search/?api=1&query=湯布院花卉村1503-3+Yufuincho+Kawakami,+Yufu,+Oita+879-5102"}], country: "JP", cat: "sight", note: "去吉卜力風格的小村莊拍照！" },
@@ -415,16 +391,10 @@
                     { time: "20:00", title: "晚餐 前田屋牛腸鍋", desc: "已預約", address: "日本〒810-0021 Fukuoka, Chuo Ward, Imaizumi, 1 Chome−10−12 Ionビル", country: "JP", cat: "food", note: "福岡必吃牛腸鍋！這家超難訂的，還好有預約！" }
                 ]
             },
-            // Day 9: 2/03 (Updated Day 9)
             {
                 date: "03", day: "Tue", fullDate: "2026-02-03",
                 location: "Fukuoka", title: "Day 9: 節分祭 & 運河城", theme: "charmmy",
-                stay: {
-                    name: "PHOENIX 薬院",
-                    address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013",
-                    addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
-                    country: "JP"
-                },
+                stay: { name: "PHOENIX 薬院", address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013", country: "JP" },
                 events: [
                     { time: "09:00", title: "櫛田神社 節分大祭", desc: "09:00 大祭, 10:00-16:00 撒豆(每30分), 10:00-18:00 厄除祈願", address: "福岡市博多区上川端町1-41", country: "JP", cat: "sight", note: "剛好遇到節分祭！一起去接福豆，祈求今年順順利利！" },
                     { time: "11:00", title: "川端通商店街", address: "福岡県福岡市博多区上川端町10", country: "JP", cat: "sight" },
@@ -434,16 +404,10 @@
                     { time: "19:00", title: "晚餐 自由覓食", cat: "food", note: "看想吃什麼，我們隨意逛隨意吃！" }
                 ]
             },
-            // Day 10: 2/04 (Updated Day 10)
             {
                 date: "04", day: "Wed", fullDate: "2026-02-04",
                 location: "Saga", title: "Day 10: 門司港 & 佐賀", theme: "charmmy",
-                stay: {
-                    name: "Tapstay Hotel",
-                    address: "佐賀県佐賀市駅前中央1-2-25",
-                    addressEn: "1 Chome-2-25 Ekimae Chuo, Saga",
-                    country: "JP"
-                },
+                stay: { name: "Tapstay Hotel", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP" },
                 events: [
                     { time: "10:00", title: "門司港懷舊區", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Blue Wing Moji')}" }], country: "JP", cat: "sight", note: "這裡的建築好復古，很有異國情調耶！" },
                     { time: "15:00", title: "移動至佐賀", cat: "transport", note: "這是我們旅程的最後一站了，去看看佐賀阿嬤（誤）" },
@@ -451,7 +415,6 @@
                     { time: "18:00", title: "佐賀牛大餐", cat: "food", note: "來佐賀一定要吃佐賀牛啊！入口即化超幸福～" }
                 ]
             },
-            // Day 11: 2/05
             {
                 date: "05", day: "Thu", fullDate: "2026-02-05",
                 location: "Saga/Home", title: "Day 11: Sweet Home", theme: "charmmy",
@@ -585,7 +548,7 @@
             if (event.time && event.time.includes(':')) {
                 const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
                 const now = new Date().getTime();
-                if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
+                // if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
             }
 
             let noteHtml = '';
