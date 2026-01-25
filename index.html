@@ -202,6 +202,7 @@
             text-decoration: none; border: none; transition: transform 0.1s;
         }
         
+        /* Force 2 per row for specific grids like Moneybox */
         .btn-grid { flex: 1 0 45% !important; }
 
         .btn-nav:active { transform: scale(0.95); }
@@ -220,7 +221,7 @@
         }
         #toast.show { visibility: visible; opacity: 1; bottom: 80px; }
 
-        .dev-btn { display: block; width: 100%; padding: 15px; margin-top: 40px; background: #EEE; color: #AAA; border: none; border-radius: 12px; font-size: 0.8rem; cursor: pointer; }
+        .dev-btn { display: none; } /* HIDDEN */
         .theme-sticker { position: absolute; bottom: 10px; right: 10px; font-size: 4rem; opacity: 0.1; pointer-events: none; }
         .falling-emoji { position: absolute; top: -50px; z-index: 9999; font-size: 2rem; pointer-events: none; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(900px) rotate(360deg); opacity: 0; } }
@@ -247,8 +248,6 @@
             <p style="color:#9E8B85; font-size: 0.9rem; margin-top:5px;">With my 小寶</p>
         </div>
         <div id="itinerary-list"></div>
-        
-        <button class="dev-btn" onclick="revealAll()">[測試用] 解除所有馬賽克</button>
     </div>
 
     <div id="toast">
@@ -266,22 +265,22 @@
                 stay: { name: "Airbnb (海雲台)", address: "부산시 해운대구 해운대해변로298번길 29, A동", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR" },
                 events: [
                     { time: "00:10", title: "抵達桃機", travel: "接駁車", desc: "1/25 23:20 出發", cat: "transport", note: "旅程從這裡開始！出發前先親一個 😘", address: "Taipei Bus Station", country: "TW" },
-                    { time: "06:10", title: "抵達金海機場", travel: "ZE984", ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }, cat: "transport", note: "小寶我們終於要出發哩！！！" },
+                    { time: "06:10", title: "抵達金海機場", travel: "ZE984", ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }, cat: "transport", note: "小寶我們終於要出發哩！！！在飛機上要好好休息！！！" },
                     { time: "07:00", title: "換錢 Moneybox", desc: "金海機場 或 海雲台", cat: "transport", multiLinks: [{ name: "機場 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B3%B5%ED%95%AD%EC%A7%84%EC%9E%85%EB%A1%9C%20165&appname=com.travel.app" }, { name: "海雲台 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EB%B3%80%EB%A1%9C%20287&appname=com.travel.app" }] },
                     { time: "08:10", title: "機場巴士 (往海雲台)", travel: "Bus 1號", desc: "到海雲台溫泉十字路口站", cat: "transport" },
                     { time: "09:20", title: "寄放行李 Airbnb", travel: "A棟 409", address: "부산시 해운대구 해운대해변로298번길 29", country: "KR", cat: "stay", note: "行李交給我！！！" },
                     { time: "09:30", title: "錦繡河豚湯", travel: "早餐", address: "부산 해운대구 중동1로43번길 23", country: "KR", cat: "food", note: "這是河豚！河豚！河豚！我不要再記錯了！！！小寶多吃一點，臉變更Ｑ我要親！！！" },
-                    { time: "10:30", title: "海雲台紀念品 (換Pass)", address: "부산 해운대구 해운대해변로 264, 1층", country: "KR", cat: "sight", note: "謝謝小寶訂ㄉ釜山Pass，要開始到處玩嚕！" },
+                    { time: "10:30", title: "海雲台紀念品 (換Pass)", address: "부산 해운대구 해운대해변로 264, 1층", country: "KR", cat: "sight", note: "謝謝小寶訂ㄉ釜山Pass，要開始到處玩嚕！好期待！" },
                     { time: "11:30", title: "T1 Basecamp", address: "부산해운대구구남로37 마리쏠호텔2층", country: "KR", cat: "sight" },
                     { time: "12:30", title: "天空膠囊列車", travel: "12:00抵達", address: "부산 해운대구 달맞이길62번길 13", country: "KR", cat: "sight", ticket: { type: "ticket", code: "RESERVED", info: "12:30-13:00" }, note: "謝謝小寶訂的膠囊列車！！！一起拍好看ㄉ照片！！！" },
-                    { time: "13:30", title: "青沙浦", travel: "散步", cat: "sight", note: "希望有大蘑菇可以打、、、" },
-                    { time: "14:39", title: "海岸列車 (青沙浦 → 松亭)", address: "부산해운대구청사포로116 청사포정거장", country: "KR", cat: "sight", note: "繼續搭車車～～～" },
+                    { time: "13:30", title: "青沙浦", travel: "散步", cat: "sight", note: "希望有大蘑菇可以打、、、(皮克敏GO!)" },
+                    { time: "14:39", title: "海岸列車 (青沙浦 → 松亭)", address: "부산해운대구청사포로116 청사포정거장", country: "KR", cat: "sight", note: "繼續搭車車～～～小寶累了就靠我的肩膀休息一下！" },
                     { time: "15:30", title: "Skyline Luge 滑車", address: "부산기장군기장읍기장해안로205", country: "KR", cat: "sight", pass: "free", note: "你敢不敢飆到200，尬哩牡尬啦" },
                     { time: "16:30", title: "Coralani 咖啡廳", address: "부산 기장군 기장읍 기장해안로 32", country: "KR", cat: "food" },
                     { time: "17:00", title: "海岸列車 (松亭 → 尾浦)", address: "부산해운대구송정중앙로8번길60", country: "KR", cat: "transport", note: "繼續搭車車～～～" },
-                    { time: "18:30", title: "嚴湧帛豬肉湯飯", address: "부산해운대구구남로24번길39 1층", country: "KR", cat: "food", note: "期待的豬肉湯飯！" },
+                    { time: "18:30", title: "嚴湧帛豬肉湯飯", address: "부산해운대구구남로24번길39 1층", country: "KR", cat: "food", note: "期待的豬肉湯飯！散步完去吃一定更香！" },
                     { time: "20:00", title: "Spa Land 汗蒸幕", address: "부산 해운대구 센텀남대로 35", country: "KR", cat: "sight", pass: "free", note: "一起拍羊角照片！！！" },
-                    { time: "22:30", title: "回 Airbnb", address: "부산시 해운대구 해운대해변로298번길 29, A동", country: "KR", cat: "stay", note: "小寶一整天都辛苦了！！！" }
+                    { time: "22:30", title: "回 Airbnb", address: "부산시 해운대구 해운대해변로298번길 29, A동", country: "KR", cat: "stay", note: "小寶一整天都辛苦了！！！我們好好休息明天繼續玩！！！" }
                 ]
             },
             {
@@ -291,12 +290,12 @@
                 events: [
                     { time: "10:00", title: "Checkout & 寄行李", cat: "stay", note: "行李寄放在Airbnb，我們輕鬆去玩水！" },
                     { time: "10:00", title: "Club D Oasis", address: "부산 해운대구 달맞이길 30", country: "KR", cat: "sight", pass: "free", note: "早上先去泡泡澡放鬆一下！！！" },
-                    { time: "12:30", title: "Solsot 釜飯", address: "부산 기장군 기장읍 기장해안로 147 3층", country: "KR", cat: "food", note: "來吃吃看小寶很推薦的釜飯！" },
+                    { time: "12:30", title: "Solsot 釜飯", address: "부산 기장군 기장읍 기장해안로 147 3층", country: "KR", cat: "food", note: "來吃吃看小寶很推薦的釜飯！一定很好吃！" },
                     { time: "14:00", title: "樂天世界", address: "부산 기장군 기장읍 동부산관광로 42", country: "KR", cat: "sight", pass: "free", note: "我們不玩，只拍！" },
                     { time: "16:30", title: "回海雲台拿行李", travel: "🚕 30min", address: "부산시 해운대구 해운대해변로298번길 29, A동 409호", country: "KR", cat: "transport" },
                     { time: "17:30", title: "移動至釜山站 Airbnb", address: "부산광역시 동구 초량동 970-10", country: "KR", cat: "stay", note: "大遷徙！！！" },
                     { time: "19:00", title: "晚餐 西面烤腸", cat: "food" },
-                    { time: "20:30", title: "西面拍拍貼!", cat: "sight", multiLinks: [{ name: "Photo Lab+", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EB%9E%A9%ED%94%8C%EB%9F%AC%EC%8A%A4%20%EC%84%9C%EB%A9%B4%EC%A0%90&appname=com.travel.app" }, { name: "Analog", url: "nmap://search?query=%EC%96%B4%EB%82%A0%EB%A1%9C%EA%B7%B8%20%EC%84%9C%EB%A9%B4&appname=com.travel.app" }, { name: "Photoism", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EC%9D%B4%EC%A6%98%EB%B0%95%EC%8A%A4%20%EC%84%9C%EB%A9%B4%EC%A0%90&appname=com.travel.app" }], note: "終於可以跟妳一起拍ㄌ！！！" },
+                    { time: "20:30", title: "西面拍拍貼!", cat: "sight", multiLinks: [{ name: "Photo Lab+", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EB%9E%A9%ED%94%8C%EB%9F%AC%EC%8A%A4%20%EC%84%9C%EB%A9%B4%EC%A0%90&appname=com.travel.app" }, { name: "Analog", url: "nmap://search?query=%EC%96%B4%EB%82%A0%EB%A1%9C%EA%B7%B8%20%EC%84%9C%EB%A9%B4&appname=com.travel.app" }, { name: "Photoism", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EC%9D%B4%EC%A6%98%EB%B0%95%EC%8A%A4%20%EC%84%9C%EB%A9%B4%EC%A0%90&appname=com.travel.app" }], note: "好期待跟小寶拍好看的拍貼！！！終於可以跟妳一起拍ㄌ！！！" },
                     { time: "22:00", title: "回釜山站 Airbnb", cat: "stay", note: "來新的地方好好休息！" }
                 ]
             },
@@ -311,7 +310,7 @@
                     { time: "17:00", title: "Yacht Holic 遊艇", travel: "Uber 18分/地鐵45分", address: "부산 해운대구 해운대해변로 84", country: "KR", cat: "sight", pass: "free", note: "最期待的遊艇行程！！！一起看漂亮夜景拍好看的照片！！！謝謝小寶幫忙預定！！！" },
                     { time: "19:30", title: "晚餐 83haechi 廣安里店", address: "부산 수영구 민락수변로 7", country: "KR", cat: "food", note: "一起吃好吃烤肉！下次回臺北請簡正欣烤看誰比較厲害" },
                     { time: "21:00", title: "廣安里海水浴場 / 大橋", address: "부산 수영구 광안해변로 219", country: "KR", cat: "sight", note: "喜歡跟妳散步聊天打蘑菇" },
-                    { time: "21:30", title: "拍貼機 Mono Mansion", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=Mono+Mansion+Gwanganli"}], country: "KR", cat: "sight", note: "繼續拍好看照片！" },
+                    { time: "21:30", title: "拍貼機 Mono Mansion", multiLinks: [{ name: "Naver Map", url: "nmap://search?query=%EB%AA%A8%EB%85%B8%EB%A7%A8%EC%85%98%20%EA%B4%91%EC%95%88%EB%A6%AC%EC%A0%90&appname=com.travel.app"}], country: "KR", cat: "sight", note: "繼續拍好看照片！" },
                     { time: "22:30", title: "回釜山站 Airbnb", address: "부산광역시 동구 초량동 970-10", country: "KR", cat: "stay", note: "小寶一整天又辛苦嚕！！！" }
                 ]
             },
@@ -388,7 +387,7 @@
                     country: "JP"
                 },
                 events: [
-                    { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", address: "日本〒812-0012 Fukuoka, Hakata Ward, 博多駅中央街1−1", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！" },
+                    { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", address: "日本〒812-0012 Fukuoka, Hakata Ward, 博多駅中央街1−1", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('博多駅')}" }] },
                     { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川北8-2", country: "JP", cat: "sight", note: "寄放行李在寄物櫃或遊客中心。這裡空氣超好的～感覺很像童話世界。" },
                     { time: "13:00", title: "午餐 由布院釜飯", multiLinks: [{name: "車站店", url: "https://www.google.com/maps/search/?api=1&query=5-3+Yufuincho+Kawakita,+Yufu,+Oita+879-5114"}, {name: "金鱗湖店", url: "https://www.google.com/maps/search/?api=1&query=1492-1+Yufuincho+Kawakami,+Yufu,+Oita+879-5102"}], country: "JP", cat: "food", note: "這家釜飯也很有名，我們來試試看！" },
                     { time: "14:30", title: "湯之坪街道散策", address: "1505-6 Yufuincho Kawakami, Yufu, Oita 879-5102", country: "JP", cat: "sight", note: "這條街好多好吃的，史努比茶屋也在這！" },
@@ -413,7 +412,7 @@
                     { time: "15:30", title: "搭巴士回博多", travel: "Bus 2hr", cat: "transport", note: "睡個午覺，醒來就到福岡市區囉！" },
                     { time: "17:25", title: "抵達博多站", cat: "transport" },
                     { time: "18:00", title: "PHOENIX 薬院 Check-in", address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013", country: "JP", cat: "stay", note: "接下來兩天住這間，聽說交通很方便喔～" },
-                    { time: "20:00", title: "晚餐 前田屋牛腸鍋", desc: "已預約", address: "日本〒810-0021 Fukuoka, Chuo Ward, Imaizumi, 1 Chome−10−12 Ionビル 2階", country: "JP", cat: "food", note: "福岡必吃牛腸鍋！這家超難訂的，還好有預約！" }
+                    { time: "20:00", title: "晚餐 前田屋牛腸鍋", desc: "已預約", address: "日本〒810-0021 Fukuoka, Chuo Ward, Imaizumi, 1 Chome−10−12 Ionビル", country: "JP", cat: "food", note: "福岡必吃牛腸鍋！這家超難訂的，還好有預約！" }
                 ]
             },
             // Day 9: 2/03 (Updated Day 9)
@@ -446,9 +445,10 @@
                     country: "JP"
                 },
                 events: [
-                    { time: "10:00", title: "門司港懷舊區", address: "日本〒801-0852 Fukuoka, Kitakyushu, Moji Ward, Minatomachi, 4−1", country: "JP", cat: "sight", note: "這裡的建築好復古，很有異國情調耶！" },
+                    { time: "10:00", title: "門司港懷舊區", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Blue Wing Moji')}" }], country: "JP", cat: "sight", note: "這裡的建築好復古，很有異國情調耶！" },
                     { time: "15:00", title: "移動至佐賀", cat: "transport", note: "這是我們旅程的最後一站了，去看看佐賀阿嬤（誤）" },
-                    { time: "16:00", title: "Tapstay Hotel Check-in", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP", cat: "stay", note: "就在車站旁邊，明天去機場超方便！" }
+                    { time: "16:00", title: "Tapstay Hotel Check-in", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP", cat: "stay", note: "就在車站旁邊，明天去機場超方便！" },
+                    { time: "18:00", title: "佐賀牛大餐", cat: "food", note: "來佐賀一定要吃佐賀牛啊！入口即化超幸福～" }
                 ]
             },
             // Day 11: 2/05
@@ -585,7 +585,7 @@
             if (event.time && event.time.includes(':')) {
                 const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
                 const now = new Date().getTime();
-                // if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
+                if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
             }
 
             let noteHtml = '';
