@@ -192,9 +192,11 @@
         .ticket-icon { font-size: 1.2rem; color: var(--daniel-blue); margin-right: 12px; }
         .ticket-code { font-weight: 900; color: var(--daniel-blue); margin-right: 6px; }
 
+        /* Grid Layout for Buttons */
         .action-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
         .btn-nav {
-            flex: 1; min-width: 80px; display: flex; align-items: center; justify-content: center; gap: 4px;
+            flex: 1 0 40%; /* 2 per row force */
+            min-width: 80px; display: flex; align-items: center; justify-content: center; gap: 4px;
             padding: 8px; border-radius: var(--radius-btn); font-size: 0.75rem; font-weight: 700;
             text-decoration: none; border: none; transition: transform 0.1s;
         }
@@ -287,8 +289,7 @@
                             { name: "機場 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=165%20Gonghangjinip-ro%2C%20Gangseo-gu%2C%20Busan" },
                             { name: "海雲台 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EB%B3%80%EB%A1%9C%20287&appname=com.travel.app" },
                             { name: "海雲台 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=287%20Haeundaehaebyeon-ro%2C%20Haeundae-gu%2C%20Busan" }
-                        ],
-                        note: "準備好彈藥，我們要去大吃大喝了！"
+                        ]
                     },
                     { 
                         time: "08:10", title: "機場巴士 (往海雲台)", travel: "Bus 1號", 
@@ -317,8 +318,7 @@
                     { 
                         time: "11:30", title: "T1 Basecamp", travel: "步行5-7分", 
                         address: "부산해운대구구남로37 마리쏠호텔2층", 
-                        country: "KR", cat: "sight", 
-                        note: "T1 加油！去看看有沒有Faker的周邊～" 
+                        country: "KR", cat: "sight" 
                     },
                     { 
                         time: "12:30", title: "天空膠囊列車 (尾浦出發)", travel: "12:00抵達", 
