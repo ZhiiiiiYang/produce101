@@ -192,21 +192,16 @@
         .ticket-icon { font-size: 1.2rem; color: var(--daniel-blue); margin-right: 12px; }
         .ticket-code { font-weight: 900; color: var(--daniel-blue); margin-right: 6px; }
 
-        /* General Action Row (3 buttons per row standard) */
+        /* Grid Layout */
         .action-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
         
         .btn-nav {
-            flex: 1; /* Auto-fill, standard 3 per row */
+            flex: 1; 
             min-width: 80px; display: flex; align-items: center; justify-content: center; gap: 4px;
             padding: 8px; border-radius: var(--radius-btn); font-size: 0.75rem; font-weight: 700;
             text-decoration: none; border: none; transition: transform 0.1s;
         }
         
-        /* Grid class for Moneybox (2 per row forced) */
-        .btn-grid {
-            flex: 1 0 45% !important; /* Force 2 per row */
-        }
-
         .btn-nav:active { transform: scale(0.95); }
         .btn-naver { background: #03C75A; color: white; }
         .btn-uber { background: #000000; color: #FFFFFF; }
@@ -385,7 +380,7 @@
                     }
                 ]
             },
-            // Day 2: 1/27
+            // Day 2: 1/27 (Updated)
             {
                 date: "27", day: "Tue", fullDate: "2026-01-27",
                 location: "Busan", title: "Day 2: 水樂園 & 樂天世界", theme: "kitty",
@@ -396,12 +391,24 @@
                     country: "KR"
                 },
                 events: [
-                    { time: "10:00", title: "Club D Oasis", address: "부산 해운대구 달맞이길 30", country: "KR", cat: "sight", pass: "free", note: "早上先去玩水放鬆一下！" },
-                    { time: "12:00", title: "Solsot 釜飯 (樂天店)", address: "부산 기장군 기장읍 동부산관광로 8", country: "KR", cat: "food" },
-                    { time: "14:00", title: "樂天世界 Lotte World", address: "부산 기장군 기장읍 동부산관광로 42", country: "KR", cat: "sight", pass: "free", note: "穿校服拍照？還是要戴可愛髮箍？" },
-                    { time: "17:00", title: "回海雲台拿行李", travel: "🚕 30min", address: "부산시 해운대구 해운대해변로298번길 29, A동 409호", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "transport", note: "跟海雲台的家說掰掰，我們要移動去市區囉！" },
-                    { time: "18:30", title: "前往釜山站 Airbnb", travel: "🚕 1hr", address: "부산광역시 동구 초량동 970-10", addressEn: "970-10 Choryang-dong, Dong-gu, Busan", country: "KR", cat: "stay" },
-                    { time: "20:00", title: "西面烤腸 / 拍貼機", cat: "food", note: "晚上去吃烤腸，順便拍超可愛的人生四格！" }
+                    { time: "10:00", title: "Checkout & 寄放行李", desc: "11:00 前退房", cat: "stay", note: "行李寄放在Airbnb，我們輕鬆去玩水！" },
+                    { time: "10:00", title: "Club D Oasis", travel: "步行6分", address: "부산 해운대구 달맞이길 30", country: "KR", cat: "sight", pass: "free", note: "早上先去泡泡澡放鬆一下！！！" },
+                    { time: "12:30", title: "午餐 Solsot 釜飯", travel: "公車30分", address: "부산 기장군 기장읍 기장해안로 147 3층", country: "KR", cat: "food", note: "來吃吃看小寶很推薦的釜飯！一定很好吃！" },
+                    { time: "14:00", title: "樂天世界 Lotte World", travel: "步行10分", address: "부산 기장군 기장읍 동부산관광로 42", country: "KR", cat: "sight", pass: "free", note: "我們不玩，只拍！" },
+                    { time: "16:30", title: "回海雲台拿行李", travel: "🚕 30min", address: "부산시 해운대구 해운대해변로298번길 29, A동 409호", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "transport" },
+                    { time: "17:30", title: "移動至釜山站 Airbnb", travel: "公車/地鐵 1hr", address: "부산광역시 동구 초량동 970-10", addressEn: "970-10 Choryang-dong, Dong-gu, Busan", country: "KR", cat: "stay", note: "大遷徙！！！" },
+                    { time: "19:00", title: "晚餐 西面烤腸", travel: "地鐵25分", desc: "現場看候位狀況", cat: "food" },
+                    { 
+                        time: "20:30", title: "西面拍拍貼!", 
+                        cat: "sight", 
+                        multiLinks: [
+                            { name: "Photo Lab+", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EB%9E%A9%ED%94%8C%EB%9F%AC%EC%8A%A4%20%EC%84%9C%EB%A9%B4%EC%A0%90&appname=com.travel.app" },
+                            { name: "Analog", url: "nmap://search?query=%EC%96%B4%EB%82%A0%EB%A1%9C%EA%B7%B8%20%EC%84%9C%EB%A9%B4&appname=com.travel.app" },
+                            { name: "Photoism", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EC%9D%B4%EC%A6%98%EB%B0%95%EC%8A%A4%20%EC%84%9C%EB%A9%B4%EC%A0%90&appname=com.travel.app" }
+                        ],
+                        note: "好期待跟小寶拍好看的拍貼！！！終於可以跟妳一起拍ㄌ！！！" 
+                    },
+                    { time: "22:00", title: "回釜山站 Airbnb", cat: "stay", note: "來新的地方好好休息！" }
                 ]
             },
             // Day 3: 1/28
@@ -427,4 +434,392 @@
                 location: "Busan Port", title: "Day 4: 南浦洞 & 登船", theme: "daniel",
                 stay: {
                     name: "新山茶花號 (船上)",
-                    address: "부산 동
+                    address: "부산 동구 충장대로 206",
+                    addressEn: "206 Chungjang-daero, Dong-gu, Busan",
+                    country: "KR"
+                },
+                events: [
+                    { time: "10:00", title: "Busan Travel Lounge", desc: "免費寄放行李", address: "부산 동구 중앙대로 206", country: "KR", cat: "transport", note: "先把行李解決掉，最後一天也要玩好玩滿！" },
+                    { time: "11:00", title: "白淺灘文化村 / 胡同醬蟹", cat: "food", note: "吃醬蟹要記得先吃驅蟲藥喔 😂" },
+                    { time: "14:00", title: "南浦洞 / BIFF廣場", cat: "sight", note: "去買妳想吃的元祖糖餅，再去Artbox逛逛。" },
+                    { time: "16:00", title: "樂天超市 光復店", cat: "food", note: "最後衝刺！買零食帶去船上吃！" },
+                    { time: "17:00", title: "抵達釜山港報到", travel: "3F大廳", address: "부산 동구 충장대로 206", country: "KR", cat: "transport", note: "記得填寫日本入境卡，我們要去睡船上囉 🚢" },
+                    { time: "20:00", title: "新山茶花號 啟航", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 → 07:30" } }
+                ]
+            },
+            // Day 5: 1/30
+            {
+                date: "30", day: "Fri", fullDate: "2026-01-30",
+                location: "Fukuoka", title: "Day 5: 早安 Daniel", theme: "daniel",
+                stay: {
+                    name: "LIFE FIELD #710",
+                    address: "福岡県福岡市博多区銀天町2-2-21",
+                    addressEn: "2-chōme-2-21 Gintenmachi, Hakata Ward, Fukuoka",
+                    country: "JP"
+                },
+                events: [
+                    { time: "07:30", title: "抵達博多港", travel: "🚌 20min", address: "福岡市博多区沖浜町14-1", country: "JP", cat: "transport", note: "小寶早安！睜開眼我們就在日本啦🇯🇵" },
+                    { time: "09:00", title: "博多站 / 飯店寄放行李", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "transport", note: "先去放行李，這間飯店在銀天町，感覺附近很多好吃的！" },
+                    { time: "16:00", title: "LIFE FIELD Check-in", cat: "stay", note: "這兩天我們住這，可以好好休息一下～" }
+                ]
+            },
+            // Day 6: 1/31 (Fukuoka Free Day)
+            {
+                date: "31", day: "Sat", fullDate: "2026-01-31",
+                location: "Fukuoka", title: "Day 6: 福岡散策", theme: "daniel",
+                stay: {
+                    name: "LIFE FIELD #710",
+                    address: "福岡県福岡市博多区銀天町2-2-21",
+                    addressEn: "2-chōme-2-21 Gintenmachi, Hakata Ward, Fukuoka",
+                    country: "JP"
+                },
+                events: [
+                    { time: "10:00", title: "市區逛街 / 咖啡廳", cat: "sight", note: "今天沒有鬧鐘，睡飽飽再出門逛街！" },
+                    { time: "18:00", title: "天神屋台 / 美食", cat: "food", note: "晚上帶妳去吃屋台，體驗一下日本路邊攤的氣氛！" }
+                ]
+            },
+            // Day 7: 2/01 (To Yufuin)
+            {
+                date: "01", day: "Sun", fullDate: "2026-02-01",
+                location: "Yufuin", title: "Day 7: 由布院之森", theme: "charmmy",
+                stay: {
+                    name: "由布院獨棟 (Yufuin)",
+                    address: "大分県由布市湯布院町川上1777-1",
+                    addressEn: "1777-1 Yufuinchō Kawakami, Yufu, Oita",
+                    country: "JP"
+                },
+                events: [
+                    { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！" },
+                    { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川上1777-1", country: "JP", cat: "sight", note: "這裡空氣超好的～感覺很像童話世界。" },
+                    { time: "15:00", title: "Check-in 享受溫泉", cat: "stay", note: "今晚住獨棟的，一定要跟妳一起泡溫泉，我要幫妳刷背背 ❤️" }
+                ]
+            },
+            // Day 8: 2/02 (Back to Fukuoka)
+            {
+                date: "02", day: "Mon", fullDate: "2026-02-02",
+                location: "Fukuoka", title: "Day 8: 金鱗湖晨霧", theme: "charmmy",
+                stay: {
+                    name: "PHOENIX 薬院",
+                    address: "福岡市中央区大宮1-6-5",
+                    addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
+                    country: "JP"
+                },
+                events: [
+                    { time: "07:00", title: "金鱗湖晨霧", cat: "sight", note: "雖然有點早，但聽說晨霧很美，我們去散步一下？" },
+                    { time: "12:00", title: "返回福岡市區", cat: "transport", note: "跟可愛的由布院說掰掰，回市區繼續吃好料！" },
+                    { time: "16:00", title: "PHOENIX 薬院 Check-in", address: "福岡市中央区大宮1-6-5", country: "JP", cat: "stay", note: "接下來兩天住這間，聽說交通很方便喔～" }
+                ]
+            },
+            // Day 9: 2/03 (Fukuoka)
+            {
+                date: "03", day: "Tue", fullDate: "2026-02-03",
+                location: "Fukuoka", title: "Day 9: 藥院咖啡巡禮", theme: "charmmy",
+                stay: {
+                    name: "PHOENIX 薬院",
+                    address: "福岡市中央区大宮1-6-5",
+                    addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
+                    country: "JP"
+                },
+                events: [
+                    { time: "10:00", title: "藥院周邊散策", cat: "food", note: "這一區有很多厲害的咖啡廳，帶妳去拍網美照！" },
+                    { time: "18:00", title: "最後的福岡晚餐", cat: "food", note: "想吃燒肉還是壽司？今天都依妳！" }
+                ]
+            },
+            // Day 10: 2/04 (Move to Saga)
+            {
+                date: "04", day: "Wed", fullDate: "2026-02-04",
+                location: "Saga", title: "Day 10: 前往佐賀", theme: "charmmy",
+                stay: {
+                    name: "Tapstay Hotel",
+                    address: "佐賀県佐賀市駅前中央1-2-25",
+                    addressEn: "1 Chome-2-25 Ekimae Chuo, Saga",
+                    country: "JP"
+                },
+                events: [
+                    { time: "10:00", title: "移動至佐賀", cat: "transport", note: "這是我們旅程的最後一站了，去看看佐賀阿嬤（誤）" },
+                    { time: "15:00", title: "Tapstay Hotel Check-in", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP", cat: "stay", note: "就在車站旁邊，明天去機場超方便！" },
+                    { time: "18:00", title: "佐賀牛大餐", cat: "food", note: "來佐賀一定要吃佐賀牛啊！入口即化超幸福～" }
+                ]
+            },
+            // Day 11: 2/05
+            {
+                date: "05", day: "Thu", fullDate: "2026-02-05",
+                location: "Saga/Home", title: "Day 11: Sweet Home", theme: "charmmy",
+                stay: {
+                    name: "甜蜜的家",
+                    address: "Taiwan",
+                    addressEn: "Taiwan",
+                    country: "TW"
+                },
+                events: [
+                    { time: "09:30", title: "前往佐賀機場 (HSG)", address: "佐賀県佐賀市川副町大字犬井道947", country: "JP", cat: "transport", note: "行李箱是不是滿到蓋不起來了？哈哈。" },
+                    { time: "12:15", title: "虎航 IT247 起飛", cat: "transport", ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE" }, note: "雖然旅程結束了，但跟小寶在一起，每天都是最棒的旅行！愛妳 ❤️" }
+                ]
+            }
+        ];
+
+        // --- Core Functions ---
+        
+        window.onscroll = function() {
+            let container = document.getElementById('app'); 
+            if (window.innerWidth >= 600) container = document.getElementById('app');
+            else container = document.documentElement;
+
+            let winScroll = container.scrollTop || document.body.scrollTop || document.documentElement.scrollTop;
+            let height = container.scrollHeight - container.clientHeight;
+            
+            if (window.innerWidth >= 600) {
+                 winScroll = document.getElementById('app').scrollTop;
+                 height = document.getElementById('app').scrollHeight - document.getElementById('app').clientHeight;
+            }
+            
+            let scrolled = (winScroll / height) * 100;
+            if(scrolled > 100) scrolled = 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+            document.getElementById("runner-icon").innerHTML = "🐱"; 
+        };
+        
+        document.getElementById('app').addEventListener('scroll', window.onscroll);
+
+        let isShowingDays = false;
+        function toggleDays() {
+            const el = document.getElementById('days-counter');
+            if (!isShowingDays) {
+                const start = new Date('2025-10-14');
+                const now = new Date();
+                const diff = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+                el.innerText = `在一起 ${diff} 天 ❤️`;
+                el.style.background = "#FFF0F5";
+            } else {
+                el.innerText = "2026/01/26 - 02/05";
+                el.style.background = "white";
+            }
+            isShowingDays = !isShowingDays;
+        }
+
+        function makeRain(char) {
+            const container = document.getElementById('app');
+            for (let i = 0; i < 15; i++) {
+                const el = document.createElement('div');
+                el.innerText = char;
+                el.className = 'falling-emoji';
+                el.style.left = (Math.random() * 80 + 10) + '%';
+                el.style.animationDuration = (Math.random() * 2 + 1.5) + 's'; 
+                container.appendChild(el);
+                setTimeout(() => el.remove(), 3500);
+            }
+        }
+
+        function renderApp() {
+            const container = document.getElementById('itinerary-list');
+            let html = '';
+
+            itinerary.forEach((day, index) => {
+                let sticker = '';
+                if(day.theme === 'kitty') sticker = '🎀';
+                if(day.theme === 'daniel') sticker = '🎩';
+                if(day.theme === 'charmmy') sticker = '🗝️';
+
+                html += `
+                <div class="card" id="card-${index}">
+                    <div class="theme-sticker">${sticker}</div>
+                    <div class="day-header" onclick="toggleDay(${index})">
+                        <div class="date-box">
+                            <div class="date-num">${day.date}</div>
+                            <div class="date-day">${day.day}</div>
+                        </div>
+                        <div class="day-info">
+                            <div class="day-title">${day.title}</div>
+                            <div class="day-loc"><i class="fa-solid fa-location-dot" style="color:var(--kitty-pink)"></i> ${day.location}</div>
+                        </div>
+                        <i id="arrow-${index}" class="fa-solid fa-chevron-down" style="color:var(--kitty-pink); transition:0.3s"></i>
+                    </div>
+
+                    <div id="timeline-${index}" class="timeline">
+                        ${day.events.map((event) => renderEvent(event, day.fullDate)).join('')}
+                        ${renderStayFooter(day.stay)}
+                    </div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function renderEvent(event, dateStr) {
+            let displayIcon = '📍';
+            if (event.cat === 'transport') displayIcon = '🚌';
+            if (event.cat === 'food') displayIcon = '🍰';
+            if (event.cat === 'stay') displayIcon = '🏰';
+            if (event.cat === 'sight') displayIcon = '🎡';
+            if (event.pass) displayIcon = '🎟️';
+
+            let passBadge = '';
+            if (event.pass === 'start') passBadge = '<span class="pass-badge">Pass Start</span>';
+            if (event.pass === 'free') passBadge = '<span class="pass-badge pass-free">Free</span>';
+
+            let ticketHtml = '';
+            if (event.ticket) {
+                let icon = 'fa-ticket';
+                if (event.ticket.type === 'flight') icon = 'fa-plane-departure';
+                if (event.ticket.type === 'train') icon = 'fa-train-subway';
+                if (event.ticket.type === 'ferry') icon = 'fa-anchor';
+                
+                ticketHtml = `
+                    <div class="ticket-block">
+                        <i class="fa-solid ${icon} ticket-icon"></i>
+                        <div>
+                            <span class="ticket-code">${event.ticket.code}</span>
+                            <span>${event.ticket.info}</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Mosaic Logic
+            let blurClass = 'blurred';
+            // Simple check for demo purposes
+            if (event.time && event.time.includes(':')) {
+                const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
+                const now = new Date().getTime();
+                // if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
+            }
+
+            let noteHtml = '';
+            if (event.note) {
+                noteHtml = `
+                    <div class="love-note ${blurClass}">
+                        <i class="fa-solid fa-heart"></i>
+                        <span class="note-content">${event.note}</span>
+                        <i class="fa-solid fa-lock lock-icon"></i>
+                    </div>
+                `;
+            }
+
+            let navButtons = '';
+            if (event.multiLinks) {
+                // Special case for Moneybox & Photo Booths
+                navButtons = event.multiLinks.map(link => {
+                    let cls = 'btn-google';
+                    if(link.name.includes('Naver') || link.name.includes('Photo') || link.name.includes('Analog')) cls = 'btn-naver';
+                    if(link.name.includes('Uber')) cls = 'btn-uber';
+                    return `<a href="${link.url}" class="btn-nav btn-grid ${cls}">${link.name}</a>`;
+                }).join('');
+            } else if (event.address) {
+                const encodedAddr = encodeURIComponent(event.address);
+                const encodedAddrEn = encodeURIComponent(event.addressEn || event.address);
+                
+                navButtons += `<button class="btn-nav btn-copy" onclick="copyAddr('${event.address}')"><i class="fa-regular fa-copy"></i></button>`;
+
+                if (event.country === 'KR') {
+                    const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
+                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                    navButtons += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
+                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+                } else if (event.country === 'JP') {
+                    const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
+                    const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                    navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
+                    navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+                } else if (event.country === 'TW') {
+                    const googleUrl = `https://www.google.com/maps/search/?api=1&query=Taipei+Bus+Station`;
+                    navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
+                }
+            }
+
+            let travelHtml = event.travel ? `<span class="travel-tag">${event.travel}</span>` : '';
+            let descHtml = event.desc ? `<div style="font-size:0.8rem; color:#888; margin-bottom:4px;">${event.desc}</div>` : '';
+
+            return `
+                <div class="event-node">
+                    <div class="event-icon">${displayIcon}</div>
+                    <div class="event-content">
+                        <div class="event-time">${event.time} ${passBadge}</div>
+                        <div class="event-title">${event.title} ${travelHtml}</div>
+                        ${descHtml}
+                        ${noteHtml}
+                        ${ticketHtml}
+                        ${navButtons ? `<div class="action-row light-row">${navButtons}</div>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStayFooter(stay) {
+            if (!stay) return '';
+            
+            const encodedAddr = encodeURIComponent(stay.address);
+            const encodedAddrEn = encodeURIComponent(stay.addressEn || stay.address);
+            
+            let btns = `<button class="btn-nav btn-copy" onclick="copyAddr('${stay.address}')"><i class="fa-regular fa-copy"></i></button>`;
+            
+            if (stay.country === 'KR') {
+                const naverUrl = `nmap://search?query=${encodedAddr}&appname=com.travel.app`;
+                const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                btns += `<a href="${naverUrl}" class="btn-nav btn-naver"><i class="fa-solid fa-map"></i> Naver</a>`;
+                btns += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+            } else if (stay.country === 'JP') {
+                const googleUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddr}`;
+                const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
+                btns += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
+                btns += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+            } else {
+                 btns = '';
+            }
+
+            return `
+                <div class="stay-footer">
+                    <div class="stay-label"><i class="fa-solid fa-moon"></i> TONIGHT</div>
+                    <div class="stay-name">${stay.name}</div>
+                    <div class="action-row" style="margin-top:0">
+                        ${btns}
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleDay(index) {
+            const tl = document.getElementById(`timeline-${index}`);
+            const ar = document.getElementById(`arrow-${index}`);
+            const cd = document.getElementById(`card-${index}`);
+            
+            const isOpening = !tl.classList.contains('open');
+
+            if (isOpening) {
+                tl.classList.add('open');
+                cd.classList.add('active-card');
+                ar.style.transform = 'rotate(180deg)';
+                setTimeout(() => cd.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
+            } else {
+                tl.classList.remove('open');
+                cd.classList.remove('active-card');
+                ar.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function copyAddr(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const x = document.getElementById("toast");
+                x.className = "show";
+                setTimeout(() => x.className = x.className.replace("show", ""), 2000);
+            });
+        }
+
+        function revealAll() {
+            document.querySelectorAll('.love-note').forEach(el => {
+                el.classList.remove('blurred');
+            });
+            alert('所有馬賽克已解除 (預覽模式)');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderApp();
+            const today = new Date().toISOString().split('T')[0];
+            const todayIndex = itinerary.findIndex(day => day.fullDate === today);
+            if (todayIndex !== -1) toggleDay(todayIndex);
+            else toggleDay(0);
+        });
+
+    </script>
+</body>
+</html>
