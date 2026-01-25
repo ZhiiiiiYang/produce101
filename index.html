@@ -202,7 +202,6 @@
             text-decoration: none; border: none; transition: transform 0.1s;
         }
         
-        /* Force 2 per row for specific grids like Moneybox */
         .btn-grid { flex: 1 0 45% !important; }
 
         .btn-nav:active { transform: scale(0.95); }
@@ -260,7 +259,7 @@
     <script>
         // Data Structure
         const itinerary = [
-            // ... (Day 1-4 省略, 保持原樣) ...
+            // Day 1: 1/26
             {
                 date: "26", day: "Mon", fullDate: "2026-01-26",
                 location: "Busan", title: "Day 1: 飛往釜山 & 海雲台", theme: "kitty",
@@ -308,11 +307,11 @@
                 events: [
                     { time: "10:30", title: "西面商圈 / 樂天百貨", address: "부산 부산진구 가야대로 772", country: "KR", cat: "sight", note: "血拼囉！！！大買特買！！！" },
                     { time: "12:30", title: "Shake Shack (西面店)", address: "부산 부산진구 중앙대로 672", country: "KR", cat: "food", note: "這也是小寶推薦的店！！！一定好ㄔ！！！" },
-                    { time: "14:30", title: "田浦洞咖啡街", address: "부산 부산진구 전포동 686-4", country: "KR", cat: "sight" },
+                    { time: "14:30", title: "田浦洞商圈", address: "부산 부산진구 전포동 686-4", country: "KR", cat: "sight" },
                     { time: "17:00", title: "Yacht Holic 遊艇", travel: "Uber 18分/地鐵45分", address: "부산 해운대구 해운대해변로 84", country: "KR", cat: "sight", pass: "free", note: "最期待的遊艇行程！！！一起看漂亮夜景拍好看的照片！！！謝謝小寶幫忙預定！！！" },
                     { time: "19:30", title: "晚餐 83haechi 廣安里店", address: "부산 수영구 민락수변로 7", country: "KR", cat: "food", note: "一起吃好吃烤肉！下次回臺北請簡正欣烤看誰比較厲害" },
                     { time: "21:00", title: "廣安里海水浴場 / 大橋", address: "부산 수영구 광안해변로 219", country: "KR", cat: "sight", note: "喜歡跟妳散步聊天打蘑菇" },
-                    { time: "21:30", title: "拍貼機 Mono Mansion", address: "부산 수영구 광안해변로 179", country: "KR", cat: "sight", note: "繼續拍好看照片！" },
+                    { time: "21:30", title: "拍貼機 Mono Mansion", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=Mono+Mansion+Gwanganli"}], country: "KR", cat: "sight", note: "繼續拍好看照片！" },
                     { time: "22:30", title: "回釜山站 Airbnb", address: "부산광역시 동구 초량동 970-10", country: "KR", cat: "stay", note: "小寶一整天又辛苦嚕！！！" }
                 ]
             },
@@ -322,7 +321,7 @@
                 stay: { name: "新山茶花號 (船上)", address: "부산 동구 충장대로 206", addressEn: "Busan Port", country: "KR" },
                 events: [
                     { time: "11:00", title: "Check out 睡飽飽", cat: "stay", note: "今天可以睡飽一點！！！喜歡跟妳睡覺！！！" },
-                    { time: "11:30", title: "Busan Travel Lounge", desc: "寄放行李", address: "부산 동구 중앙대로 206", country: "KR", cat: "transport" },
+                    { time: "11:30", title: "Busan Travel Lounge", desc: "寄放行李", address: "부산 동구 대영로 243번길 38", country: "KR", cat: "transport" },
                     { time: "12:30", title: "白淺灘文化村", address: "부산 영도구 영선동4가 605-3", country: "KR", cat: "sight", note: "散步聊天打蘑菇～～～" },
                     { time: "14:00", title: "午餐 胡同醬蟹", address: "부산 동구 중앙대로226번길 3-6", country: "KR", cat: "food", note: "我超期待的醬蟹！！！希望肚子可以撐住～～～ (先吃驅蟲藥)" },
                     { time: "15:30", title: "南浦洞 / 光復路時尚街", address: "부산 중구 광복중앙로 2", country: "KR", cat: "sight", note: "一起買好看衣服！" },
@@ -347,16 +346,16 @@
                 events: [
                     { time: "07:30", title: "抵達博多港", travel: "Bus 20min", address: "福岡市博多区沖浜町14-1", country: "JP", cat: "transport", note: "小寶早安！睜開眼我們就在日本啦🇯🇵" },
                     { time: "08:30", title: "[方案 A] 先衝民宿 (南福岡)", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "transport", note: "先去放行李，再輕鬆去太宰府！" },
-                    { time: "08:30", title: "[方案 B] 寄放天神 (置物櫃)", address: "福岡市中央区天神2丁目", country: "JP", cat: "transport", note: "寄在天神，逛街完直接拿，不用跑來跑去！" },
+                    { time: "08:30", title: "[方案 B] 寄放天神 (車站)", address: "天神 ２-1004 天神 中央区 福岡市 福岡県 810-0001", country: "JP", cat: "transport", note: "寄在天神，逛街完直接拿，不用跑來跑去！" },
                     { time: "09:30", title: "前往太宰府", travel: "西鐵電車", address: "太宰府市宰府4丁目7番1号", country: "JP", cat: "sight", note: "聽說這裡求學業很靈，但我只想求我們一直在一起！！！" },
                     { time: "10:00", title: "太宰府表參道 / 星巴克", address: "太宰府市宰府3-2-43", country: "JP", cat: "food", note: "這間星巴克超特別！！！要在這裡幫小寶拍美照！！！" },
-                    { time: "11:00", title: "太宰府天滿宮 / 天開稻荷", address: "太宰府市宰府4丁目7番1号", country: "JP", cat: "sight" },
+                    { time: "11:00", title: "太宰府天滿宮 / 天開稻荷", address: "日本〒818-0117 Fukuoka, Dazaifu, Saifu, 4 Chome−7−1", country: "JP", cat: "sight" },
                     { time: "12:30", title: "一蘭拉麵 (太宰府參道店)", address: "太宰府市宰府2-6-2", country: "JP", cat: "food", note: "吃吃看方碗的拉麵！！！聽說湯頭不一樣？" },
                     { time: "14:00", title: "灶門神社", travel: "公車", address: "太宰府市大字内山883", country: "JP", cat: "sight", note: "這就是炭治郎的神社嗎？！" },
-                    { time: "15:30", title: "回天神 / Full Full 麵包", address: "福岡市中央区天神1-10-13", country: "JP", cat: "food", note: "明太子法國麵包！！！好期待！！！" },
+                    { time: "15:30", title: "回天神 / Full Full 麵包", multiLinks: [{name: "博多店", url: "https://www.google.com/maps/search/?api=1&query=9-3+Gionmachi,+Hakata+Ward,+Fukuoka,+812-0038"}, {name: "天神店", url: "https://www.google.com/maps/search/?api=1&query=3-chōme-3-5+Tenjin,+Chuo+Ward,+Fukuoka,+810-0001"}], country: "JP", cat: "food", note: "明太子法國麵包！！！好期待！！！" },
                     { time: "16:00", title: "天神商圈大爆買", desc: "mina/地下街/PARCO", address: "福岡市中央区天神4-3-8", country: "JP", cat: "sight", note: "小寶的三麗鷗天堂！！！買爆！！！" },
-                    { time: "18:00", title: "Pixel Tree / 警固神社", address: "福岡市中央区天神1丁目", country: "JP", cat: "sight" },
-                    { time: "19:30", title: "晚餐 麵屋兼虎", address: "福岡市中央区天神2-11-1", country: "JP", cat: "food", note: "這家沾麵超有名！！！排隊也要吃！！！" },
+                    { time: "18:00", title: "Pixel Tree / 警固神社", multiLinks: [{name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=One+Fukuoka+Bldg."}], country: "JP", cat: "sight" },
+                    { time: "19:30", title: "晚餐 麵屋兼虎", multiLinks: [{name: "PARCO店", url: "https://www.google.com/maps/search/?api=1&query=2+Chome−11−1+Tenjin,+Chuo+Ward,+Fukuoka"}, {name: "天神南店", url: "https://www.google.com/maps/search/?api=1&query=4+Chome−9−18+Watanabedori,+Chuo+Ward,+Fukuoka"}], country: "JP", cat: "food", note: "這家沾麵超有名！！！排隊也要吃！！！" },
                     { time: "21:30", title: "回飯店 LIFE FIELD #710", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "stay", note: "終於可以休息了～今天走好多路，辛苦小寶了！" }
                 ]
             },
@@ -372,8 +371,8 @@
                 },
                 events: [
                     { time: "09:00", title: "大濠公園", address: "福岡市中央区大濠公園1", country: "JP", cat: "sight", note: "早起來公園散步，呼吸新鮮空氣！" },
-                    { time: "10:00", title: "FUK COFFEE Parks", address: "福岡市中央区荒戸1-4-1", country: "JP", cat: "food", note: "來吃這家的布丁，聽說超好吃的！" },
-                    { time: "11:00", title: "Sanrio Dream!ng Park", address: "福岡市中央区地行浜2-2-6", country: "JP", cat: "sight", note: "重點行程！！！三麗鷗我們來了！！！" },
+                    { time: "10:00", title: "FUK COFFEE Parks", address: "1 Chome-4-20 Arato, Chuo Ward, Fukuoka, 810-0062", country: "JP", cat: "food", note: "來吃這家的布丁，聽說超好吃的！" },
+                    { time: "11:00", title: "Sanrio Dream!ng Park", address: "日本〒810-0065 Fukuoka, Chuo Ward, Jigyohama, 2 Chome−2−6 BOSS E・ZO FUKUOKA 7F", country: "JP", cat: "sight", note: "重點行程！！！三麗鷗我們來了！！！" },
                     { time: "15:00", title: "福岡巨蛋 SMTOWN", address: "福岡市中央区地行浜2-2-2", country: "JP", cat: "sight", note: "看到 Oppa 了！！！啊啊啊啊！！！" },
                     { time: "21:00", title: "回飯店休息", cat: "stay", note: "今天太High了，晚上要好好睡一覺！" }
                 ]
@@ -389,10 +388,10 @@
                     country: "JP"
                 },
                 events: [
-                    { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！" },
-                    { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川北8-2", country: "JP", cat: "sight", note: "這裡空氣超好的～感覺很像童話世界。" },
-                    { time: "13:00", title: "午餐 由布院站前釜飯", address: "大分県由布市湯布院町川北5-1", country: "JP", cat: "food", note: "這家釜飯也很有名，我們來試試看！" },
-                    { time: "14:30", title: "湯之坪街道散策", address: "大分県由布市湯布院町川上", country: "JP", cat: "sight", note: "這條街好多好吃的，史努比茶屋也在這！" },
+                    { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", address: "日本〒812-0012 Fukuoka, Hakata Ward, 博多駅中央街1−1", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！" },
+                    { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川北8-2", country: "JP", cat: "sight", note: "寄放行李在寄物櫃或遊客中心。這裡空氣超好的～感覺很像童話世界。" },
+                    { time: "13:00", title: "午餐 由布院釜飯", multiLinks: [{name: "車站店", url: "https://www.google.com/maps/search/?api=1&query=5-3+Yufuincho+Kawakita,+Yufu,+Oita+879-5114"}, {name: "金鱗湖店", url: "https://www.google.com/maps/search/?api=1&query=1492-1+Yufuincho+Kawakami,+Yufu,+Oita+879-5102"}], country: "JP", cat: "food", note: "這家釜飯也很有名，我們來試試看！" },
+                    { time: "14:30", title: "湯之坪街道散策", address: "1505-6 Yufuincho Kawakami, Yufu, Oita 879-5102", country: "JP", cat: "sight", note: "這條街好多好吃的，史努比茶屋也在這！" },
                     { time: "17:00", title: "A-coop 超市採買", address: "大分県由布市湯布院町川上3028", country: "JP", cat: "food", note: "買點零食飲料，晚上在民宿開趴！" },
                     { time: "18:00", title: "Check-in 享受溫泉", cat: "stay", note: "今晚住獨棟的，一定要跟妳一起泡溫泉，我要幫妳刷背背 ❤️" }
                 ]
@@ -403,18 +402,18 @@
                 location: "Fukuoka", title: "Day 8: 金鱗湖晨霧", theme: "charmmy",
                 stay: {
                     name: "PHOENIX 薬院",
-                    address: "福岡市中央区大宮1-6-5",
+                    address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013",
                     addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
                     country: "JP"
                 },
                 events: [
-                    { time: "06:30", title: "金鱗湖晨霧", address: "大分県由布市湯布院町川上", country: "JP", cat: "sight", note: "早起是值得的！這景象真的像仙境一樣！" },
-                    { time: "09:00", title: "天祖神社 & 花卉村", address: "大分県由布市湯布院町川上", country: "JP", cat: "sight", note: "去吉卜力風格的小村莊拍照！" },
-                    { time: "12:00", title: "午餐 拉麵侍", address: "大分県由布市湯布院町川上", country: "JP", cat: "food", note: "離開前吃碗拉麵暖暖身子！" },
+                    { time: "06:30", title: "金鱗湖晨霧", address: "1561-1 Yufuincho Kawakami, Yufu, Oita 879-5102", country: "JP", cat: "sight", note: "早起是值得的！這景象真的像仙境一樣！" },
+                    { time: "09:00", title: "天祖神社 & 花卉村", multiLinks: [{name: "天祖神社", url: "https://www.google.com/maps/search/?api=1&query=1750+Yufuincho+Kawakami,+Yufu,+Oita+879-5102"}, {name: "花卉村", url: "https://www.google.com/maps/search/?api=1&query=湯布院花卉村1503-3+Yufuincho+Kawakami,+Yufu,+Oita+879-5102"}], country: "JP", cat: "sight", note: "去吉卜力風格的小村莊拍照！" },
+                    { time: "12:00", title: "午餐 拉麵侍", address: "日本〒879-5102 Oita, Yufu, Yufuincho Kawakami, 3056-1 モトヤマビル 1F", country: "JP", cat: "food", note: "離開前吃碗拉麵暖暖身子！" },
                     { time: "15:30", title: "搭巴士回博多", travel: "Bus 2hr", cat: "transport", note: "睡個午覺，醒來就到福岡市區囉！" },
                     { time: "17:25", title: "抵達博多站", cat: "transport" },
-                    { time: "18:00", title: "PHOENIX 薬院 Check-in", address: "福岡市中央区大宮1-6-5", country: "JP", cat: "stay", note: "接下來兩天住這間，聽說交通很方便喔～" },
-                    { time: "20:00", title: "晚餐 前田屋牛腸鍋", desc: "已預約 今泉店", address: "福岡市中央区今泉1-13-21", country: "JP", cat: "food", note: "福岡必吃牛腸鍋！這家超難訂的，還好有預約！" }
+                    { time: "18:00", title: "PHOENIX 薬院 Check-in", address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013", country: "JP", cat: "stay", note: "接下來兩天住這間，聽說交通很方便喔～" },
+                    { time: "20:00", title: "晚餐 前田屋牛腸鍋", desc: "已預約", address: "日本〒810-0021 Fukuoka, Chuo Ward, Imaizumi, 1 Chome−10−12 Ionビル 2階", country: "JP", cat: "food", note: "福岡必吃牛腸鍋！這家超難訂的，還好有預約！" }
                 ]
             },
             // Day 9: 2/03 (Updated Day 9)
@@ -423,16 +422,16 @@
                 location: "Fukuoka", title: "Day 9: 節分祭 & 運河城", theme: "charmmy",
                 stay: {
                     name: "PHOENIX 薬院",
-                    address: "福岡市中央区大宮1-6-5",
+                    address: "Omiya-1 Chome-6 Chuo Ward PHOENIX薬院, 福岡市, Fukuoka 810-0013",
                     addressEn: "1-chōme-6-5 Ōmiya, Chuo Ward, Fukuoka",
                     country: "JP"
                 },
                 events: [
-                    { time: "09:00", title: "櫛田神社 節分大祭", address: "福岡市博多区上川端町1-41", country: "JP", cat: "sight", note: "剛好遇到節分祭！一起去接福豆，祈求今年順順利利！" },
-                    { time: "11:00", title: "川端通商店街", address: "福岡市博多区上川端町", country: "JP", cat: "sight" },
-                    { time: "12:00", title: "午餐 燒肉處石原牛", address: "福岡市博多区博多駅前", country: "JP", cat: "food", note: "中午吃燒肉定食，划算又好吃！" },
-                    { time: "14:00", title: "博多運河城", desc: "水舞秀/三麗鷗/鋼彈", address: "福岡市博多区住吉1-2", country: "JP", cat: "sight", note: "這裡超大超好逛，還有妳最愛的三麗鷗！" },
-                    { time: "17:00", title: "住吉神社", address: "福岡市博多区住吉3-1-51", country: "JP", cat: "sight" },
+                    { time: "09:00", title: "櫛田神社 節分大祭", desc: "09:00 大祭, 10:00-16:00 撒豆(每30分), 10:00-18:00 厄除祈願", address: "福岡市博多区上川端町1-41", country: "JP", cat: "sight", note: "剛好遇到節分祭！一起去接福豆，祈求今年順順利利！" },
+                    { time: "11:00", title: "川端通商店街", address: "福岡県福岡市博多区上川端町10", country: "JP", cat: "sight" },
+                    { time: "12:00", title: "午餐 燒肉處石原牛", address: "日本〒812-0027 Fukuoka, Hakata Ward, Shimokawabatamachi, 3−1 博多リバレイン 1F", country: "JP", cat: "food", note: "中午吃燒肉定食，划算又好吃！" },
+                    { time: "14:00", title: "博多運河城", desc: "水舞秀: 白天整點/半點, 晚間18:00-22:00. 鋼彈秀: 18:30, 19:30, 21:00", address: "1 Chome-2 Sumiyoshi, Hakata Ward, Fukuoka, 812-0018", country: "JP", cat: "sight", note: "這裡超大超好逛，還有妳最愛的三麗鷗！" },
+                    { time: "17:00", title: "住吉神社", address: "3 Chome-1-51 Sumiyoshi, Hakata Ward, Fukuoka, 812-0018", country: "JP", cat: "sight" },
                     { time: "19:00", title: "晚餐 自由覓食", cat: "food", note: "看想吃什麼，我們隨意逛隨意吃！" }
                 ]
             },
@@ -447,22 +446,24 @@
                     country: "JP"
                 },
                 events: [
-                    { time: "10:00", title: "門司港懷舊區", address: "北九州市門司区港町", country: "JP", cat: "sight", note: "這裡的建築好復古，很有異國情調耶！" },
+                    { time: "10:00", title: "門司港懷舊區", address: "日本〒801-0852 Fukuoka, Kitakyushu, Moji Ward, Minatomachi, 4−1", country: "JP", cat: "sight", note: "這裡的建築好復古，很有異國情調耶！" },
                     { time: "15:00", title: "移動至佐賀", cat: "transport", note: "這是我們旅程的最後一站了，去看看佐賀阿嬤（誤）" },
-                    { time: "16:00", title: "Tapstay Hotel Check-in", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP", cat: "stay", note: "就在車站旁邊，明天去機場超方便！" },
-                    { time: "18:00", title: "佐賀牛大餐", cat: "food", note: "來佐賀一定要吃佐賀牛啊！入口即化超幸福～" }
+                    { time: "16:00", title: "Tapstay Hotel Check-in", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP", cat: "stay", note: "就在車站旁邊，明天去機場超方便！" }
                 ]
             },
-            // Day 11: 2/05 (Keep same)
+            // Day 11: 2/05
             {
                 date: "05", day: "Thu", fullDate: "2026-02-05",
                 location: "Saga/Home", title: "Day 11: Sweet Home", theme: "charmmy",
                 stay: { name: "甜蜜的家", address: "Taiwan", country: "TW" },
-                events: [{ time: "09:30", title: "前往佐賀機場 (HSG)", address: "佐賀県佐賀市川副町大字犬井道947", country: "JP", cat: "transport", note: "行李箱是不是滿到蓋不起來了？哈哈。" }, { time: "12:15", title: "虎航 IT247 起飛", cat: "transport", ticket: { type: "flight", code: "IT247", info: "HSG → TPE" }, note: "雖然旅程結束了，但跟小寶在一起，每天都是最棒的旅行！愛妳 ❤️" }]
+                events: [
+                    { time: "10:30", title: "前往佐賀機場 (HSG)", desc: "10:30 接駁車, 11:05 抵達", address: "1 Chome-12-1 Ekimae Chuo, Saga, 840-0801", country: "JP", cat: "transport", note: "行李箱是不是滿到蓋不起來了？哈哈。" }, 
+                    { time: "12:15", title: "虎航 IT247 起飛", cat: "transport", ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE 13:45" }, note: "雖然旅程結束了，但跟小寶在一起，每天都是最棒的旅行！愛妳 ❤️" }
+                ]
             }
         ];
 
-        // --- Core Functions (Same as v22.0) ---
+        // --- Core Functions ---
         window.onscroll = function() {
             let container = document.getElementById('app'); 
             if (window.innerWidth >= 600) container = document.getElementById('app');
@@ -579,11 +580,12 @@
                 `;
             }
 
+            // Mosaic Logic
             let blurClass = 'blurred';
             if (event.time && event.time.includes(':')) {
                 const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
                 const now = new Date().getTime();
-                if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
+                // if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
             }
 
             let noteHtml = '';
