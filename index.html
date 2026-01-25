@@ -6,7 +6,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#FFF5F7">
-    
     <title>With 小寶 🎀</title>
     
     <link rel="apple-touch-icon" href="./icon.png">
@@ -156,19 +155,16 @@
         .event-time { font-size: 0.8rem; font-weight: 700; color: var(--kitty-pink); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
         .event-title { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 6px; line-height: 1.4; }
 
-        /* Love Note */
+        /* Love Note - now just basic styling, visibility controlled by JS logic */
         .love-note {
             background: #FFF9C4; color: #5D4037; padding: 10px 14px;
             border-radius: 16px; border-bottom-left-radius: 2px;
             font-size: 0.85rem; margin: 8px 0 12px 0; position: relative;
             line-height: 1.5; display: flex; align-items: flex-start; gap: 8px;
-            transition: all 0.5s ease;
+            animation: popIn 0.5s ease;
         }
         .love-note i { color: #FFB300; margin-top: 3px; }
-        .note-content { transition: filter 0.5s ease; }
-        .blurred .note-content { filter: blur(6px); user-select: none; pointer-events: none; opacity: 0.7; }
-        .lock-icon { display: none; font-size: 0.8rem; color: #aaa; margin-left: auto; }
-        .blurred .lock-icon { display: inline-block; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
 
         /* Stay Footer */
         .stay-footer {
@@ -273,7 +269,7 @@
                     { time: "10:30", title: "海雲台紀念品 (換Pass)", address: "부산 해운대구 해운대해변로 264, 1층", country: "KR", cat: "sight", note: "謝謝小寶訂ㄉ釜山Pass，要開始到處玩嚕！好期待！" },
                     { time: "11:30", title: "T1 Basecamp", address: "부산해운대구구남로37 마리쏠호텔2층", country: "KR", cat: "sight" },
                     { time: "12:30", title: "天空膠囊列車", travel: "12:00抵達", address: "부산 해운대구 달맞이길62번길 13", country: "KR", cat: "sight", ticket: { type: "ticket", code: "RESERVED", info: "12:30-13:00" }, note: "謝謝小寶訂的膠囊列車！！！一起拍好看ㄉ照片！！！" },
-                    { time: "13:30", title: "青沙浦", travel: "散步", cat: "sight", note: "希望有大蘑菇可以打、、、(皮克敏GO!)" },
+                    { time: "13:30", title: "青沙浦", travel: "散步", cat: "sight", note: "希望有大蘑菇可以打、、、" },
                     { time: "14:39", title: "海岸列車 (青沙浦 → 松亭)", address: "부산해운대구청사포로116 청사포정거장", country: "KR", cat: "sight", note: "繼續搭車車～～～小寶累了就靠我的肩膀休息一下！" },
                     { time: "15:30", title: "Skyline Luge 滑車", address: "부산기장군기장읍기장해안로205", country: "KR", cat: "sight", pass: "free", note: "你敢不敢飆到200，尬哩牡尬啦" },
                     { time: "16:30", title: "Coralani 咖啡廳", address: "부산 기장군 기장읍 기장해안로 32", country: "KR", cat: "food" },
@@ -285,7 +281,7 @@
             },
             {
                 date: "27", day: "Tue", fullDate: "2026-01-27",
-                location: "Busan", title: "Day 2: 樂天世界 ＆ 拍拍貼", theme: "kitty",
+                location: "Busan", title: "Day 2: 水樂園 & 樂天世界", theme: "kitty",
                 stay: { name: "Twotone House", address: "부산광역시 동구 초량동 970-10", addressEn: "970-10 Choryang-dong", country: "KR" },
                 events: [
                     { time: "10:00", title: "Checkout & 寄行李", cat: "stay", note: "行李寄放在Airbnb，我們輕鬆去玩水！" },
@@ -316,7 +312,7 @@
             },
             {
                 date: "29", day: "Thu", fullDate: "2026-01-29",
-                location: "Busan Port", title: "Day 4: 南浦洞 & 前往福岡", theme: "daniel",
+                location: "Busan Port", title: "Day 4: 南浦洞 & 登船", theme: "daniel",
                 stay: { name: "新山茶花號 (船上)", address: "부산 동구 충장대로 206", addressEn: "Busan Port", country: "KR" },
                 events: [
                     { time: "11:00", title: "Check out 睡飽飽", cat: "stay", note: "今天可以睡飽一點！！！喜歡跟妳睡覺！！！" },
@@ -338,16 +334,16 @@
                 stay: { name: "LIFE FIELD #710", address: "福岡県福岡市博多区銀天町2-2-21", addressEn: "2-chōme-2-21 Gintenmachi", country: "JP" },
                 events: [
                     { time: "07:30", title: "抵達博多港", travel: "Bus 20min", address: "福岡市博多区沖浜町14-1", country: "JP", cat: "transport", note: "小寶早安！睜開眼我們就在日本啦🇯🇵" },
-                    { time: "08:30", title: "[方案 A] 先衝民宿", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "transport", note: "先去放行李，再輕鬆去太宰府！" },
-                    { time: "08:30", title: "[方案 B] 寄放天神車站", address: "天神 ２-1004 天神 中央区 福岡市 福岡県 810-0001", country: "JP", cat: "transport", note: "寄在天神，逛街完直接拿，不用跑來跑去！" },
+                    { time: "08:30", title: "[方案 A] 先衝民宿 (南福岡)", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "transport", note: "先去放行李，再輕鬆去太宰府！" },
+                    { time: "08:30", title: "[方案 B] 寄放天神 (車站)", address: "天神 ２-1004 天神 中央区 福岡市 福岡県 810-0001", country: "JP", cat: "transport", note: "寄在天神，逛街完直接拿，不用跑來跑去！" },
                     { time: "09:30", title: "前往太宰府", travel: "西鐵電車", address: "太宰府市宰府4丁目7番1号", country: "JP", cat: "sight", note: "聽說這裡求學業很靈，但我只想求我們一直在一起！！！" },
                     { time: "10:00", title: "太宰府表參道 / 星巴克", address: "太宰府市宰府3-2-43", country: "JP", cat: "food", note: "這間星巴克超特別！！！要在這裡幫小寶拍美照！！！" },
                     { time: "11:00", title: "太宰府天滿宮 / 天開稻荷", address: "日本〒818-0117 Fukuoka, Dazaifu, Saifu, 4 Chome−7−1", country: "JP", cat: "sight" },
                     { time: "12:30", title: "一蘭拉麵 (太宰府參道店)", address: "太宰府市宰府2-6-2", country: "JP", cat: "food", note: "吃吃看方碗的拉麵！！！聽說湯頭不一樣？" },
-                    { time: "14:00", title: "竈門神社", travel: "公車", address: "太宰府市大字内山883", country: "JP", cat: "sight", note: "這就是炭治郎的神社嗎？！" },
+                    { time: "14:00", title: "灶門神社", travel: "公車", address: "太宰府市大字内山883", country: "JP", cat: "sight", note: "這就是炭治郎的神社嗎？！" },
                     { time: "15:30", title: "回天神 / Full Full 麵包", multiLinks: [{name: "博多店", url: "https://www.google.com/maps/search/?api=1&query=9-3+Gionmachi,+Hakata+Ward,+Fukuoka,+812-0038"}, {name: "天神店", url: "https://www.google.com/maps/search/?api=1&query=3-chōme-3-5+Tenjin,+Chuo+Ward,+Fukuoka,+810-0001"}], country: "JP", cat: "food", note: "明太子法國麵包！！！好期待！！！" },
                     { time: "16:00", title: "天神商圈大爆買", desc: "mina/地下街/PARCO", address: "福岡市中央区天神4-3-8", country: "JP", cat: "sight", note: "小寶的三麗鷗天堂！！！買爆！！！" },
-                    { time: "18:00", title: "One Fukuoka Bldg.", multiLinks: [{name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=One+Fukuoka+Bldg."}], country: "JP", cat: "sight" },
+                    { time: "18:00", title: "Pixel Tree / 警固神社", multiLinks: [{name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=One+Fukuoka+Bldg."}], country: "JP", cat: "sight" },
                     { time: "19:30", title: "晚餐 麵屋兼虎", multiLinks: [{name: "PARCO店", url: "https://www.google.com/maps/search/?api=1&query=2+Chome−11−1+Tenjin,+Chuo+Ward,+Fukuoka"}, {name: "天神南店", url: "https://www.google.com/maps/search/?api=1&query=4+Chome−9−18+Watanabedori,+Chuo+Ward,+Fukuoka"}], country: "JP", cat: "food", note: "這家沾麵超有名！！！排隊也要吃！！！" },
                     { time: "21:30", title: "回飯店 LIFE FIELD #710", address: "福岡県福岡市博多区銀天町2-2-21", country: "JP", cat: "stay", note: "終於可以休息了～今天走好多路，辛苦小寶了！" }
                 ]
@@ -367,7 +363,7 @@
             {
                 date: "01", day: "Sun", fullDate: "2026-02-01",
                 location: "Yufuin", title: "Day 7: 由布院之森", theme: "charmmy",
-                stay: { name: "由布院Airbnb", address: "大分県由布市湯布院町川上1777-1", country: "JP" },
+                stay: { name: "由布院獨棟", address: "大分県由布市湯布院町川上1777-1", country: "JP" },
                 events: [
                     { time: "10:11", title: "博多站出發", travel: "🚆 2hr 16m", address: "日本〒812-0012 Fukuoka, Hakata Ward, 博多駅中央街1−1", cat: "transport", ticket: { type: "train", code: "由布院之森3號", info: "4號車 7番 CD" }, note: "這台綠色的火車超可愛，我有搶到好位子，風景很美喔！", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('博多駅')}" }] },
                     { time: "12:27", title: "抵達由布院", address: "大分県由布市湯布院町川北8-2", country: "JP", cat: "sight", note: "寄放行李在寄物櫃或遊客中心。這裡空氣超好的～感覺很像童話世界。" },
@@ -409,7 +405,7 @@
                 location: "Saga", title: "Day 10: 門司港 & 佐賀", theme: "charmmy",
                 stay: { name: "Tapstay Hotel", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP" },
                 events: [
-                    { time: "10:00", title: "門司港", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Blue Wing Moji')}" }], country: "JP", cat: "sight", note: "這裡的建築好復古，很有異國情調耶！" },
+                    { time: "10:00", title: "門司港懷舊區", multiLinks: [{ name: "Google Map", url: "https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Blue Wing Moji')}" }], country: "JP", cat: "sight", note: "這裡的建築好復古，很有異國情調耶！" },
                     { time: "15:00", title: "移動至佐賀", cat: "transport", note: "這是我們旅程的最後一站了，去看看佐賀阿嬤（誤）" },
                     { time: "16:00", title: "Tapstay Hotel Check-in", address: "佐賀県佐賀市駅前中央1-2-25", country: "JP", cat: "stay", note: "就在車站旁邊，明天去機場超方便！" },
                     { time: "18:00", title: "佐賀牛大餐", cat: "food", note: "來佐賀一定要吃佐賀牛啊！入口即化超幸福～" }
@@ -418,7 +414,7 @@
             {
                 date: "05", day: "Thu", fullDate: "2026-02-05",
                 location: "Saga/Home", title: "Day 11: Sweet Home", theme: "charmmy",
-                stay: { name: "回家嚕", address: "Taiwan", country: "TW" },
+                stay: { name: "甜蜜的家", address: "Taiwan", country: "TW" },
                 events: [
                     { time: "10:30", title: "前往佐賀機場 (HSG)", desc: "10:30 接駁車, 11:05 抵達", address: "1 Chome-12-1 Ekimae Chuo, Saga, 840-0801", country: "JP", cat: "transport", note: "行李箱是不是滿到蓋不起來了？哈哈。" }, 
                     { time: "12:15", title: "虎航 IT247 起飛", cat: "transport", ticket: { type: "flight", code: "IT247", info: "HSG 12:15 → TPE 13:45" }, note: "雖然旅程結束了，但跟小寶在一起，每天都是最棒的旅行！愛妳 ❤️" }
@@ -543,21 +539,27 @@
                 `;
             }
 
-            // Mosaic Logic
-            let blurClass = 'blurred';
+            // Mosaic Logic: Hide Note Completely if time > 30 mins
+            let showNote = false;
             if (event.time && event.time.includes(':')) {
                 const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
                 const now = new Date().getTime();
-                // if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
+                // 30 mins window: note appears if (eventTime - now) <= 30 mins
+                // Note: since this is static HTML for future, 'now' is 2025/2026. 
+                const diffMins = (eventTime - now) / 60000;
+                if (diffMins <= 30) {
+                    showNote = true;
+                }
+            } else {
+               // For items without specific HH:MM, default hide.
             }
 
             let noteHtml = '';
-            if (event.note) {
+            if (event.note && showNote) {
                 noteHtml = `
-                    <div class="love-note ${blurClass}">
+                    <div class="love-note">
                         <i class="fa-solid fa-heart"></i>
                         <span class="note-content">${event.note}</span>
-                        <i class="fa-solid fa-lock lock-icon"></i>
                     </div>
                 `;
             }
@@ -670,10 +672,7 @@
         }
 
         function revealAll() {
-            document.querySelectorAll('.love-note').forEach(el => {
-                el.classList.remove('blurred');
-            });
-            alert('所有馬賽克已解除 (預覽模式)');
+            // Disabled for production
         }
 
         document.addEventListener('DOMContentLoaded', () => {
