@@ -192,17 +192,17 @@
         .ticket-icon { font-size: 1.2rem; color: var(--daniel-blue); margin-right: 12px; }
         .ticket-code { font-weight: 900; color: var(--daniel-blue); margin-right: 6px; }
 
-        .action-row { display: flex; gap: 10px; margin-top: 8px; }
+        .action-row { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
         .btn-nav {
-            flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-            padding: 10px; border-radius: var(--radius-btn); font-size: 0.8rem; font-weight: 700;
+            flex: 1; min-width: 80px; display: flex; align-items: center; justify-content: center; gap: 4px;
+            padding: 8px; border-radius: var(--radius-btn); font-size: 0.75rem; font-weight: 700;
             text-decoration: none; border: none; transition: transform 0.1s;
         }
         .btn-nav:active { transform: scale(0.95); }
         .btn-naver { background: #03C75A; color: white; }
         .btn-uber { background: #000000; color: #FFFFFF; }
         .btn-google { background: #4285F4; color: white; }
-        .btn-copy { flex: 0 0 50px; background: rgba(255,255,255,0.3); color: white; border: 1px solid rgba(255,255,255,0.4); font-size: 1.1rem; backdrop-filter: blur(5px); }
+        .btn-copy { flex: 0 0 40px; background: rgba(255,255,255,0.3); color: white; border: 1px solid rgba(255,255,255,0.4); font-size: 1rem; backdrop-filter: blur(5px); }
         .light-row .btn-copy { background: #FFF; color: #555; border: 2px solid #EEE; }
 
         #toast {
@@ -253,31 +253,132 @@
     <script>
         // Data Structure
         const itinerary = [
-            // Day 1: 1/26 (Updated)
+            // Day 1: 1/26
             {
                 date: "26", day: "Mon", fullDate: "2026-01-26",
                 location: "Busan", title: "Day 1: 飛往釜山 & 海雲台", theme: "kitty",
                 stay: {
                     name: "Airbnb (海雲台)",
-                    address: "부산시 해운대구 해운대해변로298번길 29, A동 409호",
-                    addressEn: "29 Haeundaehaebyeon-ro 298beon-gil, Haeundae-gu, Busan",
+                    address: "부산시 해운대구 해운대해변로298번길 29, A동",
+                    addressEn: "29 Haeundaehaebyeon-ro 298beon-gil",
                     country: "KR"
                 },
                 events: [
-                    { time: "06:10", title: "抵達金海機場 (PUS)", travel: "ZE984", cat: "transport", ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }, note: "終於要出發了！小寶準備好了嗎？我們去韓國玩囉～" },
-                    { time: "07:30", title: "機場巴士 → 海雲台", travel: "🚌 1hr10m", desc: "搭乘機場巴士1號，前往海雲台", cat: "transport" },
-                    { time: "09:00", title: "寄放行李 Airbnb", travel: "🚶 4F 409", address: "부산시 해운대구 해운대해변로298번길 29, A동 409호", addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", country: "KR", cat: "stay", note: "先去把行李丟在409號房，輕鬆開始玩！" },
-                    { time: "09:30", title: "錦繡河豚湯", travel: "🚶 5min", address: "부산 해운대구 중동1로43번길 23", country: "KR", cat: "food", note: "第一餐吃好一點，河豚湯幫妳補補氣！" },
-                    { time: "11:00", title: "海雲台紀念品 / T1 Basecamp", cat: "sight", note: "先去換我們的釜山Pass，然後去逛逛！" },
-                    { time: "12:30", title: "天空膠囊列車 (尾浦出發)", travel: "需12:00抵達", address: "부산 해운대구 달맞이길62번길 13", country: "KR", cat: "sight", ticket: { type: "ticket", code: "RESERVED", info: "12:30 Mipo" }, note: "我們的小車廂！準備好相機，要幫妳拍美美的照片❤️" },
-                    { time: "14:10", title: "海岸列車 (青沙浦 → 松亭)", travel: "🚆 Pass", address: "부산 해운대구 청사포로 128", country: "KR", cat: "sight", note: "記得要先開通釜山Pass喔！" },
-                    { time: "15:00", title: "Skyline Luge / Coralani Cafe", address: "부산 기장군 기장읍 시랑리 산60-1", country: "KR", cat: "sight", pass: "free", note: "滑車比賽開始！輸的人晚上要幫對方按摩 😜" },
-                    { time: "17:12", title: "海岸列車 (松亭 → 尾浦)", travel: "🚆 回程", cat: "transport" },
-                    { time: "18:30", title: "嚴湧帛豬肉湯飯", travel: "⚠️ 19:00 Last Order", address: "부산 해운대구 구남로24번길 39", country: "KR", cat: "food", note: "釜山必吃的豬肉湯飯，趕在關門前去吃！" },
-                    { time: "20:00", title: "Spa Land 汗蒸幕", travel: "⚠️ 22:00 Last Entry", address: "부산 해운대구 센텀남대로 35", country: "KR", cat: "sight", pass: "free", note: "可以綁可愛的羊角頭，把今天的疲勞都蒸掉！" }
+                    { 
+                        time: "00:10", title: "抵達桃園機場 (TPE)", travel: "接駁車", 
+                        desc: "1/25 23:20 出發 → 00:10 抵達桃機", 
+                        cat: "transport",
+                        note: "旅程從這裡開始！出發前先親一個 😘",
+                        address: "Taipei Bus Station", // For Google Map
+                        country: "TW"
+                    },
+                    { 
+                        time: "06:10", title: "抵達金海機場 (PUS)", travel: "ZE984", 
+                        ticket: { type: "flight", code: "ZE984", info: "TPE 02:50 → PUS" }, 
+                        cat: "transport", 
+                        note: "小寶我們終於要出發哩！！！在飛機上要好好休息！！！" 
+                    },
+                    { 
+                        time: "07:00", title: "換錢 Moneybox", 
+                        desc: "金海機場店 或 海雲台店",
+                        cat: "transport", 
+                        multiLinks: [
+                            { name: "機場 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B3%B5%ED%95%AD%EC%A7%84%EC%9E%85%EB%A1%9C%20165&appname=com.travel.app" },
+                            { name: "機場 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=165%20Gonghangjinip-ro%2C%20Gangseo-gu%2C%20Busan" },
+                            { name: "海雲台 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EB%B3%80%EB%A1%9C%20287&appname=com.travel.app" },
+                            { name: "海雲台 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=287%20Haeundaehaebyeon-ro%2C%20Haeundae-gu%2C%20Busan" }
+                        ],
+                        note: "準備好彈藥，我們要去大吃大喝了！"
+                    },
+                    { 
+                        time: "08:10", title: "機場巴士 (往海雲台)", travel: "Bus 1號", 
+                        desc: "到海雲台溫泉十字路口站 (約1hr10min) ₩9500", 
+                        cat: "transport" 
+                    },
+                    { 
+                        time: "09:20", title: "寄放行李 Airbnb", travel: "A棟 409", 
+                        address: "부산시 해운대구 해운대해변로298번길 29", 
+                        addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", 
+                        country: "KR", cat: "stay", 
+                        note: "行李交給我！！！" 
+                    },
+                    { 
+                        time: "09:30", title: "錦繡河豚湯 (海雲台店)", travel: "早餐", 
+                        address: "부산 해운대구 중동1로43번길 23", 
+                        country: "KR", cat: "food", 
+                        note: "這是河豚！河豚！河豚！我不要再記錯了！！！小寶多吃一點，臉變更Ｑ我要親！！！" 
+                    },
+                    { 
+                        time: "10:30", title: "海雲台紀念品店 (換Pass)", travel: "9:30開", 
+                        address: "부산 해운대구 해운대해변로 264, 1층", 
+                        country: "KR", cat: "sight", 
+                        note: "謝謝小寶訂ㄉ釜山Pass，要開始到處玩嚕！好期待！" 
+                    },
+                    { 
+                        time: "11:30", title: "T1 Basecamp", travel: "步行5-7分", 
+                        address: "부산해운대구구남로37 마리쏠호텔2층", 
+                        country: "KR", cat: "sight", 
+                        note: "T1 加油！去看看有沒有Faker的周邊～" 
+                    },
+                    { 
+                        time: "12:30", title: "天空膠囊列車 (尾浦出發)", travel: "12:00抵達", 
+                        address: "부산 해운대구 달맞이길62번길 13", 
+                        country: "KR", cat: "sight", 
+                        ticket: { type: "ticket", code: "RESERVED", info: "12:30-13:00" },
+                        note: "謝謝小寶訂的膠囊列車！！！一起拍好看ㄉ照片！！！" 
+                    },
+                    { 
+                        time: "13:30", title: "青沙浦 (Cheongsapo)", travel: "散步", 
+                        cat: "sight", 
+                        note: "希望有大蘑菇可以打、、、(皮克敏GO!)" 
+                    },
+                    { 
+                        time: "14:39", title: "海岸列車 (青沙浦 → 松亭)", travel: "Train", 
+                        address: "부산해운대구청사포로116 청사포정거장", 
+                        country: "KR", cat: "sight", 
+                        note: "繼續搭車車～～～小寶累了就靠我的肩膀休息一下！" 
+                    },
+                    { 
+                        time: "15:30", title: "Skyline Luge 滑車", travel: "公車15分", 
+                        address: "부산기장군기장읍기장해안로205", 
+                        country: "KR", cat: "sight", 
+                        pass: "free", 
+                        note: "你敢不敢飆到200，尬哩牡尬啦" 
+                    },
+                    { 
+                        time: "16:30", title: "Coralani 咖啡廳", travel: "海景", 
+                        address: "부산 기장군 기장읍 기장해안로 32", 
+                        country: "KR", cat: "food" 
+                    },
+                    { 
+                        time: "17:00", title: "海岸列車 (松亭 → 尾浦)", travel: "回程", 
+                        address: "부산해운대구송정중앙로8번길60", 
+                        country: "KR", cat: "transport", 
+                        note: "繼續搭車車～～～" 
+                    },
+                    { 
+                        time: "18:30", title: "嚴湧帛豬肉湯飯", travel: "19:00 Last Order", 
+                        address: "부산해운대구구남로24번길39 1층", 
+                        country: "KR", cat: "food", 
+                        note: "期待的豬肉湯飯！散步完去吃一定更香！" 
+                    },
+                    { 
+                        time: "20:00", title: "Spa Land 汗蒸幕", travel: "22:00 Last Entry", 
+                        address: "부산 해운대구 센텀남대로 35", 
+                        country: "KR", cat: "sight", 
+                        pass: "free", 
+                        note: "一起拍羊角照片！！！" 
+                    },
+                    { 
+                        time: "22:30", title: "回 Airbnb", travel: "公車20分", 
+                        address: "부산시 해운대구 해운대해변로298번길 29, A동", 
+                        addressEn: "29 Haeundaehaebyeon-ro 298beon-gil", 
+                        country: "KR", cat: "stay", 
+                        note: "小寶一整天都辛苦了！！！我們好好休息明天繼續玩！！！" 
+                    }
                 ]
             },
-            // Day 2: 1/27 (Updated)
+            // Day 2: 1/27
             {
                 date: "27", day: "Tue", fullDate: "2026-01-27",
                 location: "Busan", title: "Day 2: 水樂園 & 樂天世界", theme: "kitty",
@@ -296,7 +397,7 @@
                     { time: "20:00", title: "西面烤腸 / 拍貼機", cat: "food", note: "晚上去吃烤腸，順便拍超可愛的人生四格！" }
                 ]
             },
-            // Day 3: 1/28 (Updated)
+            // Day 3: 1/28
             {
                 date: "28", day: "Wed", fullDate: "2026-01-28",
                 location: "Busan", title: "Day 3: 市區逛街 & 遊艇", theme: "kitty",
@@ -313,7 +414,7 @@
                     { time: "19:00", title: "83haechi 烤肉 / 廣安里", cat: "food", note: "看完廣安大橋夜景，吃頓好吃的烤肉做Ending！" }
                 ]
             },
-            // Day 4: 1/29 (Updated)
+            // Day 4: 1/29
             {
                 date: "29", day: "Thu", fullDate: "2026-01-29",
                 location: "Busan Port", title: "Day 4: 南浦洞 & 登船", theme: "daniel",
@@ -445,9 +546,8 @@
 
         // --- Core Functions ---
         
-        // 1. Scroll Runner
         window.onscroll = function() {
-            let container = document.getElementById('app'); // Use app as reference for height
+            let container = document.getElementById('app'); 
             if (window.innerWidth >= 600) container = document.getElementById('app');
             else container = document.documentElement;
 
@@ -467,7 +567,6 @@
         
         document.getElementById('app').addEventListener('scroll', window.onscroll);
 
-        // 2. Love Counter
         let isShowingDays = false;
         function toggleDays() {
             const el = document.getElementById('days-counter');
@@ -484,7 +583,6 @@
             isShowingDays = !isShowingDays;
         }
 
-        // 3. Falling Emoji Rain
         function makeRain(char) {
             const container = document.getElementById('app');
             for (let i = 0; i < 15; i++) {
@@ -498,7 +596,6 @@
             }
         }
 
-        // Render functions
         function renderApp() {
             const container = document.getElementById('itinerary-list');
             let html = '';
@@ -565,11 +662,13 @@
                 `;
             }
 
+            // Mosaic Logic
             let blurClass = 'blurred';
+            // Simple check for demo purposes
             if (event.time && event.time.includes(':')) {
                 const eventTime = new Date(`${dateStr}T${event.time}:00`).getTime();
                 const now = new Date().getTime();
-                if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
+                // if ((eventTime - now) / 60000 <= 30) blurClass = ''; 
             }
 
             let noteHtml = '';
@@ -584,7 +683,15 @@
             }
 
             let navButtons = '';
-            if (event.address) {
+            if (event.multiLinks) {
+                // Special case for Moneybox
+                navButtons = event.multiLinks.map(link => {
+                    let cls = 'btn-google';
+                    if(link.name.includes('Naver')) cls = 'btn-naver';
+                    if(link.name.includes('Uber')) cls = 'btn-uber';
+                    return `<a href="${link.url}" class="btn-nav ${cls}">${link.name}</a>`;
+                }).join('');
+            } else if (event.address) {
                 const encodedAddr = encodeURIComponent(event.address);
                 const encodedAddrEn = encodeURIComponent(event.addressEn || event.address);
                 
@@ -600,10 +707,14 @@
                     const uberUrl = `uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=${encodedAddrEn}`;
                     navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
                     navButtons += `<a href="${uberUrl}" class="btn-nav btn-uber"><i class="fa-brands fa-uber"></i> Uber</a>`;
+                } else if (event.country === 'TW') {
+                    const googleUrl = `https://www.google.com/maps/search/?api=1&query=Taipei+Bus+Station`;
+                    navButtons += `<a href="${googleUrl}" class="btn-nav btn-google"><i class="fa-brands fa-google"></i> Map</a>`;
                 }
             }
 
             let travelHtml = event.travel ? `<span class="travel-tag">${event.travel}</span>` : '';
+            let descHtml = event.desc ? `<div style="font-size:0.8rem; color:#888; margin-bottom:4px;">${event.desc}</div>` : '';
 
             return `
                 <div class="event-node">
@@ -611,6 +722,7 @@
                     <div class="event-content">
                         <div class="event-time">${event.time} ${passBadge}</div>
                         <div class="event-title">${event.title} ${travelHtml}</div>
+                        ${descHtml}
                         ${noteHtml}
                         ${ticketHtml}
                         ${navButtons ? `<div class="action-row light-row">${navButtons}</div>` : ''}
