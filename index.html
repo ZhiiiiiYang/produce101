@@ -202,7 +202,7 @@
             text-decoration: none; border: none; transition: transform 0.1s;
         }
         
-        /* Force 2 per row for specific grids */
+        /* Force 2 per row for specific grids like Moneybox */
         .btn-grid { flex: 1 0 45% !important; }
 
         .btn-nav:active { transform: scale(0.95); }
@@ -291,7 +291,9 @@
                         cat: "transport", 
                         multiLinks: [
                             { name: "機場 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B0%95%EC%84%9C%EA%B5%AC%20%EA%B3%B5%ED%95%AD%EC%A7%84%EC%9E%85%EB%A1%9C%20165&appname=com.travel.app" },
-                            { name: "海雲台 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EB%B3%80%EB%A1%9C%20287&appname=com.travel.app" }
+                            { name: "機場 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=165%20Gonghangjinip-ro%2C%20Gangseo-gu%2C%20Busan" },
+                            { name: "海雲台 Naver", url: "nmap://search?query=%EB%B6%80%EC%82%B0%EA%B4%91%EC%97%AD%EC%8B%9C%20%ED%95%B4%EC%9A%B4%EB%8C%80%EA%B5%AC%20%ED%95%B4%EC%9A%B4%EB%8C%80%ED%95%B4%EB%B3%80%EB%A1%9C%20287&appname=com.travel.app" },
+                            { name: "海雲台 Uber", url: "uber://?action=setPickup&pickup=my_location&dropoff[formatted_address]=287%20Haeundaehaebyeon-ro%2C%20Haeundae-gu%2C%20Busan" }
                         ]
                     },
                     { 
@@ -444,25 +446,12 @@
                     country: "KR"
                 },
                 events: [
-                    { time: "11:00", title: "Check out 睡飽飽", cat: "stay", note: "今天可以睡飽一點！！！喜歡跟妳睡覺！！！" },
-                    { time: "11:30", title: "Busan Travel Lounge", desc: "寄放行李", address: "부산 동구 중앙대로 206", country: "KR", cat: "transport" },
-                    { time: "12:30", title: "白淺灘文化村", travel: "公車30分", address: "부산 영도구 영선동4가 605-3", country: "KR", cat: "sight", note: "散步聊天打蘑菇～～～" },
-                    { time: "14:00", title: "午餐 胡同醬蟹", travel: "公車30分", address: "부산 동구 중앙대로226번길 3-6", country: "KR", cat: "food", note: "我超期待的醬蟹！！！希望肚子可以撐住～～～ (先吃驅蟲藥)" },
-                    { time: "15:30", title: "南浦洞 / 光復路時尚街", travel: "地鐵15分", address: "부산 중구 광복중앙로 2", country: "KR", cat: "sight", note: "一起買好看衣服！" },
-                    { 
-                        time: "16:30", title: "南浦洞拍貼機", 
-                        cat: "sight", 
-                        multiLinks: [
-                            { name: "Haru Film", url: "nmap://search?query=%ED%95%98%EB%A3%A8%ED%95%84%EB%A6%84%20%EB%82%A8%ED%8F%AC%EC%A0%90&appname=com.travel.app" },
-                            { name: "Photoism", url: "nmap://search?query=%ED%8F%AC%ED%86%A0%EC%9D%B4%EC%A6%98%20%EB%82%A8%ED%8F%AC&appname=com.travel.app" }
-                        ],
-                        note: "拍更多拍貼！！！"
-                    },
-                    { time: "17:00", title: "BIFF 廣場 / 糖餅", address: "부산 중구 비프광장로", country: "KR", cat: "food", note: "吃小寶最期待的糖餅！" },
-                    { time: "17:30", title: "樂天超市 光復店", address: "부산 중구 중앙대로 2", country: "KR", cat: "food", note: "採買船上要吃的東西！！！" },
-                    { time: "18:00", title: "前往釜山港", travel: "Uber 10分", address: "부산 동구 충장대로 206", country: "KR", cat: "transport" },
-                    { time: "18:30", title: "釜山港報到", desc: "3F大廳領票/填卡, 2F拿鑰匙", cat: "transport", note: "第一次在船上。。。睡覺" },
-                    { time: "20:00", title: "新山茶花號 啟航", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 → 07:30" }, note: "小寶好好睡歐～～～希望不會太晃～～～" }
+                    { time: "10:00", title: "Busan Travel Lounge", desc: "免費寄放行李", address: "부산 동구 중앙대로 206", country: "KR", cat: "transport", note: "先把行李解決掉，最後一天也要玩好玩滿！" },
+                    { time: "11:00", title: "白淺灘文化村 / 胡同醬蟹", cat: "food", note: "吃醬蟹要記得先吃驅蟲藥喔 😂" },
+                    { time: "14:00", title: "南浦洞 / BIFF廣場", cat: "sight", note: "去買妳想吃的元祖糖餅，再去Artbox逛逛。" },
+                    { time: "16:00", title: "樂天超市 光復店", cat: "food", note: "最後衝刺！買零食帶去船上吃！" },
+                    { time: "17:00", title: "抵達釜山港報到", travel: "3F大廳", address: "부산 동구 충장대로 206", country: "KR", cat: "transport", note: "記得填寫日本入境卡，我們要去睡船上囉 🚢" },
+                    { time: "20:00", title: "新山茶花號 啟航", cat: "transport", ticket: { type: "ferry", code: "特等艙雙床", info: "20:00 → 07:30" } }
                 ]
             },
             // Day 5: 1/30
@@ -717,11 +706,16 @@
             let navButtons = '';
             if (event.multiLinks) {
                 // Special case for Moneybox & Photo Booths
+                // Logic: if event title has Moneybox -> use grid (2 per row forced)
+                // else -> standard flex behavior (fits 3 in row mostly)
+                const isMoneybox = event.title.includes('Moneybox');
+                const gridClass = isMoneybox ? 'btn-grid' : '';
+
                 navButtons = event.multiLinks.map(link => {
                     let cls = 'btn-google';
-                    if(link.name.includes('Naver') || link.name.includes('Photo') || link.name.includes('Analog') || link.name.includes('Haru')) cls = 'btn-naver';
+                    if(link.name.includes('Naver') || link.name.includes('Photo') || link.name.includes('Analog') || link.name.includes('Haru') || link.name.includes('Mono')) cls = 'btn-naver';
                     if(link.name.includes('Uber')) cls = 'btn-uber';
-                    return `<a href="${link.url}" class="btn-nav btn-grid ${cls}">${link.name}</a>`;
+                    return `<a href="${link.url}" class="btn-nav ${gridClass} ${cls}">${link.name}</a>`;
                 }).join('');
             } else if (event.address) {
                 const encodedAddr = encodeURIComponent(event.address);
